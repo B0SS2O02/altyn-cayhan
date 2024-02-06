@@ -1,0 +1,147 @@
+<!-- header -->
+<div class="w-full p-5 border-b-2 flex flex-col justify-center">
+  <div id="hamburger" class="lg:hidden flex justify-start absolute">
+    <button class="navbar-burger flex items-center text-blue-600">
+      <svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <title>Mobile menu</title>
+        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="flex justify-end gap-5 items-center">
+    <div class="max-w-lg  ">
+
+      <button
+        class=" focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm  text-center inline-flex items-center"
+        type="button" data-dropdown-toggle="dropdown">
+        <%if(lang==='tm'){%>
+          <img class="w-[40px] h-auto" src="/assets/images/tm_flag.png" alt="Turkmen">
+          <%}else{%>
+            <img class="w-[40px] h-auto" src="/assets/images/ru_flag.png" alt="Russian">
+            <%}%>
+
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+      </button>
+
+      <!-- Dropdown menu -->
+      <div
+        class="hidden bg-white ml-[-15px] absolute text-base z-50 list-none divide-y divide-gray-100 rounded shadow my-4"
+        id="dropdown">
+
+        <ul class="py-1" aria-labelledby="dropdown">
+          <li>
+            <div onclick="changeLang('tm')" href="#" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
+              <img class="w-[40px] h-auto" src="/assets/images/tm_flag.png" alt="">
+            </div>
+          </li>
+          <li>
+            <div onclick="changeLang('ru')" href="#" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
+              <img class="w-[40px] h-auto" src="/assets/images/ru_flag.png" alt="">
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- notification dropdown -->
+    <div class="max-w-lg  ">
+
+      <button
+        class=" focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm  text-center inline-flex items-center"
+        type="button" data-dropdown-toggle="dropdown" onclick="openNotification()">
+        <div class="relative">
+          <img src="/assets/images/bell (1).png" alt="" />
+          <div id="count-orders" class="absolute px-[4px] py-[2px]  text-[20px] top-0 right-0 text-white "
+            style="background: red;border-radius: 100%;"></div>
+        </div>
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+
+      <!-- Dropdown menu -->
+      <div
+        class="hidden bg-white ml-[-100px]  md:ml-[-200px] w-[60%] md:w-[50%] absolute text-base z-50 list-none divide-y divide-gray-100 rounded shadow my-4"
+        id="dropdown">
+
+        <ul class="py-1 w-full divide-y divide-slate-700" aria-labelledby="dropdown" id="notification-orders">
+
+
+        </ul>
+      </div>
+    </div>
+    <div>
+    </div>
+    <div class="flex gap-1 items-center">
+      <span>
+        <img class="w-[40px] h-[40px] rounded-full" src="/assets/images/user.png" alt="" />
+      </span>
+      <p class="text-[20px]">
+        <%=user.name%>
+      </p>
+    </div>
+  </div>
+</div>
+<script>
+  let response
+  let order = document.querySelector("#notification-orders")
+  const notification = document.querySelector('#dropdown')
+  const openNotification = async () => {
+    const dataViews = document.querySelectorAll('[data-view=false]')
+    const ids = []
+    dataViews.forEach(element => {
+      ids.push(element.getAttribute('id'))
+      element.setAttribute('data-view', 'true')
+    });
+    if (ids.length > 0) {
+      await fetch("https://hazynadoner.com.tm/api/v1/order", {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(ids)
+      })
+    }
+  }
+  const fetchNewOrders = async () => {
+    response = await fetch("https://hazynadoner.com.tm/api/v1/order?isView=false")
+    response = await response.json()
+    response = response.orders
+    const orderItems = document.querySelectorAll("#notification-orders" > "li")
+    let text
+    if (response && response.length > 0) {
+      response.forEach(item => {
+        text += `
+                  <li id="${item.id}" data-view="${item.isView}"> 
+                    <div href="/admin/orders" class="bg-[#dbdbdb] flex text-sm  hover:bg-gray-100 text-gray-700 block px-4 py-2 font-bold">
+                    <p class="w-[60%]" >${item.address}</p>
+    
+                    <p class="w-[40%]">| ${format(item.createdAt.trim())}</p>
+                    </div>
+                  </li>
+            `;
+      });
+      order += order.insertAdjacentHTML("afterbegin", text)
+      const countOrders = parseInt(document.getElementById('count-orders').textContent) || 0;
+      document.getElementById('count-orders').textContent = countOrders + response.length
+    } else
+      if (orderItems.length == 0) {
+        text = `
+          <li>
+            <div href="#"  class="flex text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
+              Taze zakazlar tertibi
+            </div>
+          </li>
+      `
+        order += order.insertAdjacentHTML("afterbegin", text)
+      }
+  }
+  fetchNewOrders()
+
+</script>
+
+<script src="/assets/js/webSocketClient.js"></script>
+<!-- border after header -->

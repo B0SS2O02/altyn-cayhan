@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <title>JANKÖÝER</title>
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon-16x16.png">
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+
+    <link href="/assets/tailwindcss/output.css" rel="stylesheet" />
+  </head>
+  <body class="static">
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/index"
+          ><img class="img-fluid" src="/assets/img/logo_top.png"
+        /></a>
+        <button
+          class="navbar-toggler border-0 shadow-none"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar"
+          aria-label="Toggle navigation"
+        >
+          <span class="" role="button"
+            ><img src="/assets/img/menu-icon.png" style="width: 32px;height: auto;"
+          /></span>
+        </button>
+        <div
+          class="offcanvas offcanvas-end top-nav-offcanvas"
+          tabindex="-1"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+        >
+          <div class="offcanvas-header">
+            <button
+              type="button"
+              class="border-0 bg-transparent"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            >
+              <img src="/assets/img/close_icon.png" />
+            </button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link <%if(path==='/index'){%> active<%}%>" aria-current="page" href="/index"
+                  >BAŞ SAHYPA</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <%if(path==='/auth/login'){%> active<%}%>"" href="/auth/login">IÇERI GIR</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link <%if(path==='/shop'){%> active<%}%>"" href="/shop">SPORT HARYTLARY</a>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <div
+      class="text-white absolute left-0 right-0 top-0 bottom-0 m-auto shadow-2xl w-full md:w-[50%] rounded-md h-full md:h-[80%] flex flex-col 2lg:flex-row justify-center"
+    >
+      <!-- <div
+        class="w-1/2 flex m-auto mt-20 md:mt-auto items-center justify-center"
+      >
+        <img src="/assets/images/jan.png" />
+      </div> -->
+      <div
+        class="w-11/12 2lg:w-1/2 h-full top-0 m-auto flex flex-col mt-6 2lg:mt-32  items-center justify-center"
+      >
+        <div class="text-centermb-10">
+          <h1 class="text-[40px]">Welcome</h1>
+        </div>
+        <form
+          action="/auth/login"
+          method="POST"
+          class="w-[80%] flex flex-col gap-10"
+        >
+          <div>
+            <label
+              for="countries"
+              class="block mb-2 text-sm text-whte font-medium "
+              >Login</label
+            >
+            <input
+              type="text"
+              name="login"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label
+              for="countries"
+              class="block  text-sm font-medium "
+              >Password</label
+            >
+            <input
+            id="myInput"
+              type="password"
+              name="password"
+              class="bg-gray-50 border border-gray-300 my-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+            <input type="checkbox" onclick="myFunction()"> Show Password
+          </div>
+          <button
+            type="submit"
+            class="self-center bg-[#b5ec17] w-24 text-black py-2 rounded-lg hover:bg-[#b0e417d3]"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+    
+    <script>
+      function myFunction() {
+    var x = document.getElementById("myInput");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+    </script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/script.js"></script>
+  </body>
+</html>

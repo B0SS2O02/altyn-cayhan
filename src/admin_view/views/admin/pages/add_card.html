@@ -1,0 +1,88 @@
+<%- include('../components/body.html')%>
+    <div class="flex">
+      <!-- sidebar -->
+
+      <%- include('../components/sidebar.html') %>
+      <!-- end of sidebar -->
+
+     
+      <!-- header -->
+       <!-- top border of header  -->
+       <div
+       class="border-solid border-b-2 z-[-1] absolute w-full top-[80px]"
+       ></div>
+      <!-- end of top border -->
+      
+      <div class="lg:ml-[25rem] w-full lg:mx-20 mx-5 flex flex-col gap-10">
+        <%- include('../components/header.html')%>
+      <!-- end of header -->
+        <!-- border after header -->
+        <!--  main -->
+        
+        <div class="w-full">
+            <h1 class="text-4xl">Card</h1>
+            <form action="#" onsubmit="`<%if(!edit){%>${postShop(event)}<%}else{%>${editShopById(event,'<%=data.id%>')}<%}%>`">
+              <div class="border-2 rounded border-[#DBDFEA] mt-3 p-5">
+                <div class=" my-2">
+                  <label for="name" class="leading-5">Name</label>
+                  <input
+                    type="text"
+                    class="leading-5 p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                    id="title"
+                    value="<% if(edit){%><%=data.title%><%}%>"
+                  placeholder="Name"
+                  />
+                  <!-- validation id must be titleValidation because api validation param like this -->
+                  <p id="titleValidation" class="text-[red]"></p>
+                </div>
+                
+                <div class=" my-2">
+                    <label for="name" class="leading-5">Phone Number</label>
+                    <input
+                      type="text"
+                      class="leading-5 p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                      id="phoneNumber"
+                      value="<% if(edit){%><%=data.phoneNumber%><%}%>"
+                    placeholder="phone-number +99365829174"
+                    />
+                    <!-- validation id must be titleValidation because api validation param like this -->
+                    <p id="phoneNumberValidation" class="text-[red]"></p>
+                  </div>
+                
+
+                <div class="flex justify-end gap-3">
+                  <a
+                  href="/admin/shop"
+                  class="text-[#445FD3] mt-5 border-[#445FD3] border-2  px-5 py-1 text-[20px] rounded"
+                  >
+                  Close
+                </a>
+                  <button
+                  id="submit"
+                  type="submit"
+                  class="bg-[#445FD3] mt-5 text-white px-5 py-1 text-[20px] rounded"
+                  >
+                  Save
+                </button>
+              
+            </div>
+              </div>
+            </form>
+          </div>
+      </div>
+
+      </div>
+    </div>
+  </body>
+
+
+  <script>
+   
+
+  </script>
+
+  <!-- <script src="/assets/ckeditor4/ckeditor.js"></script> -->
+ 
+
+  <script src="/assets/js/fetch.js"></script>
+  <%-include('../components/end_body.html')%>

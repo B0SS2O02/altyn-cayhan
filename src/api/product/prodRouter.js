@@ -1,0 +1,244 @@
+const express = require("express");
+const { body, validationResult } = require("express-validator");
+const path = require("path");
+const { wss } = require("../wss/webSocketServer");
+const ErrorException = require("../error/ErrorException");
+const { deleteFile } = require("../shared/deleteFile");
+const { uploadProduct } = require("../util/multer");
+// const { uploadProduct } = require("../util/multer");
+const fs = require("fs");
+const router = express.Router();
+const prodService = require("./prodService");
+const ValidationException = require("../error/ValidationException");
+const ProdCategory = require("./prodCategory");
+const sequelize = require("../config/database");
+const ProdCategoryTranslation = require("./prodCategoryTranslation");
+
+router
+  .route("/product/category")
+  .get(async (req, res, next) => {
+    try {
+      const prodCategory = await prodService.getAllCategory(
+        req.headers["accept-language"]
+      );
+      res.send(prodCategory);
+    } catch (err) {
+      next(err);
+    }
+  })
+  .post(
+    uploadProduct.single("image"),
+    [
+      body("*.*.title")
+        .isString()
+        .withMessage("title field must be string format")
+        .notEmpty()
+        .withMessage("title field should not be empty"),
+    ],
+    async (req, res, next) => {
+      try {
+        if (!req.file) {
+          return next(
+            new ValidationException([
+              {
+                msg: "Please upload an image",
+                param: "image",
+              },
+            ])
+          );
+        }
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+          if (fs.existsSync(path.join("uploads", "product", req.file.filename)))
+            await deleteFile(
+              path.join("uploads", "product", req.file.filename)
+            );
+          return next(new ValidationException(errors.array()));
+        }
+        
+        const prodCategory = await prodService.saveCategory(req.body, req.file);
+        res.send(prodCategory);
+      } catch (err) {
+        
+        next(err);
+      }
+    }
+  );
+
+router
+  .route("/product/category/:id")
+  .get(async (req, res, next) => {
+    try {
+      const shopCategoryById = await prodService.findProdCategory(
+        req.params.id,
+        req.query.translations
+      );
+      res.send(shopCategoryById);
+    } catch (err) {
+      next(err);
+    }
+  })
+  .put(uploadProduct.single("image"), async (req, res, next) => {
+    try {
+      const updatedShopCategory = await prodService.updateCategoryById(
+        req.body,
+        req.file,
+        req.params.id
+      );
+
+      res.send(updatedShopCategory);
+    } catch (err) {
+      next(err);
+    }
+  })
+  .delete(async (req, res, next) => {
+    try {
+      await prodService.deleteCategoryById(req.params.id);
+      await prodService.newOrderPositionCategory();
+      res.send({
+        success: true,
+      });
+    } catch (err) {
+      next(err);
+    }
+  });
+
+// product create update delete -------
+
+router
+  .route("/product")
+  .get(async (req, res, next) => {
+    try {
+      const { page, size, category, allCategory, sort } = req.query;
+      const prodCategory = await prodService.getProducts(
+        category,
+        page,
+        size,
+        allCategory,
+        req.headers["accept-language"],
+        true,
+        sort
+      );
+      res.send(prodCategory);
+    } catch (err) {
+      next(err);
+    }
+  })
+  .post(
+    uploadProduct.single("image"),
+    [
+      body("*.*.title")
+        .isString()
+        .withMessage("title field must be string format")
+        .notEmpty()
+        .withMessage("title field should not be empty"),
+    ],
+    async (req, res, next) => {
+      try {
+        if (!req.file) {
+          return next(
+            new ValidationException([
+              {
+                msg: "Please upload an image",
+                param: "image",
+              },
+            ])
+          );
+        }
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          if (fs.existsSync(path.join("uploads", "product", req.file.filename)))
+            await deleteFile(
+              path.join("uploads", "product", req.file.filename)
+            );
+          return next(new ValidationException(errors.array()));
+        }
+        const prodCategory = await prodService.saveProduct(req.body, req.file);
+        res.send(prodCategory);
+      } catch (err) {
+        next(err);
+      }
+    }
+  );
+router.get("/product-active/:id", async (req, res, next) => {
+  try {
+    await prodService.toggleActive(req.params.id);
+    res.send({ success: true });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router
+  .route("/product/:id")
+  .get(async (req, res, next) => {
+    try {
+      const product = await prodService.findProduct(
+        req.params.id,
+        req.query.translations
+      );
+      res.send(product);
+    } catch (err) {
+      next(err);
+    }
+  })
+  .put(uploadProduct.single("image"), async (req, res, next) => {
+    try {
+      if (
+        Object.keys(req.body).length === 1 &&
+        Object.keys(req.body)[0] === "active"
+      )
+        await prodService.toggleActive(req.params.id);
+      else
+        await prodService.updateProductById(req.body, req.file, req.params.id);
+      res.send({ success: true });
+    } catch (err) {
+      console.log(err, "-------");
+      next(err);
+    }
+  })
+  .delete(async (req, res, next) => {
+    try {
+      await prodService.deleteProductByid(req.params.id);
+      await prodService.newOrderPositionProduct();
+      res.send({
+        success: true,
+      });
+    } catch (err) {
+      next(err);
+    }
+  });
+
+router.put("/product-drag", async (req, res, next) => {
+  const seqTrans = await sequelize.transaction();
+  try {
+    console.log(req.body);
+    await prodService.resortProduct(req.body, seqTrans);
+    await seqTrans.commit();
+    console.log("everything ok!");
+    res.send();
+  } catch (err) {
+    console.log(err);
+    await seqTrans.rollback();
+    next(err);
+  } finally {
+    await seqTrans.cleanup();
+  }
+});
+
+router.put("/product-category-drag", async (req, res, next) => {
+  const seqTrans = await sequelize.transaction();
+  try {
+    await prodService.resortCategory(req.body, seqTrans);
+    await seqTrans.commit();
+    res.send();
+  } catch (err) {
+    await seqTrans.rollback();
+    next(err);
+  } finally {
+    await seqTrans.cleanup();
+  }
+});
+
+module.exports = router;

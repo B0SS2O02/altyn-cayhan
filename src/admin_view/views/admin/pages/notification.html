@@ -1,0 +1,92 @@
+<%- include('../components/body.html')%>
+    <div class="flex">
+      <!-- sidebar -->
+
+      <%- include('../components/sidebar.html') %>
+      <!-- end of sidebar -->
+
+     
+      <!-- header -->
+       <!-- top border of header  -->
+       <div
+       class="border-solid border-b-2 z-[-1] absolute w-full top-[80px]"
+       ></div>
+      <!-- end of top border -->
+      
+      <div class="lg:ml-[25rem] w-full lg:mx-20 mx-5 flex flex-col gap-10">
+        <%- include('../components/header.html')%>
+      <!-- end of header -->
+        <!-- border after header -->
+        <!--  main -->
+        
+        <div class="w-full">
+            <h1 class="text-4xl">Notification</h1>
+            <form action="#" onsubmit="sendNotication(event)">
+              <div class="border-2 rounded border-[#DBDFEA] mt-3 p-5">
+                <div class=" my-2">
+                  <label for="title" class="leading-5">Title</label>
+                  <input
+                    type="text"
+                    name="title"
+                    class="leading-5 p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                    id="title" 
+                  placeholder="Title"
+                  /> 
+                  <p id="titleValidation" class="text-[red]"></p>
+
+                </div> 
+                <div class=" my-2" >
+                  <label for="desc" class="leading-5">Description</label>
+                  <textarea
+                    rows="8"
+                    placeholder="desc"
+                    class="leading-5 file:p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                    id="desc"
+                    name="desc"
+                  > </textarea> 
+                  <p id="descValidation" class="text-[red]"></p>
+
+                </div>
+  
+                <div class="flex justify-end gap-3">
+                  <a
+                  href="/admin"
+                  class="text-[#445FD3] mt-5 border-[#445FD3] border-2  px-5 py-1 text-[20px] rounded"
+                  >
+                  Close
+                </a>
+                  <button
+                  id="submit"
+                  type="submit"
+                  class="bg-[#445FD3] mt-5 text-white px-5 py-1 text-[20px] rounded"
+                  >
+                  Save
+                </button>
+              
+            </div>
+              </div>
+            </form>
+          </div>
+      </div>
+
+      </div>
+    </div>
+    
+      <!-- loading  -->
+      <div
+      id="loading"
+      class="hidden fixed w-full h-full bg-[#303030a8] left-0 top-0 flex justify-center items-center"
+    >
+        <div
+          class="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+          role="status">
+          <span
+            class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+            >Loading...</span
+          >
+        </div>
+
+      </div>
+  </body>
+  <script src="/assets/js/fetch.js"></script>
+  <%-include('../components/end_body.html')%>

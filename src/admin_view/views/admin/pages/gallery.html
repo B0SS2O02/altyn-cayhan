@@ -1,0 +1,105 @@
+<%- include('../components/body.html')%>
+  <div class="flex">
+    <!-- sidebar -->
+    <%- include('../components/sidebar.html') %>
+      <!-- end of sidebar -->
+      <!-- header -->
+      <!-- top border of header  -->
+      <div class="border-solid border-b-2 z-[-1] absolute w-full top-[80px]"></div>
+      <!-- end of top border -->
+      <div class="lg:ml-[25rem] w-full lg:mx-20 mx-5 flex flex-col gap-10">
+        <%- include('../components/header.html')%>
+          <div class="w-full">
+            <div class="flex flex-row justify-between items-center">
+              <div class="flex justify-start">
+                <h1 class="text-[30px]" data-key="Gallery">Gallery</h1>
+              </div>
+              <a href="/admin/add-gallery" data-key="Add Gallery"
+                class="p-2 border-solid border-2 text-[#445FD3]"><span>+</span> Add
+                gallery</a>
+            </div>
+          </div>
+          <hr />
+          <!-- end of header -->
+          <!-- border after header -->
+          <!--  main -->
+          <% if(data){ %>
+            <!-- search table -->
+            <!-- table news -->
+            <div>
+              <input onkeyup="FilterFunction()" id="search" type="input" placeholder="Search content...."
+                class="w-full text-black border-solid border-[#DBDFEA] border-2 p-2 mb-3 rounded-md" />
+              <table id="table"
+                class="text-left border-2 border-solid border-[#DBDFEA] rounded-md w-full text-[18px] border-separate border-spacing-0">
+                <thead class="bg-[#DBDFEA] text-[#4C4C4C]">
+                  <tr class="font-normal">
+                    <th class="w-[3%] p-3">N</th>
+                    <th class="w-[72%] p-3" data-key="Image">Name</th>
+                    <th class="w-[15%] p-3" data-key="Type">Typw</th>
+                    <th class="w-[5%]"></th>
+                    <th class="w-[5%]"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if(data.gallery.length>0){ %>
+                    <% data.gallery.forEach((item,index)=>{ %>
+                      <tr class="border-2 border-[#DBDFEA] border-solid">
+                        <td class="border-t-2 text-center">
+                          <%=((page-1)*size)+index+1%>
+                        </td>
+                        <td class="border-t-2">
+                          <img style="width: 150px;height: auto;" class="w-[150px] h-auto" src="<%=item.image%>"
+                            alt="image" />
+                        </td>
+                        <td class="border-t-2">
+                          <%=item.type%>
+                        </td>
+                        <td class="border-t-2"><a href="/admin/add-gallery/<%=item.id%>">
+                            <img class="w-auto h-[20px] active:bg-white" src="/assets/images/edit.png" alt="" /> </a>
+                        </td>
+                        <td class="border-t-2 text-[red] cursor-pointer"
+                          onclick="openModal(`<%=deleteGalleryUrl%>`,`<%=item.id%>`,'Delete Gallery',2,this)">
+                          <img class="w-auto h-[20px] active:bg-white" src="/assets/images/delete.png" alt="" />
+                        </td>
+                      </tr>
+                      <% }) %>
+                        <%}%>
+                </tbody>
+              </table>
+            </div>
+            <%-include('../components/pagination.html',{page,size,totalPages})%>
+      </div>
+      <%}%>
+  </div>
+    <div class="mt-10"></div>
+    <!-- modal -->
+    <div id="modal" class="hidden fixed w-full h-full bg-[#303030a8] left-0 top-0 flex justify-center items-center">
+      <div id="modalBox"
+        class="translate-y-[-400px] transition-all duration-700 bg-white rounded-xl text-black w-1/6 w-[15rem]">
+        <div class="flex items-center justify-between border-b-2 p-3">
+          <p class="text-[20px]" id="modalTitle" data-key="Delete Gallery">Delete Gallery</p>
+          <div class="cursor-pointer" id="close">X</div>
+        </div>
+        <div class="border-b-2 p-3" data-key="Are you sure?">Are you sure?</div>
+        <div class="p-3 flex justify-end gap-2">
+          <button data-key="No"
+            class="border-2 border-[#dc3545] rounded-lg text-[#dc3545] px-3 py-1 m-0 hover:text-white hover:bg-[#dc3545] transition-colors"
+            id="close">
+            No
+          </button>
+          <button data-key="Yes"
+            class="border-2 border-[#445FD3] rounded-lg text-[#445FD3] px-3 py-1 hover:text-white hover:bg-[#445FD3] ttransition-colors"
+            id="allow">
+            Yes
+          </button>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </body>
+
+    <script src="/assets/js/modal.js"></script>
+    <script src="/assets/js/table.js"></script>
+    <script src="/assets/js/fetch.js"></script>
+    <%-include('../components/end_body.html')%>

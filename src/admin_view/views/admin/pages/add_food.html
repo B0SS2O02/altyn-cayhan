@@ -1,0 +1,175 @@
+<%- include('../components/body.html')%>
+    <div class="flex">
+        <!-- sidebar -->
+
+        <%- include('../components/sidebar.html') %>
+            <!-- end of sidebar -->
+
+
+            <!-- header -->
+            <!-- top border of header  -->
+            <div class="border-solid border-b-2 z-[-1] absolute w-full top-[80px]"></div>
+            <!-- end of top border -->
+            <div class="lg:ml-[25rem] w-full lg:mx-20 mx-5 flex flex-col gap-10">
+                <%- include('../components/header.html')%>
+                    <!-- end of header -->
+                    <!-- border after header -->
+                    <!--  main -->
+                    <div class="w-full">
+                        <h1 class="text-4xl">Food</h1>
+                        <form action="#"
+                            onsubmit="`<%if(!edit){%>${postFood(event)}<%}else{%>${editFood(event,'<%=data.id%>')}<%}%>`">
+                            <div class="border-2 rounded border-[#DBDFEA] mt-3 p-5">
+                                <div class=" my-2">
+                                    <label for="name" class="leading-5">Turkmen Title</label>
+                                    <input type="text"
+                                        class="leading-5 p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                                        id="titleTm"
+                                        value="<% if(edit){%><%=data.prodTranslations.find(item=>item.lang=='tm').title %> <%}%>"
+                                        placeholder="Turkmen" />
+                                    <!-- validation id must be titleValidation because api validation param like this -->
+                                    <p id="translations.tm.titleValidation" class="text-[red]"></p>
+                                </div>
+                                <div class=" my-2">
+                                    <label for="name" class="leading-5">Russian Title</label>
+                                    <input type="text"
+                                        class="leading-5 p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                                        id="titleRu"
+                                        value="<% if(edit){%><%=data.prodTranslations.find(item=>item.lang=='ru').title %> <%}%>"
+                                        placeholder="Russian" />
+                                    <!-- validation id must be titleValidation because api validation param like this -->
+                                    <p id="translations.ru.titleValidation" class="text-[red]"></p>
+                                </div>
+                                <div class=" my-2">
+                                    <label for="description" class="leading-5">Turkmen Description</label>
+                                    <textarea rows="8" placeholder="Turkmen Description"
+                                        class="leading-5 file:p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                                        id="descriptionTm"
+                                        name="translations.tm.description"> <% if(edit){%><%=data.prodTranslations.find(item=>item.lang=='tm').description %> <%}%> </textarea>
+                                    <p id="translations.tm.descriptionValidation" class="text-[red]"></p>
+                                </div>
+                                <div class=" my-2">
+                                    <label for="description" class="leading-5">Russian Description</label>
+                                    <textarea rows="8" placeholder="Russian Description"
+                                        class="leading-5 file:p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                                        id="descriptionRu"
+                                        name="translations.ru.description"><% if(edit){%><%=data.prodTranslations.find(item=>item.lang=='ru').description %> <%}%></textarea>
+                                    <p id="translations.ru.descriptionValidation" class="text-[red]"></p>
+                                </div>
+                                <div>
+                                    <label for="prodCategoryId" class="block mb-2 text-sm font-medium text-gray-900 ">Select
+                                        Category</label>
+                                    <select id="prodCategoryId"
+                                        class="bg-gray-50 border  border-[#DBDFEA]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                        <%if(!edit)%>
+                                            <option value="" selected>Choose a category</option>
+                                            <% if(category.length>0){ %>
+                                                <% category.forEach(item=>{ %>
+                                                    <option value="<%=item.id%>" <% if(edit &&
+                                                        item.id===data.prodCategoryId ){ %> selected <%}%>
+                                                            ><%=item.title%>
+                                                    </option>
+                                                    <% }) %>
+                                                        <%}%>
+                                    </select>
+                                    <p id="prodCategoryIdValidation" class="text-[red]"></p>
+                                </div>
+                                <div class=" my-2">
+                                    <label for="price" class="leading-5">Price</label>
+                                    <input type="text"
+                                        class="leading-5 p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                                        id="price" value="<% if(edit){%><%=data.price%><%}%>" placeholder="price" />
+                                    <!-- validation id must be titleValidation because api validation param like this -->
+                                    <p id="priceValidation" class="text-[red]"></p>
+                                </div>
+
+
+                                <div class=" my-2">
+                                    <label for="image" class="leading-5">Image</label>
+                                    <input type="file" onchange="loadFile(event)"
+                                        class="leading-5 file:p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                                        id="image" placeholder="image" />
+                                    <!-- validation id must be titleValidation because api validation param like this -->
+                                    <p id="imageValidation" class="text-[red]"></p>
+                                </div>
+                                <div class=" my-2">
+                                    <input class="m-2 text-lg" type="checkbox" id="popular" <% if(edit &&
+                                        data.popular===true ){ %> checked <%}%>
+                                        />
+                                        <label for="status" class="leading-5">Popular</label>
+                                        <p id="popularValidation"></p>
+                                </div>
+                               
+                                <div class=" my-2">
+                                    <label for="discount" class="leading-5">Discount</label>
+                                    <input type="text"
+                                        class="leading-5 p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                                        id="discount" value="<% if(edit){%><%=data.discount%><%}%>" placeholder="discount" />
+                                    <!-- validation id must be titleValidation because api validation param like this -->
+                                    <p id="discountValidation" class="text-[red]"></p>
+                                </div>
+
+                                <div class="flex justify-end gap-3">
+                                    <a href="/admin/foods"
+                                        class="text-[#445FD3] mt-5 border-[#445FD3] border-2  px-5 py-1 text-[20px] rounded">
+                                        Close
+                                    </a>
+                                    <button id="submit" type="submit"
+                                        class="bg-[#445FD3] mt-5 text-white px-5 py-1 text-[20px] rounded">
+                                        Save
+                                    </button>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+    </div>
+    </div>
+    <!-- modal -->
+    <div id="modal" class="hidden fixed w-full h-full bg-[#303030a8] left-0 top-0 flex justify-center items-center">
+        <div id="modalBox"
+            class="translate-y-[-400px] transition-all duration-700 bg-white rounded-xl text-black w-1/6 w-[15rem]">
+            <div class="flex items-center justify-between border-b-2 p-3">
+                <p class="text-[20px]" id="modalTitle">Delete News</p>
+                <div class="cursor-pointer" id="close">X</div>
+            </div>
+            <div class="border-b-2 p-3">Are you sure?</div>
+            <div class="p-3 flex justify-end gap-2">
+                <button
+                    class="border-2 border-[#dc3545] rounded-lg text-[#dc3545] px-3 py-1 m-0 hover:text-white hover:bg-[#dc3545] transition-colors"
+                    id="close">
+                    No
+                </button>
+                <button
+                    class="border-2 border-[#445FD3] rounded-lg text-[#445FD3] px-3 py-1 hover:text-white hover:bg-[#445FD3] ttransition-colors"
+                    id="allow">
+                    Yes
+                </button>
+            </div>
+        </div>
+    </div>
+    
+   <!-- loading  -->
+   <div
+   id="loading"
+   class="hidden fixed w-full h-full bg-[#303030a8] left-0 top-0 flex justify-center items-center"
+ >
+     <div
+       class="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+       role="status">
+       <span
+         class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+         >Loading...</span
+       >
+     </div>
+
+   </div>
+    </body>
+
+    <!-- <script src="/assets/ckeditor4/ckeditor.js"></script> -->
+
+
+    <script src="/assets/js/modal.js"></script>
+    <script src="/assets/js/fetch.js"></script>
+    <%-include('../components/end_body.html')%>

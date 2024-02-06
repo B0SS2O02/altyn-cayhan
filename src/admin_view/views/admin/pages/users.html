@@ -1,0 +1,142 @@
+<%- include('../components/body.html')%>
+    <div class="flex">
+      <!-- sidebar -->
+
+      <%- include('../components/sidebar.html') %>
+      <!-- end of sidebar -->
+
+     
+      <!-- header -->
+       <!-- top border of header  -->
+       <div
+       class="border-solid border-b-2 z-[-1] absolute w-full top-[80px]"
+       ></div>
+      <!-- end of top border -->
+      
+      <div class="lg:ml-[25rem] w-full lg:mx-20 mx-5 flex flex-col gap-10">
+        <%- include('../components/header.html')%>
+      <!-- end of header -->
+        <!-- border after header -->
+        <!--  main -->
+        <div class="w-full">
+            <div class="flex flex-row justify-between items-center">
+              <div class="flex justify-start">
+                <h1 class="text-4xl" data-key="Users">Users</h1>
+              </div>
+              <a
+                href="/admin/add-user" data-key="Add User"
+                class="p-2 border-solid border-2 text-[#445FD3]"
+                ><span>+</span> Add Users</a
+              >
+            </div>
+          </div>
+          <!-- search table -->
+          <!-- table news -->
+          <div>
+            <input
+              onkeyup="FilterFunction()"
+              id="search"
+              type="input"
+              placeholder="Search content...."
+              class="w-full text-black border-solid border-[#DBDFEA] border-2 p-2 mb-3 rounded-md"
+            />
+            <table
+              id="table"
+              class="text-left border-2 border-solid border-[#DBDFEA] rounded-md w-full text-[18px] border-separate border-spacing-0"
+            >
+              <thead class="bg-[#DBDFEA] text-[#4C4C4C]">
+                <tr class="font-normal">
+                  <th class="w-[23%] p-3" style="width: 23%" data-key="Name">Name</th>
+                  <th class="w-[23%]" style="width: 23%" data-key="Login">Login</th>
+                  <th class="w-[23%]" style="width: 23%" data-key="Password">Password</th>
+                  <th class="w-[15%]" style="width: 15%" data-key="Role">Role</th>
+                  <th class="w-[10%]" style="width: 10%" data-key="Active">Active</th>
+                  <th class="w-[2.5%]" style="width: 2.5%"></th>
+                  <th class="w-[2.5%]" style="width: 2.5%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if(data.length>0){ %>
+                 <% data.forEach(item=>{ %>
+                  <tr class="border-2 border-[#DBDFEA] border-solid">
+                    <td class="p-3 border-t-2"><%=item.fullName%></td>
+                    <td class="border-t-2"><%=item.login%></td>
+                    <td class="border-t-2"><%=item.password%></td>
+                    <td class="border-t-2"><%=item.role%></td>
+                    <td
+                      class="border-t-2 cursor-pointer"
+                      id="bool"
+                      onclick="openModal(`<%=activeUserUrl%>`, `<%=item.id%>`,'Active User',1,this)"
+                    >
+                      <% if(item.active){ %>
+                        Yes
+                        <%}else{%>
+                          No
+                          <%}%>
+                    </td>
+                    <td class="border-t-2"><a href="/admin/user/<%=item.id%>">
+                      <img
+                      class="w-auto h-[20px] active:bg-white"
+                      src="/assets/images/edit.png"
+                      alt=""
+                    /> </a></td>
+                    <td
+                      class="border-t-2 text-[red] cursor-pointer"
+                      onclick="openModal(`<%=deleteUserUrl%>`,`<%=item.id%>`,'Delete User',2,this)"
+                    >
+                      
+                <img
+                class="w-auto h-[20px] active:bg-white"
+                src="/assets/images/delete.png"
+                alt=""
+              /> 
+                    </td>
+                  </tr>
+
+                  <% }) %>
+                  <%}%>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  
+      <!-- modal -->
+      <div
+        id="modal"
+        class="hidden fixed w-full h-full bg-[#303030a8] left-0 top-0 flex justify-center items-center"
+      >
+        <div
+          id="modalBox"
+          class="translate-y-[-400px] transition-all duration-700 bg-white rounded-xl text-black w-1/6 w-[15rem]"
+        >
+          <div class="flex items-center justify-between border-b-2 p-3">
+            <p class="text-[20px]" id="modalTitle" data-key="Delete User">Delete User</p>
+            <div class="cursor-pointer" id="close">X</div>
+          </div>
+          <div class="border-b-2 p-3" data-key="Are you sure?">Are you sure?</div>
+          <div class="p-3 flex justify-end gap-2">
+            <button
+              class="border-2 border-[#dc3545] rounded-lg text-[#dc3545] px-3 py-1 m-0 hover:text-white hover:bg-[#dc3545] transition-colors"
+              id="close"
+              data-key="No"
+            >
+              No
+            </button>
+            <button
+              class="border-2 border-[#445FD3] rounded-lg text-[#445FD3] px-3 py-1 hover:text-white hover:bg-[#445FD3] ttransition-colors"
+              id="allow"
+              data-key="Yes"
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </body>
+  
+  <script src="/assets/js/modal.js"></script>
+  <script src="/assets/js/table.js"></script>
+  <%-include('../components/end_body.html')%>

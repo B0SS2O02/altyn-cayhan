@@ -1,0 +1,550 @@
+<style>
+    .cancelled {
+        background-color: #ff0f0f66;
+    }
+
+    .completed {
+        background-color: #00800096;
+    }
+
+    .waiting {
+        background-color: #ffff008c;
+    }
+
+    input {
+        width: 50px;
+        padding-left: 10px !important;
+    }
+
+    .input {
+        border: 1px solid #00000099;
+        border-radius: 5px;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .form_buttons {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .form_buttons button {
+        padding: 5px 10px !important;
+        border: 1px solid;
+        border-radius: 5px;
+    }
+
+    .button_primary {
+        background-color: #445FD3;
+        color: white;
+    }
+
+    .button_secondary {
+        border: 1px solid #445FD3;
+        color: #445FD3;
+    }
+
+    .button_secondary:hover {
+        background-color: rgb(241, 241, 241);
+    }
+
+    .button_primary:hover {
+        background-color: #3653d3;
+    }
+
+    tr th {
+        padding: 0.75rem
+    }
+</style>
+<%- include('../components/body.html')%>
+    <div id="notification"
+        class="w-full h-14 bg-blue-800 flex justify-end gap-10 px-5 items-center text-white fixed z-10">
+        <h1>Sesi açmak üçin OK düwmesine basyň</h1>
+        <button onclick="openVoice()"
+            class="border-none py-[6px] px-[20px] bg-white text-blue-800 hover:text-white  hover:bg-blue-700 rounded-md">OK</button>
+    </div>
+    <div class="flex">
+        <!-- sidebar -->
+
+        <%- include('../components/sidebar.html') %>
+            <!-- end of sidebar -->
+
+
+            <!-- header -->
+            <!-- top border of header  -->
+            <iframe src="/assets/a.mp3" type="audio/mp3" allow="autoplay" id="audio" style="display: none;"
+                frameborder="0"></iframe>
+            <div class="border-solid border-b-2 z-[-1] absolute w-full top-[80px]"></div>
+            <!-- end of top border -->
+
+            <div class="lg:ml-[20rem] w-full lg:mx-20 mx-0 flex flex-col gap-5">
+                <%- include('../components/header.html')%>
+                    <div class="w-[95%] m-auto md:w-full">
+                        <div class="flex flex-row justify-between items-center">
+                            <div class="flex justify-start" style="flex-direction:column;">
+                                <h1 class="text-[30px]" data-key="Orders">Orders</h1>
+                                <div style="display: flex; gap: 10px;">
+                                    <label for="" data-key="Delivery Charge">Delivery Charge</label>
+                                    <input type="text" disabled id="deliveryCharge" value="<%=deliveryCharge%>">
+                                    <div id="form" class="form_buttons hidden">
+                                        <button onclick="putDC()" class="button_primary">Save</button>
+                                        <button onclick="editDC()" class="button_secondary">Cancel</button>
+                                    </div>
+                                    <img onclick="editDC()" id="imgDC" style="cursor: pointer;"
+                                        class="w-auto h-[20px] active:bg-white" src="/assets/images/edit.png" alt="" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- end of header -->
+                    <!-- border after header -->
+                    <!--  main -->
+                    <% if(data){ %>
+
+                        <!-- search table -->
+                        <!-- table news -->
+                        <div class="md:w-full w-[95%] m-auto">
+                            <input onkeyup="FilterFunction()" id="search" type="input" placeholder="Search content...."
+                                class="w-full text-black border-solid border-[#DBDFEA] border-2 p-2 mb-3 rounded-md" />
+                            <table id="table"
+                                class="block overflow-x-auto text-left border-2 border-solid border-[#DBDFEA] rounded-md w-full text-[15px] border-separate border-spacing-0">
+                                <thead class="bg-[#DBDFEA] text-[#4C4C4C]">
+                                    <tr class="font-normal">
+                                        <th class="w-[2%] p-2" data-key="Name">N</th>
+                                        <th class="w-[15%]" data-key="Name">Name</th>
+                                        <th class="w-[20%]" data-key="Address">Address</th>
+                                        <th class="w-[9%]" data-key="PhoneNumber">PhoneNumber</th>
+                                        <th class="w-[5%]" data-key="Price">Price</th>
+                                        <th class="w-[11%]" data-key="Date">Date</th>
+                                        <th class="w-[12%]" data-key="DeliveryTime">DeliveryTime</th>
+                                        <th class="w-[8%]" data-key="Pay">Pay</th>
+                                        <th class="w-[11%]" data-key="Status">Status</th>
+                                        <th class="min-w-[2rem]  md:w-[2.5%]"></th>
+                                        <th class="min-w-[2rem]  md:w-[2.5%]"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if(data.orders.length>0){ %>
+                                        <% data.orders.forEach((item,index)=>{ %>
+                                            <tr
+                                                class="border-2 border-[#DBDFEA] border-solid <%if(item.status==='completed'){%>completed<%}else if(item.status==='cancelled'){%>cancelled<%}else{%>waiting<%}%>">
+                                                <td class="p-3 border-t-2" id="table_number">
+                                                    <%=((page-1)*size)+index+1%>
+                                                </td>
+                                                <td class="p-3 border-t-2">
+                                                    <%=item.fullName%>
+                                                </td>
+                                                <td class="p-3 border-t-2">
+                                                    <%=item.address%>
+                                                </td>
+                                                <td class="p-3 border-t-2">
+                                                    <%=item.phoneNumber%>
+                                                </td>
+                                                <td class="p-3 border-t-2">
+                                                    <%=item.totalPrice%>
+                                                </td>
+
+                                                <td id="getTimeToDate" class="p-3 border-t-2">
+                                                    <%=item.createdAt%>
+                                                </td>
+                                                <td class="p-3 border-t-2">
+                                                    <span id="getTimeToDateOnlyDays">
+                                                        <%=item.deliveryTime%>
+                                                    </span>
+                                                </td>
+                                                <td class="p-3 border-t-2" data-orderid="<%=item.id%>">
+                                                    <!-- <%=item.paymentMethod%> -->
+                                                    <% if(item.paymentMethod=='card'){%>Kart<%}else if(item.paymentMethod=='cash'){%>Nagt<%}%>
+                                                </td>
+
+                                                <td class="py-3 border-t-2">
+                                                    <div>
+                                                        <select name="status"
+                                                            onchange="putStatusOrder('<%=item.id%>',this,'<%=item.status%>')"
+                                                            id="status"
+                                                            class="bg-gray-50 border  border-[#DBDFEA]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-9/12 py-2.5 ">
+                                                            <%staticStatusOrder.map(status=>{%>
+                                                                <option data-key="<%=status%>" value="<%=status%>" <%
+                                                                    if(status===item.status){ %> selected <%}%>
+                                                                        ><%=status%>
+                                                                </option>
+
+                                                                <%})%>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td class="border-t-2">
+                                                    <!-- <a href="/admin/order/<%=item.id%>"> -->
+                                                    <div onclick="openModalOrder('<%=item.id%>')">
+
+                                                        <img class="w-auto h-[20px] active:bg-white"
+                                                            src="/assets/images/folder.png" alt="" />
+                                                    </div>
+                                                    <!-- </a> -->
+                                                </td>
+                                                <td class="border-t-2 text-[red] cursor-pointer"
+                                                    onclick="openModal(`<%=deleteOrderUrl%>`,`<%=item.id%>`,'Delete Order',2,this)">
+
+                                                    <img class="w-auto h-[20px] active:bg-white"
+                                                        src="/assets/images/delete.png" alt="" />
+                                                </td>
+                                            </tr>
+
+                                            <% }) %>
+                                                <%}%>
+                                </tbody>
+                            </table>
+                        </div>
+                        <%-include('../components/pagination.html'),{page,size,totalPages}%>
+            </div>
+            <%}%>
+    </div>
+    <div class="mt-10"></div>
+    <!-- modal -->
+    <div id="modal" class="hidden fixed w-full h-full bg-[#303030a8] left-0 top-0 flex justify-center items-center">
+        <div id="modalBox"
+            class="translate-y-[-400px] transition-all duration-700 bg-white rounded-xl text-black w-1/6 w-[15rem]">
+            <div class="flex items-center justify-between border-b-2 p-3">
+                <p class="text-[20px]" id="modalTitle" data-key="Delete Order">Delete Order</p>
+                <div class="cursor-pointer" id="close">X</div>
+            </div>
+            <div class="border-b-2 p-3" data-key="Are you sure?">Are you sure?</div>
+            <div class="p-3 flex justify-end gap-2">
+                <button
+                    class="border-2 border-[#dc3545] rounded-lg text-[#dc3545] px-3 py-1 m-0 hover:text-white hover:bg-[#dc3545] transition-colors"
+                    id="close" data-key="No">
+                    No
+                </button>
+                <button
+                    class="border-2 border-[#445FD3] rounded-lg text-[#445FD3] px-3 py-1 hover:text-white hover:bg-[#445FD3] ttransition-colors"
+                    id="allow" data-key="Yes">
+                    Yes
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <button id="sound">Sound</button>
+    <div id="single_order" class="hidden z-[10] fixed top-0 h-[100vh] fixed w-[100vw] "
+        style="background-color: rgba(0, 0, 0, 0.75);" onclick="closeOrderModel()">
+    </div>
+    <div id="single_order1" class="hidden fixed z-[20] top-0 right-0 h-[100vh] w-[60%] bg-[#EAF2FC] ">
+        <div class="relative w-full bg-[#EAF2FC] ">
+            <div onclick="closeOrderModel()" class=" cursor-pointer absolute  top-0 left-0 p-3">
+                <div>X</div>
+            </div>
+            <div id="loading"
+                class="hidden fixed w-full h-full bg-[#303030a8] left-0 top-0 flex justify-center items-center">
+                <div class="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                    role="status">
+                    <span
+                        class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- loading  -->
+    <div id="loading" class="hidden fixed w-full h-full bg-[#303030a8] left-0 top-0 flex justify-center items-center">
+        <div class="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            role="status">
+            <span
+                class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+        </div>
+
+    </div>
+    </body>
+    <!-- <script src="/node_modules/ws/index.js"></script> -->
+    <script src="/assets/js/modal.js"></script>
+    <script src="/assets/js/table.js"></script>
+    <script src="/assets/js/fetch.js"></script>
+    <script>
+
+        const input = document.getElementById('deliveryCharge')
+        const form = document.getElementById('form')
+        const img = document.getElementById('imgDC')
+        async function putDC() {
+            initialValue = input.value
+            await fetch('https://hazynadoner.com.tm/api/v1/delivery', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    deliveryCharge: initialValue
+                })
+            })
+            img.classList.toggle('hidden')
+            form.classList.toggle('hidden')
+            input.toggleAttribute('disabled')
+            input.classList.toggle('input')
+
+        }
+        function editDC() {
+            img.classList.toggle('hidden')
+            form.classList.toggle('hidden')
+            input.toggleAttribute('disabled')
+            input.classList.toggle('input')
+            input.click()
+        }
+    </script>
+    <script>
+        const audio = new Audio('/assets/a.mp3')
+        audio.setAttribute('muted', 'muted')
+        audio.setAttribute('preload', 'none')
+        // audio.play()
+        document.querySelector('#sound').addEventListener('click', function () {
+            ('button click', audio)
+            audio.play();
+        })
+    </script>
+    <script>
+        const times = document.querySelectorAll('#getTimeToDate')
+        for (let i = 0; i < times.length; i++) {
+            times[i].textContent = format(times[i].textContent.trim())
+        }
+
+    </script>
+    <script>
+        function openVoice() {
+            document.getElementById('notification').style.display = "none"
+        }
+
+    </script>
+
+    <script>
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function openModalOrder(id) {
+            const singleOrderParent = document.querySelector('#single_order')
+            const singleOrderParent1 = document.querySelector('#single_order1')
+            singleOrderParent.classList.remove('hidden')
+            singleOrderParent1.classList.remove('hidden')
+            const loading = document.querySelector("#single_order1  #loading");
+            loading.classList.remove('hidden')
+            const staticStatusOrder = ['completed', 'cancelled', 'on the way', 'waiting']
+            // const timeOfDay = ['09:00-12:00', '12:00-15:00', '15:00-18:00', '18:00-21:00']
+            const paymentStatus = {
+                pending: 'garasylyar',
+                failure: 'yatyryldy',
+                success: 'pul tolendi'
+            }
+            let delivery
+            document.body.style.overflowY = 'hidden'
+            fetch('https://hazynadoner.com.tm/api/v1/delivery').then(res => {
+                return res.json()
+            })
+                .then(res => {
+                    delivery = res
+                    return fetch('https://hazynadoner.com.tm/api/v1/order/' + id, {
+                        method: 'GET',
+                        headers: {
+                            'Accept-Language': getCookie('lang')
+                        }
+                    })
+                })
+                .then(res => { return res.json() })
+                .then(data => {
+                    console.log(data)
+                    const text = `
+                    <div class="w-[95%] m-auto md:w-full">
+                            <div class="flex flex-row justify-between items-center">
+                                <div class="flex flex-col justify-start">
+                                        <h1 class="text-[30px] text-center pl-4" data-key="Order">Order</h1>                                   
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td class="px-4 py-2 uppercase" data-key="FullName">FullName</td>
+                                                <td>
+                                                    ${data.fullName}--
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-2 uppercase" data-key="PhoneNumber">Phone-Number</td>
+                                                <td>
+                                                    ${data.phoneNumber}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-2 uppercase" data-key="Address">Address</td>
+                                                <td>
+                                                    ${data.address}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-2 uppercase" data-key="Total Price">Total Price</td>
+                                                <td>
+                                                    ${data.totalPrice}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-2 uppercase" data-key="Date">Date</td>
+                                                <td id="getTimeToDate">
+                                                    ${format(data.createdAt)}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-2 uppercase" data-key="Status">Status</td>
+                                                <td>
+                                                    <div>
+                                                        <select name="status"
+                                                            onchange="putStatusOrder('${data.id}',this)" id="status"
+                                                            class="bg-gray-50 border  border-[#DBDFEA]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-9/12 py-2.5 ">
+                                                            ${staticStatusOrder.map(status => `
+                                                                <option value="${status}" ${status === data.status && 'selected'}
+                                                                        >${status}
+                                                                </option>
+                                                                `
+                    ).join("")}
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            
+                                            
+                                            <tr>
+                                                <td class="px-4 py-2 uppercase" data-key="DeliveryDate">Delivery Date</td>
+                                                <td class="p-3 border-t-2">
+                                                    <span id="getTimeToDateOnlyDays">
+                                                        ${data.deliveryTime}
+                                                    </span>
+                                                </td>
+                                            </tr> 
+                                            
+                                            <tr>
+                                                <td class="px-4 py-2 uppercase" data-key="Pay">Pay</td>
+                                                <td class="p-3 border-t-2">
+                                                    ${data.paymentMethod=='card' ? 'Kart' : data.paymentMethod=='cash' ? 'Nagt' : 'Error' }
+                                                    ${
+                                                        data.paymentMethod=='card' && `
+                                                            <span class="bg-white">
+                                                                ${data.payments[0].transactionId}
+                                                            </span>
+                                                        `
+                                                    }
+                                                        </td>
+                                            </tr>
+                                                        
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="md:w-full w-[95%] m-auto">
+                            <table id="table"
+                                class="block overflow-x-auto text-left border-2 border-solid border-[#DBDFEA] rounded-md w-full text-[18px] border-separate border-spacing-0">
+                                <thead class="bg-[#DBDFEA] text-[#4C4C4C]">
+                                    <tr class="font-normal">
+                                        <th class="w-[20%] p-3" data-key="Image">Image</th>
+                                        <th class="w-[25%]" data-key="Name">Name</th>
+                                        <th class="w-[10%]" data-key="Count">Count</th>
+                                        <th class="w-[5%]" data-key="Price">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${data.orderItems.length > 0 && `
+                                        ${data.orderItems.map(item => `
+                                            <tr class="border-2 border-[#DBDFEA] border-solid">
+                                                <td class="p-3 border-t-2">
+                                                    <img src="${item.product.image}" alt="">
+                                                </td>
+                                                <td class="p-3 border-t-2">
+                                                    ${item.product.title}
+                                                </td>
+                                                <td class="p-3 border-t-2">
+                                                    ${item.count}
+                                                </td>
+                                                <td class="p-3 border-t-2">
+                                                    ${item.product.price}
+                                                </td>
+
+                                            </tr>
+                                            ` ).join("")}
+                                        `}
+                                            <tr class="border-2 border-[#DBDFEA] border-solid">
+                                                
+                                                <td class="p-3 border-t-2">
+                                                </td>
+                                                <td class="p-3 border-t-2" data-key="Delivery Charge">
+                                                    Delivery Charge
+                                                </td>
+                                                <td class="p-3 border-t-2">
+                                                </td>
+                                                <td class="p-3 border-t-2">
+                                                    +${delivery?.deliveryCharge}
+                                                </td>
+                                            </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    `
+                    loading.classList.add('hidden')
+                    let singleOrderChild = document.querySelector('#single_order1>div')
+                    singleOrderChild += singleOrderChild.insertAdjacentHTML('afterbegin', text)
+                    document.getElementById('single_order1').style.overflow = 'scroll'
+                    //options----------------
+
+                    const locales = {
+                        tm: {
+                            "completed": "ugradyldy",
+                            "cancelled": "ugradylmady",
+                            "waiting": "garaşylýar",
+                            "on the way": "ýolda",
+                        },
+                        ru: {
+                            "completed": "завершенный",
+                            "cancelled": "отменен",
+                            "waiting": "ожидающий",
+                            "on the way": "в пути",
+                        }
+                    }
+                    const dataKeys = document.getElementsByTagName('tr')[1].querySelectorAll('[data-key]')
+                    const lang = document.querySelector('html').getAttribute('lang')
+                    for (let index = 0; index < dataKeys.length; index++) {
+                        const element = dataKeys[index];
+                        element.textContent = locales[lang][element.getAttribute('data-key')]
+                    }
+                }).catch(err => {
+                    console.log(err)
+                    alert("Yalnyshlyk yuze cykdy programmistler bilan hawarlashmagynyz gerek")
+                })
+        }
+        function closeOrderModel() {
+            const loading = document.querySelector("#loading");
+            loading.classList.remove('hidden')
+            document.body.style.overflowY = 'scroll'
+            const singleOrderParent = document.querySelector('#single_order')
+            singleOrderParent.classList.add('hidden')
+            const singleOrderParent1 = document.querySelector('#single_order1')
+            singleOrderParent1.classList.add('hidden')
+            let singleOrderChild = document.querySelector('#single_order1>div')
+            singleOrderChild.removeChild(singleOrderChild.firstElementChild)
+            singleOrderChild.removeChild(singleOrderChild.firstElementChild)
+            loading.classList.add('hidden')
+        }
+    </script>
+
+    <%-include('../components/end_body.html')%>

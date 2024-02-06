@@ -1,0 +1,70 @@
+<div id="body"></div>
+<div id="menu" class="hidden z-10 h-[100vh] lg:fixed w-[17rem] lg:flex lg:flex-col lg:items-center py-10 gap-5 bg-[#EAF2FC]">
+  <!-- photo -->
+  <!-- w-40 => 10rem -->
+  <div id="close" class="hidden cursor-pointer absolute top-0 right-0 p-3">
+    <div>X</div>
+  </div>
+  <!-- title -->
+  <div class="text-[#445FD3]">
+    <p class="font-bold text-[35px]" data-key="Pikir">Pikir</p>
+    <div class="flex flex-row gap-1 justify-center">
+      <div class="bg-[#445FD3] rounded-full w-1.5 h-1.5"></div>
+      <div class="bg-[#445FD3] w-1.5 h-1.5"></div>
+      <div class="bg-[#445FD3] w-1.5 h-1.5"></div>
+      <div class="bg-[#445FD3] w-1.5 h-1.5"></div>
+      <div class="bg-[#445FD3] rounded-full w-1.5 h-1.5"></div>
+      <div class="bg-[#445FD3] rounded-full w-1.5 h-1.5"></div>
+      <div class="bg-[#445FD3] rounded-full w-1.5 h-1.5"></div>
+      <div class="bg-[#445FD3] rounded-full w-1.5 h-1.5"></div>
+    </div>
+  </div>
+  <!-- lists -->
+  <div class="flex flex-col h-full justify-between w-[80%]">
+    <ul class="flex-col mt-[50px]">
+      <% if(user.role==='admin' ){ %>
+
+        <li class="flex items-center gap-3 active:bg-[#445FD3] active:text-white p-2 rounded-[3px]">
+          <img class="w-[25px] h-[25px] active:bg-white" src="/assets/images/dashboard.png" alt="" />
+          <a href="/admin/dashboard" class="font-[400] text-[18px]" data-key="Dashboard">Dashboard</a>
+        </li>
+        <li class="flex items-center gap-3 active:bg-[#445FD3] active:text-white p-2 rounded-[3px]">
+          <img class="w-[25px] h-[25px] active:bg-white" src="/assets/images/shopping-cart.png" alt="" />
+          <a href="/admin/orders" class="font-[400] text-[18px]" data-key="Orders">Orders</a>
+        </li>
+        <li class="flex items-center gap-3 active:bg-[#445FD3] active:text-white p-2 rounded-[3px]">
+          <img class="w-[25px] h-[25px] active:bg-white" src="/assets/images/fast-food.png" alt="" />
+          <a href="/admin/foods" class="font-[400] text-[18px]" data-key="Foods">Foods</a>
+        </li>
+        <li class="flex items-center gap-3 active:bg-[#445FD3] active:text-white p-2 rounded-[3px]">
+          <img class="w-[25px] h-[25px] active:bg-white" src="/assets/images/drink.png" alt="" />
+          <a href="/admin/category" class="font-[400] text-[18px]" data-key="Category">Category</a>
+        </li>
+        <li class="flex items-center gap-3 active:bg-[#445FD3] active:text-white p-2 rounded-[3px]">
+          <img class="w-[25px] h-[25px] active:bg-white" src="/assets/images/video.png" alt="" />
+          <a href="/admin/video" class="font-[400] text-[18px]" data-key="Video">Video</a>
+        </li>
+        <li class="flex items-center gap-3 active:bg-[#445FD3] active:text-white p-2 rounded-[3px]">
+          <img class="w-[25px] h-[25px] active:bg-white" src="/assets/images/gallery.png" alt="" />
+          <a href="/admin/gallery" class="font-[400] text-[18px]" data-key="Gallery">Gallery</a>
+        </li>
+        <li class="flex items-center gap-3 active:bg-[#445FD3] active:text-white p-2 rounded-[3px]">
+          <img class="w-[25px] h-[25px] active:bg-white" src="/assets/images/notification.png" alt="" />
+          <a href="/admin/send-notification" class="font-[400] text-[18px]" data-key="Notification">Notification</a>
+        </li>
+        <li class="flex items-center gap-3 active:bg-[#445FD3] active:text-white p-2 rounded-[3px]">
+          <img class="w-[25px] h-[25px] active:bg-white" src="/assets/images/user.png" alt="" />
+          <a href="/admin/users" class="font-[400] text-[18px]" data-key="Users">Users</a>
+        </li>
+        <%}%>
+    </ul>
+    <ul class="flex-col">
+      <li class="flex items-center gap-3 active:bg-[#445FD3] active:text-white p-2 rounded-[3px]">
+        <img class="w-[25px] h-[25px] active:bg-white" src="/assets/images/logout.png" alt="" />
+        <form action="/admin/logout" method="POST" class="my-auto">
+          <button class="font-[400] text-[18px]" type="submit" data-key="Logout">Logout</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,115 @@
+<style>
+    progress[value]::-webkit-progress-bar {
+        background-color: #eee;
+        border-radius: 2px;
+        width: 250px;
+        height: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+    }
+</style><%- include('../components/body.html')%>
+    <div class="flex">
+        <!-- sidebar -->
+        <%- include('../components/sidebar.html') %>
+            <!-- end of sidebar -->
+            <!-- header -->
+            <!-- top border of header  -->
+            <div class="border-solid border-b-2 z-[-1] absolute w-full top-[80px]"></div>
+            <!-- end of top border -->
+            <div class="lg:ml-[25rem] w-full lg:mx-20 mx-5 flex flex-col gap-10">
+                <%- include('../components/header.html')%>
+                    <!-- end of header -->
+                    <!-- border after header -->
+                    <!--  main -->
+                    <div class="w-full">
+                        <h1 class="text-4xl">Video</h1>
+                        <form action="#"
+                            onsubmit="`<%if(!edit){%>${postVideo(event)}<%}else{%>${editVideo(event,'<%=data.id%>')}<%}%>`">
+                            <div class="border-2 rounded border-[#DBDFEA] mt-3 p-5">
+                                <div class=" my-2">
+                                    <label for="name" class="leading-5">Turkmen Title</label>
+                                    <input type="text"
+                                        class="leading-5 p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                                        id="titleTm"
+                                        value="<% if(edit){%><%=data.videoTranslations.find(item=>item.lang=='tm').title %> <%}%>"
+                                        placeholder="Turkmen" />
+                                    <!-- validation id must be titleValidation because api validation param like this -->
+                                    <p id="translations.tm.titleValidation" class="text-[red]"></p>
+                                </div>
+                                <div class=" my-2">
+                                    <label for="name" class="leading-5">Russian Title</label>
+                                    <input type="text"
+                                        class="leading-5 p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                                        id="titleRu"
+                                        value="<% if(edit){%><%=data.videoTranslations.find(item=>item.lang=='ru').title %> <%}%>"
+                                        placeholder="Russian" />
+                                    <!-- validation id must be titleValidation because api validation param like this -->
+                                    <p id="translations.ru.titleValidation" class="text-[red]"></p>
+                                </div>
+
+                                <div class=" my-2">
+                                    <label for="image" class="leading-5">Video</label>
+                                    <input type="file"
+                                        class="leading-5 file:p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                                        id="video" value="<% if(edit){%><%=data.video%><%}%>" placeholder="video" />
+
+                                    <p id="videoValidation" class="text-[red]"></p>
+
+                                </div>
+                                <div class=" my-2">
+                                    <label for="videoDuration" class="leading-5">Video Duration</label>
+                                    <input type="text"
+                                        class="leading-5 p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                                        id="videoDuration" value="<% if(edit){%><%=data.videoDuration %> <%}%>"
+                                        placeholder="duration" />
+                                    <!-- validation id must be titleValidation because api validation param like this -->
+                                    <p id="videoDurationValidation" class="text-[red]"></p>
+                                </div>
+
+                                <div class=" my-2">
+                                    <label for="image" class="leading-5">Image</label>
+                                    <input type="file" onchange="loadFile(event)"
+                                        class="leading-5 file:p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                                        id="image" placeholder="image" />
+                                    <!-- validation id must be titleValidation because api validation param like this -->
+                                    <p id="imageValidation" class="text-[red]"></p>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <progress id="progress-bar" value="0" max="100"></progress><br>
+                                        <label for="progress-bar">0%</label>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <a href="/admin/video"
+                                            class="text-[#445FD3] mt-5 border-[#445FD3] border-2  px-5 py-1 text-[20px] rounded">
+                                            Close
+                                        </a>
+                                        <button type="submit"
+                                            class="bg-[#445FD3] mt-5 text-white px-5 py-1 text-[20px] rounded">
+                                            Save
+                                        </button>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+    </div>
+    </div>
+    <!-- loading  -->
+    <div id="loading" class="hidden fixed w-full h-full bg-[#303030a8] left-0 top-0 flex justify-center items-center">
+        <div class="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            role="status">
+            <span
+                class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+        </div>
+
+    </div>
+    </body>
+
+    <!-- <script src="/assets/ckeditor4/ckeditor.js"></script> -->
+
+ 
+    <script src="/assets/js/fetch.js"></script>
+    <%-include('../components/end_body.html')%>
