@@ -236,7 +236,6 @@ exports.getNotification = async (req, res, next) => {
   }
 };
 
-
 exports.getOrders = async (req, res, next) => {
   try {
     let { page: qPage, size: qSize } = req.query;
@@ -256,15 +255,20 @@ exports.getOrders = async (req, res, next) => {
       null,
       res.locals.lang
     );
+
+    // console.log("order------", order.data);
     const delivery = await Fetch(url + "delivery", "GET");
     const { page, size, totalPages } = order.data;
     // const timeOfDay =['09:00-12:00','12:00-15:00','15:00-18:00','18:00-21:00']
     const paymentStatus = {
-      pending:'garasylyar',
-      failure:'yatyryldy',
-      success:'pul tolendi'
-    }
-    console.log(totalPages,page,size)
+      pending: "garasylyar",
+      failure: "yatyryldy",
+      success: "pul tolendi",
+    };
+
+    console.log('data',order.data);
+
+    console.log(totalPages, page, size);
     res.render("admin/pages/orders.html", {
       path: "/foods",
       data: order.data,
@@ -301,4 +305,3 @@ exports.getOrderById = async (req, res, next) => {
     edit: false,
   });
 };
-

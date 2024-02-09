@@ -174,8 +174,8 @@ const registerTFEB = async (transactionId, amount) => {
         data_bank.transaction.invoiceNumber = requestId
         data_bank.transaction.totalAmount = amount
         data_bank.transaction.merchantOrderId = transactionId
-        data_bank.environment.transport.merchantFinalResponseUrl = "https://hazynadoner.com.tm/api/v1/order/payment/callback-handler-tfeb"
-        data_bank.environment.transport.challengeResponseUrl = "https://hazynadoner.com.tm/api/v1/order/payment/callback-handler-tfeb"
+        data_bank.environment.transport.merchantFinalResponseUrl = "http://localhost:3001/api/v1/order/payment/callback-handler-tfeb"
+        data_bank.environment.transport.challengeResponseUrl = "http://localhost:3001/api/v1/order/payment/callback-handler-tfeb"
         console.log('load response to checkout')
         const secResponse = await axios(
             {
@@ -196,8 +196,8 @@ const registerTFEB = async (transactionId, amount) => {
                 orderId: secResponse.data.response.orderId,
                 success: true,
                 url: secResponse.data._links.redirectToCheckout.href,
-                finalUrl: "https://hazynadoner.com.tm/api/v1/order/payment/callback-handler-tfeb/" + secResponse.data.response.orderId,
-                checkOrder: "https://hazynadoner.com.tm/api/v1/order/payment/check-status-tfeb?orderId=" + secResponse.data.response.orderId
+                finalUrl: "http://localhost:3001/api/v1/order/payment/callback-handler-tfeb/" + secResponse.data.response.orderId,
+                checkOrder: "http://localhost:3001/api/v1/order/payment/check-status-tfeb?orderId=" + secResponse.data.response.orderId
             }
         }
         return { success: false, orderId: null, formUrl: null, finalUrl: null, checkOrder: null }
@@ -265,8 +265,8 @@ const refundOrderTFEB = async (url, transactionId, amount) => {
     data_bank.transaction.totalAmount = amount
     data_bank.transaction.type = 'RFND'
     data_bank.transaction.merchantOrderId = transactionId
-    data_bank.environment.transport.merchantFinalResponseUrl = "https://hazynadoner.com.tm/api/v1/order/payment/callback-handler-tfeb"
-    data_bank.environment.transport.challengeResponseUrl = "https://hazynadoner.com.tm/api/v1/order/payment/callback-handler-tfeb"
+    data_bank.environment.transport.merchantFinalResponseUrl = "http://localhost:3001/api/v1/order/payment/callback-handler-tfeb"
+    data_bank.environment.transport.challengeResponseUrl = "http://localhost:3001/api/v1/order/payment/callback-handler-tfeb"
     const thirdResponse = await axios(
         {
             url: url + "/refund",

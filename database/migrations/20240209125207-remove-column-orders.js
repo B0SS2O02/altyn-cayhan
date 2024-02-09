@@ -3,11 +3,12 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addColumn("products", "position", {
-      type: Sequelize.INTEGER,
-    });
+    await queryInterface.removeColumn("orders", "isPaidBank");
   },
+
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeColumn("products", "position", {});
+    await queryInterface.addColumn("orders", "isPaidBank", {
+      type: Sequelize.BOOLEAN,
+    });
   },
 };

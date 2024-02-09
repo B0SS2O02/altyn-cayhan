@@ -97,7 +97,7 @@
       element.setAttribute('data-view', 'true')
     });
     if (ids.length > 0) {
-      await fetch("https://hazynadoner.com.tm/api/v1/order", {
+      await fetch("http://localhost:3001/api/v1/order", {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -107,7 +107,7 @@
     }
   }
   const fetchNewOrders = async () => {
-    response = await fetch("https://hazynadoner.com.tm/api/v1/order?isView=false")
+    response = await fetch("http://localhost:3001/api/v1/order?isView=false")
     response = await response.json()
     response = response.orders
     const orderItems = document.querySelectorAll("#notification-orders" > "li")

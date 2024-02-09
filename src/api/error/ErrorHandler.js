@@ -1,11 +1,12 @@
 const logger = require("../shared/logger");
 
-module.exports = (err, req, res, next) => {
+module.exports = (err, req, res, next) => 
+{
   const { status, message, errors } = err;
- console.log(errors,status,message)
+  console.log(errors, status, message);
   let validationErrors;
   if (errors) {
-    validationErrors = {}
+    validationErrors = {};
     errors.forEach((error) => (validationErrors[error.param] = error.msg));
   }
   const error = {

@@ -67,7 +67,7 @@ router
       }
       const seqTrans = await sequelize.transaction();
       try {
-        console.log(req.body);
+        console.log("---------", req.body);
         let order = await OrdersService.saveOrder(req.body, seqTrans);
         // let dataPayment;
         // if (req.body.paymentMethod == 'card') {
@@ -84,7 +84,7 @@ router
         console.log(dataPayment);
         res.send({ success: true, ...dataPayment });
       } catch (err) {
-        console.log(err);
+        console.log("Error--------------", err);
         await seqTrans.rollback();
         next(err);
       } finally {
@@ -157,7 +157,7 @@ router.get("/order/payment/check-status-tfeb", async (req, res, next) => {
     const checkStatus = await OrdersService.checkStatusByPayment(orderId);
     if (!checkStatus) {
       return res.redirect(
-        "https://hazynadoner.com.tm/api/v1/order/payment/callback-handler-tfeb/" +
+        "http://localhost:3001/api/v1/order/payment/callback-handler-tfeb/" +
           orderId
       );
     }
@@ -182,7 +182,7 @@ router.get("/order/payment/check-status", async (req, res, next) => {
     const checkStatus = await OrdersService.checkStatusByPayment(orderId);
     if (!checkStatus) {
       return res.redirect(
-        "https://hazynadoner.com.tm/api/v1/order/payment/callback-handler?orderId=" +
+        "http://localhost:3001/api/v1/order/payment/callback-handler?orderId=" +
           orderId
       );
     }

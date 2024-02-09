@@ -120,7 +120,7 @@
                                         <th class="w-[5%]" data-key="Price">Price</th>
                                         <th class="w-[11%]" data-key="Date">Date</th>
                                         <th class="w-[12%]" data-key="DeliveryTime">DeliveryTime</th>
-                                        <th class="w-[8%]" data-key="Pay">Pay</th>
+                                        
                                         <th class="w-[11%]" data-key="Status">Status</th>
                                         <th class="min-w-[2rem]  md:w-[2.5%]"></th>
                                         <th class="min-w-[2rem]  md:w-[2.5%]"></th>
@@ -155,10 +155,7 @@
                                                         <%=item.deliveryTime%>
                                                     </span>
                                                 </td>
-                                                <td class="p-3 border-t-2" data-orderid="<%=item.id%>">
-                                                    <!-- <%=item.paymentMethod%> -->
-                                                    <% if(item.paymentMethod=='card'){%>Kart<%}else if(item.paymentMethod=='cash'){%>Nagt<%}%>
-                                                </td>
+                                                
 
                                                 <td class="py-3 border-t-2">
                                                     <div>
@@ -271,7 +268,7 @@
         const img = document.getElementById('imgDC')
         async function putDC() {
             initialValue = input.value
-            await fetch('https://hazynadoner.com.tm/api/v1/delivery', {
+            await fetch('http://localhost:3001/api/v1/delivery', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -304,6 +301,15 @@
             audio.play();
         })
     </script>
+
+    <script>
+        const times2 = document.querySelectorAll('#getTimeToDateOnlyDays')
+        for (let i = 0; i < times2.length; i++) {
+            times2[i].textContent = format(times2[i].textContent.trim())
+        }
+
+    </script>
+
     <script>
         const times = document.querySelectorAll('#getTimeToDate')
         for (let i = 0; i < times.length; i++) {
@@ -351,12 +357,12 @@
             }
             let delivery
             document.body.style.overflowY = 'hidden'
-            fetch('https://hazynadoner.com.tm/api/v1/delivery').then(res => {
+            fetch('http://localhost:3001/api/v1/delivery').then(res => {
                 return res.json()
             })
                 .then(res => {
                     delivery = res
-                    return fetch('https://hazynadoner.com.tm/api/v1/order/' + id, {
+                    return fetch('http://localhost:3001/api/v1/order/' + id, {
                         method: 'GET',
                         headers: {
                             'Accept-Language': getCookie('lang')
@@ -414,8 +420,7 @@
                                                                 <option value="${status}" ${status === data.status && 'selected'}
                                                                         >${status}
                                                                 </option>
-                                                                `
-                    ).join("")}
+                                                                `).join("")}
                                                         </select>
                                                     </div>
                                                 </td>
@@ -431,19 +436,7 @@
                                                 </td>
                                             </tr> 
                                             
-                                            <tr>
-                                                <td class="px-4 py-2 uppercase" data-key="Pay">Pay</td>
-                                                <td class="p-3 border-t-2">
-                                                    ${data.paymentMethod=='card' ? 'Kart' : data.paymentMethod=='cash' ? 'Nagt' : 'Error' }
-                                                    ${
-                                                        data.paymentMethod=='card' && `
-                                                            <span class="bg-white">
-                                                                ${data.payments[0].transactionId}
-                                                            </span>
-                                                        `
-                                                    }
-                                                        </td>
-                                            </tr>
+                                            
                                                         
 
                                         </tbody>

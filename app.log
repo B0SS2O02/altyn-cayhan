@@ -483,3 +483,115 @@
 [06-Feb-2024 16:21:01]  [INFO ]:	server is listening another 3001 port1.0.0
 [06-Feb-2024 16:21:06]  [INFO ]:	server is listening another 3001 port1.0.0
 [06-Feb-2024 16:21:40]  [INFO ]:	server is listening another 3001 port1.0.0
+[07-Feb-2024 15:30:41]  [INFO ]:	server is listening another 3001 port1.0.0
+[07-Feb-2024 15:30:49]  [ERROR]:	неверный синтаксис для типа integer: "2100.55"
+[07-Feb-2024 15:32:07]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 16:27:23]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 16:32:13]  [ERROR]:	неверный синтаксис для типа integer: "2100.55"
+[09-Feb-2024 16:33:57]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 16:34:55]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 16:36:25]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 16:36:55]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 16:37:07]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 16:39:37]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 16:42:24]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 16:43:18]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 16:45:20]  [ERROR]:	Product by 1 not found 
+[09-Feb-2024 16:48:28]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 16:52:04]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 16:52:31]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 16:52:34]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 16:55:32]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 16:56:28]  [ERROR]:	Validation Failure
+[09-Feb-2024 16:56:37]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:01:25]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:07:49]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:07:50]  [ERROR]:	столбец "paymentMethod" не существует
+[09-Feb-2024 17:10:24]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:10:32]  [ERROR]:	столбец "paymentMethod" не существует
+[09-Feb-2024 17:11:41]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:11:41]  [ERROR]:	столбец "paymentMethod" не существует
+[09-Feb-2024 17:11:46]  [ERROR]:	столбец "paymentMethod" не существует
+[09-Feb-2024 17:13:08]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:13:09]  [ERROR]:	столбец "paymentMethod" не существует
+[09-Feb-2024 17:13:36]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:13:36]  [ERROR]:	столбец "paymentMethod" не существует
+[09-Feb-2024 17:13:51]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:14:17]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:14:19]  [ERROR]:	столбец "paymentMethod" не существует
+[09-Feb-2024 17:18:12]  [ERROR]:	столбец "paymentMethod" не существует
+[09-Feb-2024 17:18:53]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:21:43]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:22:16]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:22:17]  [ERROR]:	string violation: deliveryTime cannot be an array or an object
+[09-Feb-2024 17:22:38]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:23:27]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:23:38]  [ERROR]:	Not Found
+[09-Feb-2024 17:24:19]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:24:31]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:24:32]  [ERROR]:	string violation: deliveryTime cannot be an array or an object
+[09-Feb-2024 17:24:45]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:25:36]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:25:55]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:25:55]  [ERROR]:	string violation: deliveryTime cannot be an array or an object
+[09-Feb-2024 17:26:09]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:26:30]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:36:56]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:38:32]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:39:17]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:42:55]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:45:33]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:45:43]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:46:18]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:46:43]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:47:16]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:47:51]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:48:11]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:48:37]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:48:40]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:48:46]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:49:32]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:49:50]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:50:27]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:50:35]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:52:09]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:53:54]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:53:59]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:54:16]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:54:29]  [ERROR]:	столбец order.isPaidBank не существует
+[09-Feb-2024 17:56:54]  [ERROR]:	столбец order.isPaidBank не существует
+[09-Feb-2024 17:57:00]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:57:04]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 17:58:50]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 18:09:33]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 18:09:40]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 18:12:30]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 18:12:57]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 18:13:15]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 19:00:24]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 19:02:37]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 19:02:45]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 19:05:36]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 19:05:47]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 19:06:07]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 19:06:13]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 19:19:29]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 19:19:31]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 19:39:02]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 19:39:22]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 20:02:10]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 20:02:13]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 20:02:17]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 20:02:56]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 20:04:58]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 20:05:34]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 20:06:14]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 20:07:10]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 20:12:28]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 20:13:07]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 20:13:13]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 20:13:38]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 20:14:03]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 20:14:16]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 20:14:49]  [INFO ]:	server is listening another 3001 port1.0.0
+[09-Feb-2024 20:15:25]  [INFO ]:	server is listening another 3001 port1.0.0
