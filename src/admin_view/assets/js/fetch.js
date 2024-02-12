@@ -1,11 +1,13 @@
-
 let loading = document.getElementById("loading");
 var ValidationParamsUser = ["login", "password", "fullName", "role"];
-var ValidationParamsNotification = ['title', 'desc'];
+var ValidationParamsNotification = ["title", "desc"];
 var ValidationParamsVideo = [
   "translations.tm.title",
   "translations.ru.title",
-  "image", "video", "videoDuration"];
+  "image",
+  "video",
+  "videoDuration",
+];
 var ValidationParamsGallery = [
   "image",
   "translations.tm.title",
@@ -21,27 +23,25 @@ var ValidationParamsFood = [
   "translations.ru.title",
   "price",
   "popular",
-  "discount"
+  "discount",
 ];
 
 var ValidationParamsCategory = [
   "translations.tm.title",
   "translations.ru.title",
   "image",
-]
+];
 
 let url = {
+  restaurant: "/api/v1/restaurant",
   video: "/api/v1/video",
   gallery: "/api/v1/gallery",
   user: "/api/v1/auth",
   notification: "/api/v1/send-notification",
   food: "/api/v1/product",
   category: "/api/v1/product/category",
-  order: "/api/v1/order"
+  order: "/api/v1/order",
 };
-
-
-
 
 function cleanValidationInputs(params) {
   params.forEach((item) => {
@@ -112,8 +112,10 @@ function foodValues() {
     prodCategoryId: parseInt(document.getElementById("prodCategoryId").value),
     "translations.tm.title": document.getElementById("titleTm").value,
     "translations.ru.title": document.getElementById("titleRu").value,
-    "translations.tm.description": document.getElementById("descriptionTm").value,
-    "translations.ru.description": document.getElementById("descriptionRu").value,
+    "translations.tm.description":
+      document.getElementById("descriptionTm").value,
+    "translations.ru.description":
+      document.getElementById("descriptionRu").value,
   };
 }
 function categoryValues() {
@@ -125,14 +127,13 @@ function categoryValues() {
 }
 
 function redirectToFormKey(value) {
-  let newValue = value
-  if (newValue.includes('.')) {
-    newValue = newValue.replaceAll('.', '][')
-    newValue = newValue.replace("]", "")
-    newValue += ']'
-
+  let newValue = value;
+  if (newValue.includes(".")) {
+    newValue = newValue.replaceAll(".", "][");
+    newValue = newValue.replace("]", "");
+    newValue += "]";
   }
-  return newValue
+  return newValue;
 }
 
 function getAllInputsInTagsAndAppendFormData(cb, params) {
@@ -149,85 +150,6 @@ function getAllInputsInTagsAndConvertJSON(cb, params) {
   const INPUTS = cb();
   return INPUTS;
 }
-
-
-// ---------------video
-
-
-// video post
-function postVideo(e) {
-  // loading.classList.remove("hidden");
-  e.preventDefault();
-  cleanValidationInputs(ValidationParamsVideo);
-
-  const formData = getAllInputsInTagsAndAppendFormData(
-    videoValues,
-    ValidationParamsVideo
-  );
-  const progress = document.getElementById("progress-bar");
-  const req = new XMLHttpRequest();
-  req.open("POST", url.video);
-  req.upload.addEventListener("progress", function (e) {
-    const percentComplete = (e.loaded / e.total) * 100;
-    progress.setAttribute("value", percentComplete);
-    progress.nextElementSibling.nextElementSibling.innerText =
-      Math.round(percentComplete) + "%";
-  });
-  req.addEventListener("load", function () {
-    const response = JSON.parse(req.response);
-    if (req.status >= 400) {
-      if (response.message.includes('File')) {
-        return alert('file size should be less than 50mb')
-      }
-
-    }
-    if (response.message && response.message.includes("Validation Failure")) {
-      putValidationInputs(response.validationErrors);
-    } else window.location.href = "/admin/video";
-  });
-  req.send(formData);
-}
-
-// edit video
-function editVideo(e, id) {
-  loading.classList.remove("hidden");
-  e.preventDefault();
-  cleanValidationInputs(ValidationParamsVideo);
-  const formData = getAllInputsInTagsAndAppendFormData(
-    videoValues,
-    ValidationParamsVideo
-  );
-  const progress = document.getElementById("progress-bar");
-  const req = new XMLHttpRequest();
-  req.open("PUT", `${url.video}/${id}`);
-  req.upload.addEventListener("progress", function (e) {
-    const percentComplete = (e.loaded / e.total) * 100;
-    progress.setAttribute("value", percentComplete);
-    progress.nextElementSibling.nextElementSibling.innerText =
-      Math.round(percentComplete) + "%";
-  });
-  req.addEventListener("load", function () {
-    const response = JSON.parse(req.response);
-    if (req.status >= 400) {
-      if (response.message.includes('File')) {
-        return alert('file size should be less than 50mb')
-      }
-    }
-
-    loading.classList.add("hidden");
-    if (response.message && response.message.includes("Validation Failure")) {
-      putValidationInputs(response.validationErrors);
-    } else window.location.href = "/admin/video";
-  });
-  req.send(formData);
-}
-
-
-
-
-// --------------video  1
-
-
 
 // create shop category
 function postCategory(e) {
@@ -249,8 +171,8 @@ function postCategory(e) {
     })
     .then((response) => {
       loading.classList.add("hidden");
-      if (response.message && response.message.includes('File too large')) {
-        return alert("Image size should be less than 20Kb")
+      if (response.message && response.message.includes("File too large")) {
+        return alert("Image size should be less than 20Kb");
       }
       if (response.message && response.message.includes("Validation Failure")) {
         putValidationInputs(response.validationErrors);
@@ -277,12 +199,42 @@ function editCategory(e, id) {
     })
     .then((response) => {
       loading.classList.add("hidden");
-      if (response.message && response.message.includes('File too large')) {
-        return alert("Image size should be less than 20Kb")
+      if (response.message && response.message.includes("File too large")) {
+        return alert("Image size should be less than 20Kb");
       }
       if (response.message && response.message.includes("Validation Failure")) {
         putValidationInputs(response.validationErrors);
       } else window.location.href = "/admin/category";
+    });
+}
+
+// edit restaurant
+function editRestaurant(e, id) {
+  e.preventDefault();
+  loading.classList.remove("hidden");
+
+  
+
+  cleanValidationInputs(ValidationParamsCategory);
+  const formData = getAllInputsInTagsAndAppendFormData(
+    categoryValues,
+    ValidationParamsCategory
+  );
+  fetch(`${url.restaurant}/${id}`, {
+    method: "PUT",
+    body: formData,
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      loading.classList.add("hidden");
+      if (response.message && response.message.includes("File too large")) {
+        return alert("Image size should be less than 20Kb");
+      }
+      if (response.message && response.message.includes("Validation Failure")) {
+        putValidationInputs(response.validationErrors);
+      } else window.location.href = "/admin/restaurant";
     });
 }
 
@@ -301,14 +253,12 @@ function postFood(e) {
     body: formData,
   })
     .then((response) => {
-
       return response.json();
     })
     .then((response) => {
-
       loading.classList.add("hidden");
-      if (response.message && response.message.includes('File too large')) {
-        return alert("Image size should be less than 20Kb")
+      if (response.message && response.message.includes("File too large")) {
+        return alert("Image size should be less than 20Kb");
       }
       if (response.message && response.message.includes("Validation Failure")) {
         putValidationInputs(response.validationErrors);
@@ -331,30 +281,29 @@ function editFood(e, id) {
 
   fetch(`${url.food}/${id}`, {
     method: "PUT",
-    body: formData
+    body: formData,
   })
     .then((response) => {
       return response.json();
     })
     .then((response) => {
       loading.classList.add("hidden");
-      if (response.message && response.message.includes('File too large')) {
-        return alert("Image size should be less than 20Kb")
+      if (response.message && response.message.includes("File too large")) {
+        return alert("Image size should be less than 20Kb");
       }
       if (response.message && response.message.includes("Validation Failure")) {
         putValidationInputs(response.validationErrors);
-      }
-      else window.location.href = "/admin/foods/";
+      } else window.location.href = "/admin/foods/";
     });
 }
 
 function putStatusFood(id, target) {
-  const formData = new FormData()
+  const formData = new FormData();
   loading.classList.remove("hidden");
-  formData.append(target.name, target.value)
+  formData.append(target.name, target.value);
   fetch(`${url.food}/${id}`, {
     method: "PUT",
-    body: formData
+    body: formData,
   })
     .then((response) => {
       return response.json();
@@ -362,44 +311,42 @@ function putStatusFood(id, target) {
     .then((response) => {
       loading.classList.add("hidden");
     })
-    .catch(err => {
-      alert('Yalnyshlyk yuze cykdy')
-    })
+    .catch((err) => {
+      alert("Yalnyshlyk yuze cykdy");
+    });
   loading.classList.add("hidden");
 }
 
 function putStatusOrder(id, target, oldColor) {
-  console.log('----')
+  console.log("----");
   loading.classList.remove("hidden");
   fetch(`${url.order}/${id}`, {
     method: "PUT",
     body: JSON.stringify({
-      status: target.value
+      status: target.value,
     }),
     headers: {
-      'Content-Type': 'application/json',
-
-    }
+      "Content-Type": "application/json",
+    },
   })
     .then((response) => {
       return response.json();
     })
     .then((response) => {
-      let tr = target.parentNode.parentNode.parentNode
-      let color = target.value
-      const values = ['completed', 'cancelled', 'waiting']
-      values.map(item => {
-        tr.classList.remove(item)
-      })
-      if (color === 'on the way')
-        color = 'waiting'
-      tr.classList.add(color)
+      let tr = target.parentNode.parentNode.parentNode;
+      let color = target.value;
+      const values = ["completed", "cancelled", "waiting"];
+      values.map((item) => {
+        tr.classList.remove(item);
+      });
+      if (color === "on the way") color = "waiting";
+      tr.classList.add(color);
       loading.classList.add("hidden");
     })
-    .catch(err => {
-      console.log(err)
-      alert('Yalnyshlyk yuze cykdy')
-    })
+    .catch((err) => {
+      console.log(err);
+      alert("Yalnyshlyk yuze cykdy");
+    });
 }
 
 function strToDate(dtStr) {
@@ -416,7 +363,6 @@ function strToDate(dtStr) {
     timeParts[2]
   ));
 }
-
 
 // create user
 function postUser(e) {
@@ -447,7 +393,6 @@ function postUser(e) {
     });
 }
 
-
 function sendNotication(e) {
   e.preventDefault();
   loading.classList.remove("hidden");
@@ -471,12 +416,9 @@ function sendNotication(e) {
       loading.classList.add("hidden");
       if (response.message && response.message.includes("Validation Failure")) {
         putValidationInputs(response.validationErrors);
-      } 
-      else window.location.href = "/admin";
+      } else window.location.href = "/admin";
     });
 }
-
-
 
 function editUserById(e, id) {
   e.preventDefault();
@@ -506,7 +448,6 @@ function editUserById(e, id) {
     });
 }
 
-
 // create gallery
 function postGallery(e) {
   e.preventDefault();
@@ -515,26 +456,24 @@ function postGallery(e) {
   const formData = getAllInputsInTagsAndAppendFormData(
     galleryValues,
     ValidationParamsGallery
-  )
+  );
   fetch(`${url.gallery}`, {
     method: "POST",
-    body: formData
+    body: formData,
   })
     .then((response) => {
       return response.json();
     })
     .then((response) => {
       loading.classList.add("hidden");
-      if (response.message && response.message.includes('File too large')) {
-        return alert("Image size should be less than 20Kb")
+      if (response.message && response.message.includes("File too large")) {
+        return alert("Image size should be less than 20Kb");
       }
       if (response.message && response.message.includes("Validation Failure")) {
         putValidationInputs(response.validationErrors);
       } else window.location.href = "/admin/gallery";
     });
 }
-
-
 
 // edit gallery
 function editGallery(e, id) {
@@ -545,24 +484,21 @@ function editGallery(e, id) {
   const formData = getAllInputsInTagsAndAppendFormData(
     galleryValues,
     ValidationParamsGallery
-  )
+  );
   fetch(`${url.gallery}/${id}`, {
     method: "PUT",
-    body: formData
+    body: formData,
   })
     .then((response) => {
       return response.json();
     })
     .then((response) => {
       loading.classList.add("hidden");
-      if (response.message && response.message.includes('File too large')) {
-        return alert("Image size should be less than 20Kb")
+      if (response.message && response.message.includes("File too large")) {
+        return alert("Image size should be less than 20Kb");
       }
       if (response.message && response.message.includes("Validation Failure")) {
         putValidationInputs(response.validationErrors);
-      }
-      else window.location.href = "/admin/gallery";
+      } else window.location.href = "/admin/gallery";
     });
 }
-
-

@@ -21,55 +21,49 @@
               onsubmit="`<%if(!edit){%>${postGallery(event)}<%}else{%>${editGallery(event,'<%=data.id%>')}<%}%>`">
               <div class="border-2 rounded border-[#DBDFEA] mt-3 p-5">
 
-                <div class=" my-2 hidden" style="display:none;"  >
+                <div class=" my-2 hidden" style="display:none;">
                   <label for="name" class="leading-5">Turkmen Title</label>
                   <input type="hidden" class="leading-5 p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
-                    id="titleTm"
-                    value=""
-                    placeholder="Turkmen" />
+                    id="titleTm" value="" placeholder="Turkmen" />
                   <!-- validation id must be titleValidation because api validation param like this -->
                   <p id="translations.tm.titleValidation" class="text-[red]"></p>
                 </div>
                 <div class=" my-2 hidden" style="display:none;">
                   <label for="name" class="leading-5">Russian Title</label>
                   <input type="hidden" class="leading-5 p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
-                    id="titleRu"
-                    value=""
-                    placeholder="Russian" />
+                    id="titleRu" value="" placeholder="Russian" />
                   <!-- validation id must be titleValidation because api validation param like this -->
                   <p id="translations.ru.titleValidation" class="text-[red]"></p>
                 </div>
-		         <div>
-                                    <label for="type"
-                                        class="block mb-2 text-sm font-medium text-gray-900 ">Select
-                                        Type</label>
-                                    <select id="type"
-                                        class="bg-gray-50 border  border-[#DBDFEA]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                        <%if(!edit)%>
-                                            <option value="" selected>Choose a category</option>
-                                            <% if(typeLists.length>0){ %>
-                                                <% typeLists.forEach(item=>{ %>
-                                                    <option value="<%=item%>" <% if(edit &&
-                                                        item===data.type ){ %> selected <%}%>
-                                                            ><%=item%>
-                                                    </option>
-                                                    <% }) %>
-                                                        <%}%>
-                                    </select>
-                                    <p id="typeValidation" class="text-[red]"></p>
-                                </div>
-                       
+                <div>
+                  <label for="type" class="block mb-2 text-sm font-medium text-gray-900 ">Select
+                    Type</label>
+                  <select id="type"
+                    class="bg-gray-50 border  border-[#DBDFEA]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                    <%if(!edit)%>
+                      <option value="" selected>Choose a category</option>
+                      <% if(typeLists.length>0){ %>
+                        <% typeLists.forEach(item=>{ %>
+                          <option value="<%=item%>" <% if(edit && item===data.type ){ %> selected <%}%>
+                              ><%=item%>
+                          </option>
+                          <% }) %>
+                            <%}%>
+                  </select>
+                  <p id="typeValidation" class="text-[red]"></p>
+                </div>
+
                 <div class=" my-2">
                   <label for="image" class="leading-5">Image</label>
-                  <input type="file"
-                    class="leading-5 file:p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black" id="image"
-                    placeholder="image" />
+                  <input type="file" class="leading-5 file:p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
+                    id="image" placeholder="image" />
                   <!-- validation id must be titleValidation because api validation param like this -->
                   <p id="imageValidation" class="text-[red]"></p>
-                  <img id="output" src="<% if(edit){ %><%=data.image%><%}%>" style="width: max-content;max-height: 522px; padding-top: 30px">
-               
-		</div>
-		
+                  <img id="output" src="<% if(edit){ %><%=data.image%><%}%>"
+                    style="width: max-content;max-height: 522px; padding-top: 30px">
+
+                </div>
+
 
                 <div class="flex justify-end gap-3">
                   <a href="/admin/gallery"
@@ -87,34 +81,29 @@
       </div>
   </div>
   </div>
-   <!-- loading  -->
-        <div
-        id="loading"
-        class="hidden fixed w-full h-full bg-[#303030a8] left-0 top-0 flex justify-center items-center"
-      >
-          <div
-            class="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-            role="status">
-            <span
-              class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-              >Loading...</span
-            >
-          </div>
-  
-        </div>
+  <!-- loading  -->
+  <div id="loading" class="hidden fixed w-full h-full bg-[#303030a8] left-0 top-0 flex justify-center items-center">
+    <div
+      class="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+      role="status">
+      <span
+        class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+    </div>
+
+  </div>
   </body>
 
   <!-- <script src="/assets/ckeditor4/ckeditor.js"></script> -->
 
 
   <script>
-    var loadFile = function(event) {
-var output = document.getElementById('output');
-output.src = URL.createObjectURL(event.target.files[0]);
-output.onload = function() {
-  URL.revokeObjectURL(output.src) // free memory
-}
-};
+    var loadFile = function (event) {
+      var output = document.getElementById('output');
+      output.src = URL.createObjectURL(event.target.files[0]);
+      output.onload = function () {
+        URL.revokeObjectURL(output.src) // free memory
+      }
+    };
   </script>
   <script src="/assets/js/fetch.js"></script>
   <%-include('../components/end_body.html')%>

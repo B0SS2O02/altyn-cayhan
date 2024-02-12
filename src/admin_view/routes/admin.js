@@ -9,20 +9,16 @@ const {
   getFoods,
   getAddUser,
   getUpdateUser,
-  getGallery,
   getOrders,
   getNotification,
-  getAddGallery,
-  getEditGallery,
-  getVideo,
-  getAddVideo,
-  getEditVideo,
   getAddFood,
   getEditFood,
   getCategory,
   getEditCategory,
   getAddCategory,
   getOrderById,
+  getRestaurant,
+  getEditRestaurant,
 } = require("../controller/admin");
 
 router.get(["/dashboard", "/"], getDashboard);
@@ -43,5 +39,8 @@ router.get("/orders", getOrders);
 router.get("/order/:id", getOrderById);
 
 router.get("/send-notification", getNotification);
+
+router.get("/restaurant", getRestaurant);
+router.get("/add-restaurant/:id", getEditRestaurant);
 
 module.exports = router;

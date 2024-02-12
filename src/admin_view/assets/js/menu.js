@@ -126,6 +126,7 @@ const locales = {
     "<- Back": "<- Yza",
     Notification: "Notification",
     DeliveryDate: "Eltip Beriş Wagty",
+    Restaurant: "Restoranlar",
   },
   ru: {
     Foods: "Продукты питания",
@@ -184,6 +185,7 @@ const locales = {
     "<- Back": "<- назад",
     Notification: "Notification",
     DeliveryDate: "Dostawka",
+    Restaurant: "Рестораны",
   },
 };
 const dataKeys = document.querySelectorAll("[data-key]");

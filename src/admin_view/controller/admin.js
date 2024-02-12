@@ -111,47 +111,7 @@ exports.getEditCategory = async (req, res, next) => {
   });
 };
 
-exports.getVideo = async (req, res, next) => {
-  try {
-    let { page: qPage, size: qSize } = req.query;
-    if (!qPage || !qSize) {
-      qPage = 1;
-      qSize = 10;
-    }
-    const video = await Fetch(
-      url + `video?page=${qPage}&size=${qSize}&random=false`,
-      "GET",
-      null,
-      res.locals.lang
-    );
-    const { page, size, totalPages } = video.data;
-    res.render("admin/pages/video.html", {
-      path: "/video",
-      data: video.data,
-      page: parseInt(page),
-      size: parseInt(size),
-      totalPages,
-      deleteVideoUrl: "/api/v1/video/",
-    });
-  } catch (err) {
-    next(err);
-    console.log(err.message);
-  }
-};
 
-exports.getAddVideo = async (req, res, next) => {
-  res.render("admin/pages/add_video.html", {
-    edit: false,
-  });
-};
-
-exports.getEditVideo = async (req, res, next) => {
-  const fetchedVideo = await Fetch(`${url}video/${req.params.id}`, "GET", null);
-  res.render("admin/pages/add_video.html", {
-    data: fetchedVideo.data,
-    edit: true,
-  });
-};
 
 exports.getUsers = async (req, res, next) => {
   const users = await Fetch(`${url}users`, "GET");
@@ -174,58 +134,6 @@ exports.getUpdateUser = async (req, res, next) => {
     edit: true,
     data: user.data,
   });
-};
-
-exports.getGallery = async (req, res, next) => {
-  let { page: qPage, size: qSize } = req.query;
-  if (!qPage || !qSize) {
-    qPage = 1;
-    qSize = 10;
-  }
-  const gallery = await Fetch(
-    `${url}gallery?page=${qPage}&size=${qSize}`,
-    "GET",
-    null,
-    res.locals.lang
-  );
-
-  const { page, size, totalPages } = gallery.data;
-  try {
-    res.render("admin/pages/gallery.html", {
-      deleteGalleryUrl: "/api/v1/gallery/",
-      data: gallery.data,
-      page: parseInt(page),
-      size: parseInt(size),
-      totalPages,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
-exports.getAddGallery = async (req, res, next) => {
-  try {
-    res.render("admin/pages/add_gallery.html", {
-      edit: false,
-      typeLists: ["gallery", "banner"],
-      deleteImageById: "/api/v1/gallery/image/",
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
-exports.getEditGallery = async (req, res, next) => {
-  const gallery = await Fetch(`${url}gallery/${req.params.id}`, "GET", null);
-  try {
-    res.render("admin/pages/add_gallery.html", {
-      edit: true,
-      typeLists: ["gallery", "banner"],
-      data: gallery.data,
-    });
-  } catch (err) {
-    next(err);
-  }
 };
 
 exports.getNotification = async (req, res, next) => {
@@ -266,7 +174,7 @@ exports.getOrders = async (req, res, next) => {
       success: "pul tolendi",
     };
 
-    console.log('data',order.data);
+    console.log("data", order.data);
 
     console.log(totalPages, page, size);
     res.render("admin/pages/orders.html", {
@@ -303,5 +211,37 @@ exports.getOrderById = async (req, res, next) => {
     deliveryCharge: delivery.data.deliveryCharge,
     staticStatusOrder: staticStatusOrder,
     edit: false,
+  });
+};
+
+exports.getRestaurant = async (req, res, next) => {
+  try {
+    const restaurant = await Fetch(
+      url + "restaurant",
+      "GET",
+      null,
+      res.locals.lang
+    );
+    console.log(restaurant.data);
+    res.render("admin/pages/restaurant.html", {
+      path: "/foods",
+      data: restaurant.data,
+    });
+  } catch (err) {
+    next(err);
+    console.log(err.message);
+  }
+};
+
+exports.getEditRestaurant = async (req, res, next) => {
+  const fetchedCategory = await Fetch(
+    `${url}restaurant/${req.params.id}?translations=true`,
+    "GET",
+    null,
+    res.locals.lang
+  );
+  res.render("admin/pages/add_restaurant.html", {
+    data: fetchedCategory.data,
+    edit: true,
   });
 };

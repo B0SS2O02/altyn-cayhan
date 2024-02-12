@@ -5,6 +5,7 @@ const ErrorHandler = require("./error/ErrorHandler");
 const ShopRouter = require("./product/prodRouter");
 const AuthRouter = require("./auth/authRouter");
 const OrdersRouter = require("./orders/ordersRouter");
+const RestRouter = require("./restaurant/restRouter");
 
 app
   .route("/delivery")
@@ -30,10 +31,10 @@ app.put("/set-cookie", async (req, res, next) => {
   res.send({ success: true });
 });
 
-
 app.use(ShopRouter);
 app.use(AuthRouter);
 app.use(OrdersRouter);
+app.use(RestRouter);
 
 app.use(ErrorHandler);
 

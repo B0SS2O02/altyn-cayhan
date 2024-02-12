@@ -1,5 +1,6 @@
 <div id="body"></div>
-<div id="menu" class="hidden z-10 h-[100vh] lg:fixed w-[17rem] lg:flex lg:flex-col lg:items-center py-10 gap-5 bg-[#EAF2FC]">
+<div id="menu"
+  class="hidden z-10 h-[100vh] lg:fixed w-[17rem] lg:flex lg:flex-col lg:items-center py-10 gap-5 bg-[#EAF2FC]">
   <!-- photo -->
   <!-- w-40 => 10rem -->
   <div id="close" class="hidden cursor-pointer absolute top-0 right-0 p-3">
@@ -29,6 +30,10 @@
           <a href="/admin/dashboard" class="font-[400] text-[18px]" data-key="Dashboard">Dashboard</a>
         </li>
         <li class="flex items-center gap-3 active:bg-[#445FD3] active:text-white p-2 rounded-[3px]">
+          <img class="w-[25px] h-[25px] active:bg-white" src="/assets/images/notification.png" alt="" />
+          <a href="/admin/restaurant" class="font-[400] text-[18px]" data-key="Restaurant">Restaurant</a>
+        </li>
+        <li class="flex items-center gap-3 active:bg-[#445FD3] active:text-white p-2 rounded-[3px]">
           <img class="w-[25px] h-[25px] active:bg-white" src="/assets/images/shopping-cart.png" alt="" />
           <a href="/admin/orders" class="font-[400] text-[18px]" data-key="Orders">Orders</a>
         </li>
@@ -40,10 +45,6 @@
           <img class="w-[25px] h-[25px] active:bg-white" src="/assets/images/drink.png" alt="" />
           <a href="/admin/category" class="font-[400] text-[18px]" data-key="Category">Category</a>
         </li>
-        <!-- <li class="flex items-center gap-3 active:bg-[#445FD3] active:text-white p-2 rounded-[3px]">
-          <img class="w-[25px] h-[25px] active:bg-white" src="/assets/images/notification.png" alt="" />
-          <a href="/admin/send-notification" class="font-[400] text-[18px]" data-key="Notification">Notification</a>
-        </li> -->
         <li class="flex items-center gap-3 active:bg-[#445FD3] active:text-white p-2 rounded-[3px]">
           <img class="w-[25px] h-[25px] active:bg-white" src="/assets/images/user.png" alt="" />
           <a href="/admin/users" class="font-[400] text-[18px]" data-key="Users">Users</a>
