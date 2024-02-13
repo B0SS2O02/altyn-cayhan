@@ -173,6 +173,7 @@ function connect() {
       }
     } else {
       let notificationOrders = document.getElementById("notification-orders");
+      document.getElementById("count-orders").style.display = "block";
       const countOrders =
         parseInt(document.getElementById("count-orders").textContent) || 0;
       document.getElementById("count-orders").textContent = countOrders + 1;

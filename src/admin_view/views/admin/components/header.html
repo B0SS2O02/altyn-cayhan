@@ -52,8 +52,8 @@
         class=" focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm  text-center inline-flex items-center"
         type="button" data-dropdown-toggle="dropdown" onclick="openNotification()">
         <div class="relative">
-          <img src="/assets/images/bell (1).png" alt="" />
-          <div id="count-orders" class="absolute px-[4px] py-[2px]  text-[20px] top-0 right-0 text-white "
+          <img src="/assets/images/bell (1).png" class="" alt="" />
+          <div id="count-orders" class="absolute px-[4px] py-[2px]  text-[20px] top-0 right-0 text-white hidden"
             style="background: red;border-radius: 100%;"></div>
         </div>
         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -125,6 +125,7 @@
             `;
       });
       order += order.insertAdjacentHTML("afterbegin", text)
+      document.getElementById("count-orders").style.display = "block";
       const countOrders = parseInt(document.getElementById('count-orders').textContent) || 0;
       document.getElementById('count-orders').textContent = countOrders + response.length
     } else

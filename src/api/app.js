@@ -6,6 +6,7 @@ const ShopRouter = require("./product/prodRouter");
 const AuthRouter = require("./auth/authRouter");
 const OrdersRouter = require("./orders/ordersRouter");
 const RestRouter = require("./restaurant/restRouter");
+const OfflineRouter = require("./offline/offlineRouter.js");
 
 app
   .route("/delivery")
@@ -35,6 +36,7 @@ app.use(ShopRouter);
 app.use(AuthRouter);
 app.use(OrdersRouter);
 app.use(RestRouter);
+app.use(OfflineRouter);
 
 app.use(ErrorHandler);
 

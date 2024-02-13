@@ -13,6 +13,7 @@ const ValidationException = require("../error/ValidationException");
 const ProdCategory = require("./prodCategory");
 const sequelize = require("../config/database");
 const ProdCategoryTranslation = require("./prodCategoryTranslation");
+const { upVersion } = require("../util/version");
 
 router
   .route("/product/category")
@@ -56,11 +57,11 @@ router
             );
           return next(new ValidationException(errors.array()));
         }
-        
+
         const prodCategory = await prodService.saveCategory(req.body, req.file);
+        upVersion();
         res.send(prodCategory);
       } catch (err) {
-        
         next(err);
       }
     }
@@ -86,7 +87,7 @@ router
         req.file,
         req.params.id
       );
-
+      upVersion();
       res.send(updatedShopCategory);
     } catch (err) {
       next(err);
@@ -96,6 +97,7 @@ router
     try {
       await prodService.deleteCategoryById(req.params.id);
       await prodService.newOrderPositionCategory();
+      upVersion();
       res.send({
         success: true,
       });
@@ -155,6 +157,7 @@ router
           return next(new ValidationException(errors.array()));
         }
         const prodCategory = await prodService.saveProduct(req.body, req.file);
+        upVersion();
         res.send(prodCategory);
       } catch (err) {
         next(err);
@@ -192,6 +195,7 @@ router
         await prodService.toggleActive(req.params.id);
       else
         await prodService.updateProductById(req.body, req.file, req.params.id);
+      upVersion();
       res.send({ success: true });
     } catch (err) {
       console.log(err, "-------");
@@ -202,6 +206,7 @@ router
     try {
       await prodService.deleteProductByid(req.params.id);
       await prodService.newOrderPositionProduct();
+      upVersion();
       res.send({
         success: true,
       });
@@ -217,6 +222,7 @@ router.put("/product-drag", async (req, res, next) => {
     await prodService.resortProduct(req.body, seqTrans);
     await seqTrans.commit();
     console.log("everything ok!");
+    upVersion();
     res.send();
   } catch (err) {
     console.log(err);
@@ -232,6 +238,7 @@ router.put("/product-category-drag", async (req, res, next) => {
   try {
     await prodService.resortCategory(req.body, seqTrans);
     await seqTrans.commit();
+    upVersion();
     res.send();
   } catch (err) {
     await seqTrans.rollback();

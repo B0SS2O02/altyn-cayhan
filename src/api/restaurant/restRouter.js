@@ -20,7 +20,7 @@ router
     try {
       const RestaurantById = await restService.findRestaurant(
         req.params.id,
-        req.query.translations
+        req.query.translations,
       );
       res.send(RestaurantById);
     } catch (error) {

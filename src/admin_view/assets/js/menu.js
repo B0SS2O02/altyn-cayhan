@@ -116,6 +116,8 @@ const locales = {
       "Naharlar restoranyň esasy harydy bolup her bir naharyň özüne degişli kategoriýasy bardyr.",
     "When it comes to ordering food, it's like stepping into a doorway that leads to a world of culinary delights. It's an experience that tantalizes your taste buds, stirs your senses, and satisfies both hunger and cravings.":
       "Iýmit sargyt etmek barada aýdylanda, aşpez lezzetleri dünýäsine alyp barýan gapydan giren ýaly. Bu, tagamyňyzy güýçlendirýän, duýgyňyzy güýçlendirýän we açlygy we islegleri kanagatlandyrýan tejribe.",
+    "Restaurant description":
+      "Restoranlar restoranyň adyny, beýanyny we suratlaryny üýtgetmek üçin bölüm.",
     "Delivery Charge": "Eltip bermek",
     "Total Foods": "Jemi Naharlar",
     "Total Orders": "Jemi Sargytlar",
@@ -166,7 +168,7 @@ const locales = {
     Users: "Пользователи",
     Logout: "Выйти",
     Dashboard: "Панель  ",
-    Pikir: "Пикир",
+    Pikir: "Pikir",
     FullName: "Полное имя",
     "Total Price": "Итоговая цена",
     "Categories are division of restaurant foods. Here you can manage them.":
@@ -175,6 +177,8 @@ const locales = {
       "Блюда - это основная продукция ресторана, и каждая еда имеет свои категории.",
     "When it comes to ordering food, it's like stepping into a doorway that leads to a world of culinary delights. It's an experience that tantalizes your taste buds, stirs your senses, and satisfies both hunger and cravings.":
       "Когда дело доходит до заказа еды, это все равно, что войти в дверь, ведущую в мир кулинарных изысков. Это опыт, который дразнит ваши вкусовые рецепторы, возбуждает ваши чувства и утоляет голод и тягу.",
+    "Restaurant description":
+      "Рестораны – это раздел для изменения названия, описания и фотографий ресторана.",
     "Delivery Charge": "Плата за доставку",
     "Total Foods": "Всего продуктов",
     "Total Orders": "Всего заказов",
