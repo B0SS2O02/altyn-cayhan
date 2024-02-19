@@ -6,7 +6,7 @@ const Model = Sequelize.Model;
 class Auth extends Model {}
 
 Auth.init(
-  {
+    {
     fullName: {
       type: Sequelize.STRING,
     },
