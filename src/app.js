@@ -47,8 +47,9 @@ app.use(express.json());
 
 app.use("/admin", ADMIN_VIEW_SOURCE);
 app.use("/api/v1", API);
+
 app.get("/", async (req, res, next) => {
-  res.render("hazyna-doner.html");
+  res.render("main.html");
 });
 
 module.exports = app;

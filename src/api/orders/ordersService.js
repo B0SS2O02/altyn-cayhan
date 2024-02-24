@@ -31,7 +31,7 @@ const findOrders = async (page, size, lang, isView) => {
         attributes: ["transactionId", "status"],
       },
     ],
-    order: [["id", "desc"]],
+    order: [["id", "asc"]],
   });
   return {
     orders: orders.rows.map((convSequelize) => {
