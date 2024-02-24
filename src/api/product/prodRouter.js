@@ -11,7 +11,7 @@ const router = express.Router();
 const prodService = require("./prodService");
 const ValidationException = require("../error/ValidationException");
 const ProdCategory = require("./prodCategory");
-const sequelize = require("../config/database");
+const { sequelize } = require("../../../database/models");
 const ProdCategoryTranslation = require("./prodCategoryTranslation");
 const { upVersion } = require("../util/version");
 

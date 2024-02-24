@@ -32,7 +32,7 @@ module.exports = {
     database: "altyncayhana",
     host: "95.85.127.110",
     port: 5432,
-    logging: false,
+    logging: true,
     dialectOptions: {
       maxRetryCount: 10, // Maximum number of connection acquisition retries
       minRetryCount: 1, // Minimum number of connection acquisition retries

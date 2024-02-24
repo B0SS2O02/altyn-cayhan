@@ -1,8 +1,10 @@
 const Sequelize = require("sequelize");
-const sequelize = require("../config/database");
+const { sequelize } = require("../../../database/models");
 const ProdCategory = require("./prodCategory");
 
 const Model = Sequelize.Model;
+
+
 
 class Product extends Model {}
 

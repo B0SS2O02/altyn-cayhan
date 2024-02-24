@@ -1,4 +1,4 @@
-const sequelize = require("../config/database");
+const { sequelize } = require("../../../database/models");
 const Sequelize = require("sequelize");
 
 const Model = Sequelize.Model;
