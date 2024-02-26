@@ -5,7 +5,7 @@ const { connectWSS } = require("./src/api/wss/webSocketServer");
 const Auth = require("./src/api/auth/auth");
 const server = async () => {
   try {
-    await sequelize.sync({});
+    await sequelize.sync({alter:true});
     await Auth.count().then(async (response) => {
       if (!response) {
         await Auth.create({
