@@ -26,11 +26,11 @@ module.exports = {
 
 // module.exports = {
 //   database: {
+//     database: "shop",
+//     username: "postgres",
+//     password: "pikir",
 //     dialect: "postgres",
-//     username: "root",
-//     password: "root5312023",
-//     database: "altyncayhana",
-//     host: "95.85.127.110",
+//     host: "127.0.0.1",
 //     port: 5432,
 //     logging: false,
 //     dialectOptions: {
@@ -49,3 +49,4 @@ module.exports = {
 //     JWT_SECRET_KEY: "futboljankoyer__!",
 //   },
 // };
+

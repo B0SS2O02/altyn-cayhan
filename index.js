@@ -18,12 +18,12 @@ const server = async () => {
 //    });
     await sequelize.sync();
     await defaults();
-    app.listen(3001, async () => {
+    app.listen(8880, async () => {
       logger.info(
         "server is listening another 3001 port" +
           process.env.npm_package_version
       );
-      connectWSS(3002);
+      connectWSS(8881);
     });
   } catch (err) {
     console.log(err);

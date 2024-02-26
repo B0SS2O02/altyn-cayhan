@@ -1,7 +1,7 @@
 const { Fetch } = require("../../api/util/axios");
 const path = require("path");
 const fs = require("fs");
-const url = "http://localhost:3001/api/v1/";
+const url = "http://localhost:8880/api/v1/";
 
 exports.getDashboard = async (req, res, next) => {
   const data = JSON.parse(

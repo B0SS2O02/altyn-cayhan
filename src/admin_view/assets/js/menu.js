@@ -47,7 +47,7 @@ dropdown.forEach((element) => {
 // })
 function changeLang(value) {
   console.log("lang", value);
-  fetch("http://localhost:3001/api/v1/set-cookie", {
+  fetch("http://localhost:8880/api/v1/set-cookie", {
     method: "PUT",
     body: JSON.stringify({
       lang: value,

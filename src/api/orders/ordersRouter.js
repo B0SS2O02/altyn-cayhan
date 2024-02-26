@@ -157,7 +157,7 @@ router.get("/order/payment/check-status-tfeb", async (req, res, next) => {
     const checkStatus = await OrdersService.checkStatusByPayment(orderId);
     if (!checkStatus) {
       return res.redirect(
-        "http://localhost:3001/api/v1/order/payment/callback-handler-tfeb/" +
+        "http://localhost:8880/api/v1/order/payment/callback-handler-tfeb/" +
           orderId
       );
     }
@@ -182,7 +182,7 @@ router.get("/order/payment/check-status", async (req, res, next) => {
     const checkStatus = await OrdersService.checkStatusByPayment(orderId);
     if (!checkStatus) {
       return res.redirect(
-        "http://localhost:3001/api/v1/order/payment/callback-handler?orderId=" +
+        "http://localhost:8880/api/v1/order/payment/callback-handler?orderId=" +
           orderId
       );
     }

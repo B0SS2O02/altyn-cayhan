@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
   //  next(new ErrorException("Authentication failed"));
   try {
     const response = await axios.post(
-      "http://localhost:3001/api/v1/auth/token/verify",
+      "http://localhost:8880/api/v1/auth/token/verify",
       JSON.stringify({ token: req.cookies.token }),
       {
         headers: {

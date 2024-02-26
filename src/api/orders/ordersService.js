@@ -178,7 +178,7 @@ const bankUrlRedirect = {
   registerUrl: function (bankId, orderId, amount, language) {
     console.log(this.auth[bankId], bankId);
     console.log(this.auth[bankId].userName, "---");
-    return `${this.banks[bankId]}/register.do?userName=${this.auth[bankId].userName}&password=${this.auth[bankId].password}&orderNumber=${orderId}&amount=${amount}00&language=${language}&currency=934&returnUrl=http://localhost:3001/api/v1/order/payment/callback-handler`;
+    return `${this.banks[bankId]}/register.do?userName=${this.auth[bankId].userName}&password=${this.auth[bankId].password}&orderNumber=${orderId}&amount=${amount}00&language=${language}&currency=934&returnUrl=http://localhost:8880/api/v1/order/payment/callback-handler`;
   },
   checkOrderUrl: function (bankId, transactionId, language) {
     return `${this.banks[bankId]}/getOrderStatus.do?userName=${this.auth[bankId].userName}&password=${this.auth[bankId].password}&orderId=${transactionId}&language=${language}`;
@@ -210,8 +210,8 @@ const createForms = async (order, seqTrans, language = "ru") => {
       response = await response.json();
       console.log(response);
       data.url = response.formUrl;
-      data.finalUrl = `http://localhost:3001/api/v1/order/payment/callback-handler?orderId=${response.orderId}`;
-      data.checkOrder = `http://localhost:3001/api/v1/order/payment/check-status?orderId=${response.orderId}`;
+      data.finalUrl = `http://localhost:8880/api/v1/order/payment/callback-handler?orderId=${response.orderId}`;
+      data.checkOrder = `http://localhost:8880/api/v1/order/payment/check-status?orderId=${response.orderId}`;
     }
     await order.createPayment(
       {
@@ -222,7 +222,7 @@ const createForms = async (order, seqTrans, language = "ru") => {
     );
     console.log("final data->", response);
     return data;
-    //  { url: response.formUrl, finalUrl: `http://localhost:3001/api/v1/order/payment/callback-handler?orderId=${response.orderId}`, checkOrder: `http://localhost:3001/api/v1/order/payment/check-status?orderId=${response.orderId}` }
+    //  { url: response.formUrl, finalUrl: `http://localhost:8880/api/v1/order/payment/callback-handler?orderId=${response.orderId}`, checkOrder: `http://localhost:8880/api/v1/order/payment/check-status?orderId=${response.orderId}` }
   } catch (err) {
     console.log(err);
     throw new ErrorException(
