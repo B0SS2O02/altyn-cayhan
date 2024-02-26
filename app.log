@@ -97,3 +97,99 @@
 [24-Feb-2024 19:30:58]  [INFO ]:	server is listening another 3001 port1.0.0
 [24-Feb-2024 19:31:00]  [INFO ]:	server is listening another 3001 port1.0.0
 [24-Feb-2024 19:34:30]  [INFO ]:	server is listening another 3001 port1.0.0
+[25-Feb-2024 21:56:40]  [INFO ]:	server is listening another 3001 port1.0.0
+[25-Feb-2024 21:57:31]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 16:49:31]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:01:28]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:02:16]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:19:06]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:19:24]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:23:51]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:23:53]  [ERROR]:	столбец product.restaurantId не существует
+[26-Feb-2024 17:24:38]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:25:22]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:26:10]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:37:08]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:40:42]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:40:51]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:41:09]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:41:15]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:41:29]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:43:55]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:48:13]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:48:24]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:48:51]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 17:48:53]  [ERROR]:	Validation Failure
+[26-Feb-2024 17:48:58]  [ERROR]:	Validation Failure
+[26-Feb-2024 18:26:06]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:26:08]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:29:37]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:30:10]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:30:20]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:31:34]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:33:05]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:34:19]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:34:48]  [ERROR]:	Cannot set headers after they are sent to the client
+[26-Feb-2024 18:34:51]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:35:47]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:35:49]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:36:06]  [ERROR]:	Validation Failure
+[26-Feb-2024 18:36:12]  [ERROR]:	Cannot set headers after they are sent to the client
+[26-Feb-2024 18:36:14]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:39:39]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:39:40]  [ERROR]:	Cannot read properties of null (reading 'ProdCategoryTranslations')
+[26-Feb-2024 18:40:28]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:40:29]  [ERROR]:	Cannot read properties of null (reading 'RestaurantTranslation')
+[26-Feb-2024 18:40:35]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:40:43]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:40:49]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:40:50]  [ERROR]:	Cannot read properties of null (reading 'RestaurantTranslation')
+[26-Feb-2024 18:41:07]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:41:07]  [ERROR]:	Cannot read properties of null (reading 'RestaurantTranslation')
+[26-Feb-2024 18:41:09]  [ERROR]:	Cannot read properties of null (reading 'RestaurantTranslation')
+[26-Feb-2024 18:41:20]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:41:21]  [ERROR]:	Cannot read properties of null (reading 'RestaurantTranslation')
+[26-Feb-2024 18:41:40]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:41:40]  [ERROR]:	Cannot read properties of null (reading 'RestaurantTranslation')
+[26-Feb-2024 18:42:34]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:42:34]  [ERROR]:	Cannot read properties of null (reading 'restaurantTranslations')
+[26-Feb-2024 18:43:02]  [ERROR]:	Cannot read properties of null (reading 'restaurantTranslations')
+[26-Feb-2024 18:43:37]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:43:37]  [ERROR]:	Cannot read properties of null (reading 'restaurantTranslations')
+[26-Feb-2024 18:44:48]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:44:49]  [ERROR]:	Cannot read properties of null (reading 'restaurantTranslations')
+[26-Feb-2024 18:44:50]  [ERROR]:	Cannot read properties of null (reading 'restaurantTranslations')
+[26-Feb-2024 18:45:04]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:45:05]  [ERROR]:	Cannot read properties of null (reading 'restaurantTranslations')
+[26-Feb-2024 18:45:06]  [ERROR]:	Cannot read properties of null (reading 'restaurantTranslations')
+[26-Feb-2024 18:45:18]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:45:18]  [ERROR]:	Cannot read properties of null (reading 'restaurantTranslations')
+[26-Feb-2024 18:45:26]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:45:26]  [ERROR]:	Cannot read properties of null (reading 'restaurantTranslations')
+[26-Feb-2024 18:45:35]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:45:36]  [ERROR]:	Cannot read properties of null (reading 'restaurantTranslations')
+[26-Feb-2024 18:46:12]  [ERROR]:	отношение "products" не существует
+[26-Feb-2024 18:46:23]  [ERROR]:	отношение "auths" не существует
+[26-Feb-2024 18:46:36]  [ERROR]:	отношение "auths" не существует
+[26-Feb-2024 18:46:39]  [ERROR]:	отношение "auths" не существует
+[26-Feb-2024 18:46:44]  [ERROR]:	отношение "auths" не существует
+[26-Feb-2024 18:46:57]  [ERROR]:	отношение "auths" не существует
+[26-Feb-2024 18:47:03]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:47:23]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:47:24]  [ERROR]:	Cannot read properties of undefined (reading 'toJSON')
+[26-Feb-2024 18:47:29]  [ERROR]:	Cannot read properties of undefined (reading 'toJSON')
+[26-Feb-2024 18:49:10]  [ERROR]:	Cannot read properties of undefined (reading 'toJSON')
+[26-Feb-2024 18:49:43]  [ERROR]:	Cannot read properties of undefined (reading 'toJSON')
+[26-Feb-2024 18:49:59]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:50:00]  [ERROR]:	Cannot read properties of undefined (reading 'toJSON')
+[26-Feb-2024 18:50:03]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:50:04]  [ERROR]:	Cannot read properties of undefined (reading 'toJSON')
+[26-Feb-2024 18:50:21]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:50:21]  [ERROR]:	Cannot read properties of undefined (reading 'toJSON')
+[26-Feb-2024 18:51:28]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 18:52:12]  [ERROR]:	Cannot set headers after they are sent to the client
+[26-Feb-2024 18:52:14]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 19:12:09]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 19:15:34]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 19:16:01]  [INFO ]:	server is listening another 3001 port1.0.0
+[26-Feb-2024 19:16:04]  [INFO ]:	server is listening another 3001 port1.0.0

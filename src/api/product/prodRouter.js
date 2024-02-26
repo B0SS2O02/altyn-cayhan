@@ -112,9 +112,10 @@ router
   .route("/product")
   .get(async (req, res, next) => {
     try {
-      const { page, size, category, allCategory, sort } = req.query;
+      const { page, size, category, allCategory, sort, restaurant } = req.query;
       const prodCategory = await prodService.getProducts(
         category,
+        restaurant,
         page,
         size,
         allCategory,
@@ -159,6 +160,7 @@ router
         const prodCategory = await prodService.saveProduct(req.body, req.file);
         upVersion();
         res.send(prodCategory);
+        res.send("ok");
       } catch (err) {
         next(err);
       }

@@ -8,6 +8,8 @@ const Product = require("./product");
 const ProdCategoryTranslation = require("./prodCategoryTranslation");
 const ProdTranslation = require("./prodTranslation");
 const { Op } = require("sequelize");
+const Restaurant = require("../restaurant/restaurants");
+const RestaurantTranslation = require("../restaurant/restTranslator");
 
 const addNewPath = (originalname) => {
   return `/uploads/product/${
@@ -66,6 +68,7 @@ const getAllCategory = async (lang) => {
 
 const getProducts = async (
   prodCategoryId = false,
+  restaurant,
   page,
   size,
   allCategory = false,
@@ -83,7 +86,7 @@ const getProducts = async (
     };
   }
   if (prodCategoryId) where.prodCategoryId = prodCategoryId;
-
+  if (restaurant) where["restaurantId"] = restaurant;
   if ((sort && !sort.active) || !sort) {
     where = {
       ...where,
@@ -120,6 +123,20 @@ const getProducts = async (
     ],
   });
 
+  include.push({
+    model: Restaurant,
+    attributes: ["id"],
+    include: [
+      {
+        model: RestaurantTranslation,
+        attributes: ["title"],
+        where: {
+          lang: lang,
+        },
+      },
+    ],
+  });
+
   if (translations) {
     include.push({
       model: ProdTranslation,
@@ -135,6 +152,9 @@ const getProducts = async (
     include,
     order: [["position", "asc"]],
   });
+
+  console.log(products);
+
   return {
     products: products.rows.map((convSeqeulize) => {
       const data = convSeqeulize.get({ plain: true });
@@ -148,6 +168,10 @@ const getProducts = async (
       data.currentPrice = currentPrice;
 
       data.category = data.prodCategory.ProdCategoryTranslations[0].title;
+      delete data.prodCategory;
+
+      console.log("++++++++++", data);
+      data.restaurant = data.restaurant.restaurantTranslations[0].title;
       delete data.prodCategory;
 
       if (data.prodTranslations) {
@@ -299,6 +323,7 @@ const saveProduct = async (body, file) => {
   const pos = await Product.max("position");
   const product = await Product.create({
     prodCategoryId: body.prodCategoryId,
+    restaurantId: body.restaurantId,
     price: body.price,
     popular: body.popular,
     position: pos + 1,
