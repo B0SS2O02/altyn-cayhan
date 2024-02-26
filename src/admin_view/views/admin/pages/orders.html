@@ -268,7 +268,7 @@
         const img = document.getElementById('imgDC')
         async function putDC() {
             initialValue = input.value
-            await fetch('http://localhost:3001/api/v1/delivery', {
+            await fetch('http://localhost:8880/api/v1/delivery', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -357,12 +357,12 @@
             }
             let delivery
             document.body.style.overflowY = 'hidden'
-            fetch('http://localhost:3001/api/v1/delivery').then(res => {
+            fetch('http://localhost:8880/api/v1/delivery').then(res => {
                 return res.json()
             })
                 .then(res => {
                     delivery = res
-                    return fetch('http://localhost:3001/api/v1/order/' + id, {
+                    return fetch('http://localhost:8880/api/v1/order/' + id, {
                         method: 'GET',
                         headers: {
                             'Accept-Language': getCookie('lang')

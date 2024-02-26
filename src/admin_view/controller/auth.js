@@ -10,7 +10,7 @@ exports.getLogin = async (req, res, next) => {
 exports.postLogin = async (req, res, next) => {
   try {
     const response = await axios.post(
-      "http://localhost:3001/api/v1/auth/login",
+      "http://localhost:8880/api/v1/auth/login",
       req.body,
       {
         headers: {
