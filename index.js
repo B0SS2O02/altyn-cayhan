@@ -1,10 +1,11 @@
 const app = require("./src/app");
-const sequelize = require("./src/api/config/database");
+const { sequelize } = require("./database/models");
 const logger = require("./src/api/shared/logger");
 const { connectWSS } = require("./src/api/wss/webSocketServer");
-const Auth = require("./src/api/auth/auth");
+const defaults = require("./src/api/util/defaults");
 const server = async () => {
   try {
+<<<<<<< HEAD
     await sequelize.sync({alter:true});
     await Auth.count().then(async (response) => {
       if (!response) {
@@ -16,6 +17,10 @@ const server = async () => {
         });
       }
     });
+=======
+    await sequelize.sync();
+    await defaults();
+>>>>>>> 4938acace6cebe300abff175c21746606e2da2c3
     app.listen(3001, async () => {
       logger.info(
         "server is listening another 3001 port" +

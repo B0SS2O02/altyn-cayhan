@@ -16,6 +16,7 @@ var ValidationParamsGallery = [
 ];
 var ValidationParamsFood = [
   "prodCategoryId",
+  "restaurantId",
   "translations.tm.description",
   "translations.ru.description",
   "image",
@@ -110,6 +111,7 @@ function foodValues() {
     image: document.getElementById("image").files[0],
     discount: document.getElementById("discount").value,
     prodCategoryId: parseInt(document.getElementById("prodCategoryId").value),
+    restaurantId: parseInt(document.getElementById("restaurantId").value),
     "translations.tm.title": document.getElementById("titleTm").value,
     "translations.ru.title": document.getElementById("titleRu").value,
     "translations.tm.description":
@@ -213,8 +215,6 @@ function editRestaurant(e, id) {
   e.preventDefault();
   loading.classList.remove("hidden");
 
-  
-
   cleanValidationInputs(ValidationParamsCategory);
   const formData = getAllInputsInTagsAndAppendFormData(
     categoryValues,
@@ -243,7 +243,6 @@ function postFood(e) {
   e.preventDefault();
   loading.classList.remove("hidden");
   cleanValidationInputs(ValidationParamsFood);
-
   const formData = getAllInputsInTagsAndAppendFormData(
     foodValues,
     ValidationParamsFood

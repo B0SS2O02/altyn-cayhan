@@ -15,9 +15,9 @@ app.use(
 );
 
 app.use(function (req, res, next) {
-  console.log(req.method, req.hostname, req.baseUrl, req.url)
-  next()
-})
+  console.log(req.method, req.hostname, req.baseUrl, req.url);
+  next();
+});
 //-----------------------------  cors ---------------------
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -33,21 +33,10 @@ app.use(function (req, res, next) {
   next();
 });
 
-
-
-// every 2 days cron is working
-// cron.schedule("0 23 */2 * *", async () => {
-const getDataPay = async () => {
-  console.log('----')
-}
-getDataPay()
-// });
-
-
 //---------------------------- end of cors ----------------
 app.use(function (req, res, next) {
-  console.log(req.method, req.hostname, req.baseUrl, req.url)
-  next()
+  console.log(req.method, req.hostname, req.baseUrl, req.url);
+  next();
 });
 
 app.engine(".html", require("ejs").__express);
@@ -58,8 +47,9 @@ app.use(express.json());
 
 app.use("/admin", ADMIN_VIEW_SOURCE);
 app.use("/api/v1", API);
+
 app.get("/", async (req, res, next) => {
-  res.render("hazyna-doner.html");
+  res.render("main.html");
 });
 
 module.exports = app;

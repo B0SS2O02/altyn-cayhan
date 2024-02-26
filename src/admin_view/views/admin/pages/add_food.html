@@ -57,7 +57,8 @@
                                     <p id="translations.ru.descriptionValidation" class="text-[red]"></p>
                                 </div>
                                 <div>
-                                    <label for="prodCategoryId" class="block mb-2 text-sm font-medium text-gray-900 ">Select
+                                    <label for="prodCategoryId"
+                                        class="block mb-2 text-sm font-medium text-gray-900 ">Select
                                         Category</label>
                                     <select id="prodCategoryId"
                                         class="bg-gray-50 border  border-[#DBDFEA]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
@@ -73,6 +74,25 @@
                                                         <%}%>
                                     </select>
                                     <p id="prodCategoryIdValidation" class="text-[red]"></p>
+                                </div>
+                                <div>
+                                    <label for="restaurantId"
+                                        class="block mb-2 text-sm font-medium text-gray-900 ">Select
+                                        Restaurant</label>
+                                    <select id="restaurantId"
+                                        name="restaurantId" class="bg-gray-50 border  border-[#DBDFEA]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                        <%if(!edit)%>
+                                            <option value="" selected>Choose a restaurant</option>
+                                            <% if(restaurant.length>0){ %>
+                                                <% restaurant.forEach(item=>{ %>
+                                                    <option value="<%=item.id%>" <% if(edit &&
+                                                        item.id===data.restaurantId ){ %> selected <%}%>
+                                                            ><%=item.title%>
+                                                    </option>
+                                                    <% }) %>
+                                                        <%}%>
+                                    </select>
+                                    <p id="restaurantIdValidation" class="text-[red]"></p>
                                 </div>
                                 <div class=" my-2">
                                     <label for="price" class="leading-5">Price</label>
@@ -99,12 +119,13 @@
                                         <label for="status" class="leading-5">Popular</label>
                                         <p id="popularValidation"></p>
                                 </div>
-                               
+
                                 <div class=" my-2">
                                     <label for="discount" class="leading-5">Discount</label>
                                     <input type="text"
                                         class="leading-5 p-2 my-1 w-full rounded border-[#DBDFEA] border-2 text-black"
-                                        id="discount" value="<% if(edit){%><%=data.discount%><%}%>" placeholder="discount" />
+                                        id="discount" value="<% if(edit){%><%=data.discount%><%}%>"
+                                        placeholder="discount" />
                                     <!-- validation id must be titleValidation because api validation param like this -->
                                     <p id="discountValidation" class="text-[red]"></p>
                                 </div>
@@ -149,22 +170,16 @@
             </div>
         </div>
     </div>
-    
-   <!-- loading  -->
-   <div
-   id="loading"
-   class="hidden fixed w-full h-full bg-[#303030a8] left-0 top-0 flex justify-center items-center"
- >
-     <div
-       class="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-       role="status">
-       <span
-         class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-         >Loading...</span
-       >
-     </div>
 
-   </div>
+    <!-- loading  -->
+    <div id="loading" class="hidden fixed w-full h-full bg-[#303030a8] left-0 top-0 flex justify-center items-center">
+        <div class="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            role="status">
+            <span
+                class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+        </div>
+
+    </div>
     </body>
 
     <!-- <script src="/assets/ckeditor4/ckeditor.js"></script> -->

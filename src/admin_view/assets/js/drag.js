@@ -94,7 +94,7 @@ function slist(target, apiTitle) {
           rangeB = Math.max(newElem, currentElem);
         if (newElem !== currentElem) {
           try {
-            await fetch(`http://localhost:3001/api/v1/${apiTitle}-drag`, {
+            await fetch(`/api/v1/${apiTitle}-drag`, {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",

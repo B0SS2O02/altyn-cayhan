@@ -25,6 +25,7 @@ exports.getFoods = async (req, res, next) => {
       res.locals.lang
     );
 
+    console.log('-------',product);
     const { page, size, totalPages } = product.data;
     res.render("admin/pages/foods.html", {
       path: "/foods",
@@ -42,14 +43,22 @@ exports.getFoods = async (req, res, next) => {
 };
 
 exports.getAddFood = async (req, res, next) => {
-  const fetchedData = await Fetch(
+  const fetchedDataCat = await Fetch(
     `${url}product/category`,
     "GET",
     null,
     res.locals.lang
   );
+  const fetchedDataRest = await Fetch(
+    `${url}restaurant`,
+    "GET",
+    null,
+    res.locals.lang
+  );
+  console.log(fetchedDataRest.data);
   res.render("admin/pages/add_food.html", {
-    category: fetchedData.data.category,
+    category: fetchedDataCat.data.category,
+    restaurant: fetchedDataRest.data.restaurants,
     edit: false,
   });
 };
@@ -110,8 +119,6 @@ exports.getEditCategory = async (req, res, next) => {
     edit: true,
   });
 };
-
-
 
 exports.getUsers = async (req, res, next) => {
   const users = await Fetch(`${url}users`, "GET");

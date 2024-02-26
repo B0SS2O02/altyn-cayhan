@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 module.exports = {
   database: {
 
@@ -12,15 +13,56 @@ module.exports = {
       maxRetryCount: 10, // Maximum number of connection acquisition retries
       minRetryCount: 1, // Minimum number of connection acquisition retries
       retryInterval: 1000, // Time interval between retries in milliseconds (1 second in this example)
+=======
+  module.exports = {
+    database: {
+      database: "shop",
+      username: "postgres",
+      password: "pikir",
+      dialect: "postgres",
+      host: "127.0.0.1",
+      port: 5432,
+      logging: false,
+      dialectOptions: {
+        maxRetryCount: 10, // Maximum number of connection acquisition retries
+        minRetryCount: 1, // Minimum number of connection acquisition retries
+        retryInterval: 1000, // Time interval between retries in milliseconds (1 second in this example)
+      },
+      pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000,
+      },
+>>>>>>> 4938acace6cebe300abff175c21746606e2da2c3
     },
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000,
+    key: {
+      JWT_SECRET_KEY: "futboljankoyer__!",
     },
-  },
-  key: {
-    JWT_SECRET_KEY: "futboljankoyer__!",
-  },
-};
+  };
+
+// module.exports = {
+//   database: {
+//     dialect: "postgres",
+//     username: "root",
+//     password: "root5312023",
+//     database: "altyncayhana",
+//     host: "95.85.127.110",
+//     port: 5432,
+//     logging: false,
+//     dialectOptions: {
+//       maxRetryCount: 10, // Maximum number of connection acquisition retries
+//       minRetryCount: 1, // Minimum number of connection acquisition retries
+//       retryInterval: 1000, // Time interval between retries in milliseconds (1 second in this example)
+//     },
+//     pool: {
+//       max: 5,
+//       min: 0,
+//       acquire: 30000,
+//       idle: 10000,
+//     },
+//   },
+//   key: {
+//     JWT_SECRET_KEY: "futboljankoyer__!",
+//   },
+// };

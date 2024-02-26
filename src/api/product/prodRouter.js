@@ -11,7 +11,7 @@ const router = express.Router();
 const prodService = require("./prodService");
 const ValidationException = require("../error/ValidationException");
 const ProdCategory = require("./prodCategory");
-const sequelize = require("../config/database");
+const { sequelize } = require("../../../database/models");
 const ProdCategoryTranslation = require("./prodCategoryTranslation");
 const { upVersion } = require("../util/version");
 
@@ -112,9 +112,10 @@ router
   .route("/product")
   .get(async (req, res, next) => {
     try {
-      const { page, size, category, allCategory, sort } = req.query;
+      const { page, size, category, allCategory, sort, restaurant } = req.query;
       const prodCategory = await prodService.getProducts(
         category,
+        restaurant,
         page,
         size,
         allCategory,
@@ -159,6 +160,7 @@ router
         const prodCategory = await prodService.saveProduct(req.body, req.file);
         upVersion();
         res.send(prodCategory);
+        res.send("ok");
       } catch (err) {
         next(err);
       }

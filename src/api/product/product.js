@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
-const sequelize = require("../config/database");
+const { sequelize } = require("../../../database/models");
 const ProdCategory = require("./prodCategory");
+const Restaurant = require("../restaurant/restaurants");
 
 const Model = Sequelize.Model;
 
@@ -35,4 +36,6 @@ Product.init(
 
 ProdCategory.hasMany(Product, { onDelete: "CASCADE" });
 Product.belongsTo(ProdCategory);
+Restaurant.hasMany(Product, { onDelete: "CASCADE" });
+Product.belongsTo(Restaurant);
 module.exports = Product;

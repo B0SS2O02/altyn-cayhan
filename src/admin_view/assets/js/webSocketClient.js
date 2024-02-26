@@ -192,7 +192,7 @@ function connect() {
       );
     }
     const isViewedIds = [item.id];
-    await fetch("http://localhost:3001/api/v1/order", {
+    await fetch("/api/v1/order", {
       method: "PUT",
       body: JSON.stringify(isViewedIds),
       headers: {
