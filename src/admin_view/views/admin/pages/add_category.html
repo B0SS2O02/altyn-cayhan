@@ -1,24 +1,23 @@
 <%- include('../components/body.html')%>
-    <div class="flex">
-        <!-- sidebar -->
+<div class="flex">
+  <!-- sidebar -->
 
-        <%- include('../components/sidebar.html') %>
-            <!-- end of sidebar -->
+  <%- include('../components/sidebar.html') %>
+  <!-- end of sidebar -->
 
 
-            <!-- header -->
-            <!-- top border of header  -->
-            <div class="border-solid border-b-2 z-[-1] absolute w-full top-[80px]"></div>
-            <!-- end of top border -->
-            <div class="lg:ml-[25rem] w-full lg:mx-20 mx-5 flex flex-col gap-10">
-                <%- include('../components/header.html')%>
-                    <!-- end of header -->
-                    <!-- border after header -->
-                    <!--  main -->
-                    <div class="w-full">
-                        <h1 class="text-4xl">Category</h1>
-                        <form action="#"
-                            onsubmit="`<%if(!edit){%>${postCategory(event)}<%}else{%>${editCategory(event,'<%=data.id%>')}<%}%>`">
+  <!-- header -->
+  <!-- top border of header  -->
+  <div class="border-solid border-b-2 z-[-1] absolute w-full top-[80px]"></div>
+  <!-- end of top border -->
+  <div class="lg:ml-[25rem] w-full lg:mx-20 mx-5 flex flex-col gap-10">
+    <%- include('../components/header.html')%>
+    <!-- end of header -->
+    <!-- border after header -->
+    <!--  main -->
+    <div class="w-full">
+      <h1 class="text-4xl">Category</h1>
+      <form action="#" onsubmit="`<%if(!edit){%>${postCategory(event)}<%}else{%>${editCategory(event,'<%=data.id%>')}<%}%>`">
                             <div class="border-2 rounded border-[#DBDFEA] mt-3 p-5">
 
                                 <div class=" my-2">
@@ -40,6 +39,25 @@
                                         placeholder="Russian" />
                                     <!-- validation id must be titleValidation because api validation param like this -->
                                     <p id="translations.ru.titleValidation" class="text-[red]"></p>
+                                </div>
+
+                                <div>
+                                    <label for="restaurantId"
+                                        class="block mb-2 text-sm font-medium text-gray-900 ">Select
+                                        Restaurant</label>
+                                    <select id="restaurantId"
+                                        name="restaurantId" class="bg-gray-50 border  border-[#DBDFEA]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                        <%if(!edit)%>
+                                            <option value="" selected>Choose a restaurant</option>
+                                            <% if(restaurant.length>0){ %>
+                                                <% restaurant.forEach(item=>{ %>
+                                                    <option value=" <%=item.id%>" <% if(edit &&
+                                                        item.id===data.restaurantId ){ %> selected <%}%>
+                                                            ><%=item.title%> </option>
+        <% }) %>
+        <%}%>
+                                    </select>
+                                    <p id="restaurantIdValidation" class="text-[red]"></p>
                                 </div>
 
                                 <div class=" my-2">

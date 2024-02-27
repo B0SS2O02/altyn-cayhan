@@ -30,6 +30,7 @@ var ValidationParamsFood = [
 var ValidationParamsCategory = [
   "translations.tm.title",
   "translations.ru.title",
+  "restaurantId",
   "image",
 ];
 
@@ -122,6 +123,7 @@ function foodValues() {
 }
 function categoryValues() {
   return {
+    restaurantId: document.getElementById("restaurantId").value,
     image: document.getElementById("image").files[0],
     "translations.tm.title": document.getElementById("titleTm").value,
     "translations.ru.title": document.getElementById("titleRu").value,

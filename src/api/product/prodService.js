@@ -192,7 +192,6 @@ const getProducts = async (
     page,
     totalPages: Math.ceil(products.count / size),
   };
-  return products;
 };
 
 const saveCategory = async (body, file) => {
@@ -203,6 +202,7 @@ const saveCategory = async (body, file) => {
   const category = await ProdCategory.create({
     image: mainImgPath,
     position: pos + 1,
+    restaurantId: body.restaurantId,
   });
   for (let index = 0; index < Object.keys(body.translations).length; index++) {
     await category.createProdCategoryTranslation({
@@ -226,6 +226,9 @@ const findProdCategory = async (id, translations = false, lang) => {
         model: ProdCategoryTranslation,
         attributes: ["title", "lang"],
         where,
+      },
+      {
+        model: Product,
       },
     ];
   }
