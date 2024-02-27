@@ -2,6 +2,7 @@ const Sequelize = require("sequelize");
 const { sequelize } = require("../../../database/models");
 const ProdCategory = require("./prodCategory");
 const Restaurant = require("../restaurant/restaurants");
+const config = require("../../../serverSettings.json");
 
 const Model = Sequelize.Model;
 
@@ -23,7 +24,12 @@ Product.init(
     discount: {
       type: Sequelize.INTEGER,
     },
-    image: Sequelize.STRING,
+    image: {
+      type: Sequelize.STRING,
+      get() {
+        return `${config.url}:${config.port}${this.getDataValue("image")}`;
+      },
+    },
     position: {
       type: Sequelize.INTEGER,
     },
