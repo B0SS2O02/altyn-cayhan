@@ -32,7 +32,13 @@ const formatImages = async (oldImagePath, newImagePath) => {
   }
 };
 
-const getAllCategory = async (lang) => {
+const getAllCategory = async (lang, restaurant) => {
+  let where = {};
+
+  if (restaurant) {
+    where["restaurantId"] = restaurant;
+  }
+
   const category = await ProdCategory.findAll({
     order: [["position", "asc"]],
     include: [
@@ -44,6 +50,7 @@ const getAllCategory = async (lang) => {
         },
       },
     ],
+    where,
   });
   return {
     category: category.map((convSeqeulize) => {
@@ -158,7 +165,7 @@ const getProducts = async (
   return {
     products: products.rows.map((convSeqeulize) => {
       const data = convSeqeulize.get({ plain: true });
-      let currentPrice = data.price ? parseFloat(data.price).toFixed(2) : null;
+      let currentPrice = data.price ? +data.price : null;
       if (data.discount && data.discount > 0 && data.price) {
         currentPrice = (
           currentPrice - parseFloat((data.price * data.discount) / 100)
@@ -213,33 +220,124 @@ const saveCategory = async (body, file) => {
   return category;
 };
 
-const findProdCategory = async (id, translations = false, lang) => {
-  let include = [],
-    where = {};
-  if (lang)
-    where = {
-      lang: lang,
+const findProdCategory = async (
+  id,
+  translations = false,
+  lang = "tm",
+  page = 1,
+  size = 10,
+  sort = null
+) => {
+  let where = {},
+    limits = {},
+    include = [];
+  if (page && size) {
+    limits = {
+      limit: size,
+      offset: (page - 1) * size,
     };
-  if (translations || lang) {
-    include = [
+  }
+  if (id) where.prodCategoryId = id;
+  if ((sort && !sort.active) || !sort) {
+    where = {
+      ...where,
+      active: true,
+    };
+  }
+
+  if (sort && sort.popular) {
+    where = {
+      ...where,
+      popular: true,
+    };
+  }
+  if (sort && sort.discount) {
+    where = {
+      ...where,
+      discount: {
+        [Op.not]: null,
+      },
+    };
+  }
+
+  include.push({
+    model: ProdCategory,
+    attributes: ["id"],
+    include: [
       {
         model: ProdCategoryTranslation,
-        attributes: ["title", "lang"],
-        where,
+        attributes: ["title"],
+        where: {
+          lang: lang,
+        },
       },
-      {
-        model: Product,
-      },
-    ];
-  }
-  const category = ProdCategory.findOne({
-    where: {
-      id: id,
-    },
-    include,
+    ],
   });
-  if (!category) throw new NotFoundException();
-  return category;
+
+  include.push({
+    model: Restaurant,
+    attributes: ["id"],
+    include: [
+      {
+        model: RestaurantTranslation,
+        attributes: ["title"],
+        where: {
+          lang: lang,
+        },
+      },
+    ],
+  });
+
+  if (translations) {
+    include.push({
+      model: ProdTranslation,
+      attributes: ["title", "description"],
+      where: {
+        lang: lang,
+      },
+    });
+  }
+  const products = await Product.findAndCountAll({
+    where,
+    ...limits,
+    include,
+    order: [["position", "asc"]],
+  });
+
+  console.log(products);
+
+  return {
+    products: products.rows.map((convSeqeulize) => {
+      const data = convSeqeulize.get({ plain: true });
+      let currentPrice = data.price ? parseFloat(data.price).toFixed(2) : null;
+      if (data.discount && data.discount > 0 && data.price) {
+        currentPrice = (
+          currentPrice - parseFloat((data.price * data.discount) / 100)
+        ).toFixed(2);
+      }
+
+      data.currentPrice = currentPrice;
+
+      data.category = data.prodCategory.ProdCategoryTranslations[0].title;
+      delete data.prodCategory;
+
+      console.log("++++++++++", data);
+      data.restaurant = data.restaurant.restaurantTranslations[0].title;
+      delete data.prodCategory;
+
+      if (data.prodTranslations) {
+        Object.entries(...data.prodTranslations).forEach((e, i) => {
+          data[e[0]] = e[1];
+        });
+        delete data.prodTranslations;
+      }
+
+      return data;
+    }),
+    size,
+    page,
+    totalPages: Math.ceil(products.count / size),
+  };
 };
 
 const updateCategoryById = async (body, file, id) => {
@@ -600,6 +698,133 @@ const findProductByPos = async (index, tx) => {
   return prod;
 };
 
+const getProductsSearch = async (
+  prodCategoryId = false,
+  restaurant,
+  page,
+  size,
+  allCategory = false,
+  lang = "tm",
+  translations = false,
+  sort,
+  word
+) => {
+  console.log(word);
+  let where = {},
+    limits = {},
+    include = [];
+  if (page && size) {
+    limits = {
+      limit: size,
+      offset: (page - 1) * size,
+    };
+  }
+  if (prodCategoryId) where.prodCategoryId = prodCategoryId;
+  if (restaurant) where["restaurantId"] = restaurant;
+  if ((sort && !sort.active) || !sort) {
+    where = {
+      ...where,
+      active: true,
+    };
+  }
+
+  if (sort && sort.popular) {
+    where = {
+      ...where,
+      popular: true,
+    };
+  }
+  if (sort && sort.discount) {
+    where = {
+      ...where,
+      discount: {
+        [Op.not]: null,
+      },
+    };
+  }
+
+  include.push({
+    model: ProdCategory,
+    attributes: ["id"],
+    include: [
+      {
+        model: ProdCategoryTranslation,
+        attributes: ["title"],
+        where: {
+          lang: lang,
+        },
+      },
+    ],
+  });
+
+  include.push({
+    model: Restaurant,
+    attributes: ["id"],
+    include: [
+      {
+        model: RestaurantTranslation,
+        attributes: ["title"],
+        where: {
+          lang: lang,
+        },
+      },
+    ],
+  });
+
+  if (translations) {
+    include.push({
+      model: ProdTranslation,
+      attributes: ["title", "description"],
+      where: {
+        lang: lang,
+        title: { [Op.like]: `${word}%` },
+      },
+    });
+  }
+  const products = await Product.findAndCountAll({
+    where,
+    ...limits,
+    include,
+    order: [["position", "asc"]],
+  });
+
+  for (const iterator of products.rows) {
+    console.log(iterator.toJSON());
+  }
+
+  return {
+    products: products.rows.map((convSeqeulize) => {
+      const data = convSeqeulize.get({ plain: true });
+      let currentPrice = data.price ? +data.price : null;
+      if (data.discount && data.discount > 0 && data.price) {
+        currentPrice = (
+          currentPrice - parseFloat((data.price * data.discount) / 100)
+        ).toFixed(2);
+      }
+
+      data.currentPrice = currentPrice;
+
+      data.category = data.prodCategory.ProdCategoryTranslations[0].title;
+      delete data.prodCategory;
+
+      console.log("++++++++++", data);
+      data.restaurant = data.restaurant.restaurantTranslations[0].title;
+      delete data.prodCategory;
+
+      if (data.prodTranslations) {
+        Object.entries(...data.prodTranslations).forEach((e, i) => {
+          data[e[0]] = e[1];
+        });
+        delete data.prodTranslations;
+      }
+      return data;
+    }),
+    size,
+    page,
+    totalPages: Math.ceil(products.count / size),
+  };
+};
+
 module.exports = {
   saveCategory,
   resortCategory,
@@ -616,4 +841,5 @@ module.exports = {
   toggleActive,
   newOrderPositionProduct,
   newOrderPositionCategory,
+  getProductsSearch,
 };

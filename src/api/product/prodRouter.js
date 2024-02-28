@@ -20,7 +20,8 @@ router
   .get(async (req, res, next) => {
     try {
       const prodCategory = await prodService.getAllCategory(
-        req.headers["accept-language"]
+        req.headers["accept-language"],
+        req.query.restaurant
       );
       res.send(prodCategory);
     } catch (err) {
@@ -73,7 +74,10 @@ router
     try {
       const shopCategoryById = await prodService.findProdCategory(
         req.params.id,
-        req.query.translations
+        req.query.translations,
+        req.headers["accept-language"],
+        req.query.page,
+        req.query.size
       );
       res.send(shopCategoryById);
     } catch (err) {
@@ -113,6 +117,7 @@ router
   .get(async (req, res, next) => {
     try {
       const { page, size, category, allCategory, sort, restaurant } = req.query;
+      console.log(req.query);
       const prodCategory = await prodService.getProducts(
         category,
         restaurant,
@@ -247,6 +252,27 @@ router.put("/product-category-drag", async (req, res, next) => {
     next(err);
   } finally {
     await seqTrans.cleanup();
+  }
+});
+
+router.get("/search/:word", async (req, res, next) => {
+  try {
+    const { word } = req.params;
+    const { page, size, category, allCategory, sort, restaurant } = req.query;
+    const prodCategory = await prodService.getProductsSearch(
+      category,
+      restaurant,
+      page,
+      size,
+      allCategory,
+      req.headers["accept-language"],
+      true,
+      sort,
+      word
+    );
+    res.send(prodCategory);
+  } catch (err) {
+    next(err);
   }
 });
 

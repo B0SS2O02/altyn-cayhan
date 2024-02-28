@@ -25,6 +25,7 @@ exports.getFoods = async (req, res, next) => {
       res.locals.lang
     );
 
+    
     console.log("-------", product);
     const { page, size, totalPages } = product.data;
     res.render("admin/pages/foods.html", {

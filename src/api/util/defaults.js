@@ -23,8 +23,8 @@ const rests = [
     image: "/uploads/restaurant/res3.webp",
     position: 3,
     translate: [
-      { title: "rest 2", description: "rest 2 description", lang: "ru" },
-      { title: "rest 2", description: "rest 2 description", lang: "tm" },
+      { title: "rest 3", description: "rest 3 description", lang: "ru" },
+      { title: "rest 3", description: "rest 3 description", lang: "tm" },
     ],
   },
 ];
