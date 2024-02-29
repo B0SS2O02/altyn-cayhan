@@ -1,3 +1,5 @@
 node_modules
 uploads/product
 app.log
+version.json
+delivery.json
