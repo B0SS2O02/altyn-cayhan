@@ -52,35 +52,37 @@ const GetOffline = async () => {
       for (const key in element) {
         if (key == "restaurantTranslations") {
           temp["translation"] = element[key];
-        } else if (key == "prodCategories") {
-          let tempCatList = [];
-          for (const cat of element[key]) {
-            let tempCat = {};
-            for (const catKey in cat) {
-              if (catKey == "ProdCategoryTranslations") {
-                tempCat["translate"] = cat[catKey];
-              } else if (catKey == "products") {
-                let tempProductList = [];
-                for (const product of cat[catKey]) {
-                  let tempProduct = {};
-                  for (const productKey in product) {
-                    if (productKey == "prodTranslations") {
-                      tempProduct["translate"] = product[productKey];
-                    } else {
-                      tempProduct[productKey] = product[productKey];
-                    }
-                  }
-                  tempProductList.push(tempProduct);
-                }
-                tempCat["products"] = tempProductList;
-              } else {
-                tempCat[catKey] = cat[catKey];
-              }
-            }
-            tempCatList.push(tempCat);
-          }
-          temp["category"] = tempCatList;
-        } else {
+        }
+        // else if (key == "prodCategories") {
+        //   let tempCatList = [];
+        //   for (const cat of element[key]) {
+        //     let tempCat = {};
+        //     for (const catKey in cat) {
+        //       if (catKey == "ProdCategoryTranslations") {
+        //         tempCat["translate"] = cat[catKey];
+        //       } else if (catKey == "products") {
+        //         let tempProductList = [];
+        //         for (const product of cat[catKey]) {
+        //           let tempProduct = {};
+        //           for (const productKey in product) {
+        //             if (productKey == "prodTranslations") {
+        //               tempProduct["translate"] = product[productKey];
+        //             } else {
+        //               tempProduct[productKey] = product[productKey];
+        //             }
+        //           }
+        //           tempProductList.push(tempProduct);
+        //         }
+        //         tempCat["products"] = tempProductList;
+        //       } else {
+        //         tempCat[catKey] = cat[catKey];
+        //       }
+        //     }
+        //     tempCatList.push(tempCat);
+        //   }
+        //   temp["category"] = tempCatList;
+        // }
+        else {
           temp[key] = element[key];
         }
       }
