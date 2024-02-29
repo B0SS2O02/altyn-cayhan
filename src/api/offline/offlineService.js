@@ -60,11 +60,9 @@ const GetOffline = async () => {
               if (catKey == "ProdCategoryTranslations") {
                 tempCat["translate"] = cat[catKey];
               } else if (catKey == "products") {
-                console.log(cat.id);
                 let tempProductList = [];
                 for (const product of cat[catKey]) {
                   let tempProduct = {};
-                  console.log(product);
                   for (const productKey in product) {
                     if (productKey == "prodTranslations") {
                       tempProduct["translate"] = product[productKey];
