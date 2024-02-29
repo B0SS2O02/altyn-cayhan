@@ -25,7 +25,8 @@ exports.getFoods = async (req, res, next) => {
       res.locals.lang
     );
 
-    console.log('-------',product);
+    
+    console.log("-------", product);
     const { page, size, totalPages } = product.data;
     res.render("admin/pages/foods.html", {
       path: "/foods",
@@ -64,8 +65,14 @@ exports.getAddFood = async (req, res, next) => {
 };
 
 exports.getEditFood = async (req, res, next) => {
-  const fetchedCategory = await Fetch(
+  const fetchedDataCat = await Fetch(
     `${url}product/category`,
+    "GET",
+    null,
+    res.locals.lang
+  );
+  const fetchedDataRest = await Fetch(
+    `${url}restaurant`,
     "GET",
     null,
     res.locals.lang
@@ -75,7 +82,8 @@ exports.getEditFood = async (req, res, next) => {
     "GET"
   );
   res.render("admin/pages/add_food.html", {
-    category: fetchedCategory.data.category,
+    category: fetchedDataCat.data.category,
+    restaurant: fetchedDataRest.data.restaurants,
     data: fetchedProduct.data,
     edit: true,
   });
@@ -102,8 +110,15 @@ exports.getCategory = async (req, res, next) => {
 };
 
 exports.getAddCategory = async (req, res, next) => {
+  const fetchedDataRest = await Fetch(
+    `${url}restaurant`,
+    "GET",
+    null,
+    res.locals.lang
+  );
   res.render("admin/pages/add_category.html", {
     edit: false,
+    restaurant: fetchedDataRest.data.restaurants,
   });
 };
 
@@ -114,8 +129,15 @@ exports.getEditCategory = async (req, res, next) => {
     null,
     res.locals.lang
   );
+  const fetchedDataRest = await Fetch(
+    `${url}restaurant`,
+    "GET",
+    null,
+    res.locals.lang
+  );
   res.render("admin/pages/add_category.html", {
     data: fetchedCategory.data,
+    restaurant: fetchedDataRest.data.restaurants,
     edit: true,
   });
 };

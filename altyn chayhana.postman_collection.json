@@ -17,13 +17,19 @@
 					}
 				],
 				"url": {
-					"raw": "{{url1}}/product/category",
+					"raw": "{{url1}}/product/category?restaurant=3",
 					"host": [
 						"{{url1}}"
 					],
 					"path": [
 						"product",
 						"category"
+					],
+					"query": [
+						{
+							"key": "restaurant",
+							"value": "3"
+						}
 					]
 				}
 			},
@@ -176,6 +182,24 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url1}}/search/f",
+					"host": [
+						"{{url1}}"
+					],
+					"path": [
+						"search",
+						"f"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -201,7 +225,7 @@
 	"variable": [
 		{
 			"key": "url1",
-			"value": "http://216.250.12.159:3002/api/v1"
+			"value": "http://216.250.12.159:8880/api/v1"
 		}
 	]
 }

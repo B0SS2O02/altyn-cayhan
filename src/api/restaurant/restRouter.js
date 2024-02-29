@@ -6,7 +6,8 @@ const { uploadRestaurant } = require("../util/multer.js");
 router.route("/restaurant").get(async (req, res, next) => {
   try {
     const prodCategory = await restService.getRestaurants(
-      req.headers["accept-language"] || "ru"
+      req.headers["accept-language"] || "ru",
+      req.query.category
     );
     res.send(prodCategory);
   } catch (error) {
@@ -20,7 +21,7 @@ router
     try {
       const RestaurantById = await restService.findRestaurant(
         req.params.id,
-        req.query.translations,
+        req.query.translations
       );
       res.send(RestaurantById);
     } catch (error) {

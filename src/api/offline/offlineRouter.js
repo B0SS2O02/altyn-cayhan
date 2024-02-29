@@ -4,29 +4,34 @@ const prodCatTranslate = require("../product/prodCategoryTranslation");
 const product = require("../product/product");
 const productTranslate = require("../product/prodTranslation");
 const { getVersion } = require("../util/version");
+const Restaurant = require("../restaurant/restaurants");
+const RestaurantTranslation = require("../restaurant/restTranslator");
+const { GetOffline } = require("./offlineService");
 
 router.get("/offline", async (req, res, next) => {
   try {
-    const productCategory = await prodCat.findAll({
-      attributes: { exclude: ["createdAt", "updatedAt"] },
-      include: [
-        {
-          model: prodCatTranslate,
-          attributes: { exclude: ["createdAt", "updatedAt", "prodCategoryId"] },
-        },
-      ],
-    });
-    const products = await product.findAll({
-      attributes: { exclude: ["createdAt", "updatedAt"] },
-      include: [
-        {
-          model: productTranslate,
-          attributes: { exclude: ["createdAt", "updatedAt", "productId"] },
-        },
-      ],
-    });
+    // const productCategory = await prodCat.findAll({
+    //   attributes: { exclude: ["createdAt", "updatedAt"] },
+    //   include: [
+    //     {
+    //       model: prodCatTranslate,
+    //       attributes: { exclude: ["createdAt", "updatedAt", "prodCategoryId"] },
+    //     },
+    //   ],
+    // });
+    // const products = await product.findAll({
+    //   attributes: { exclude: ["createdAt", "updatedAt"] },
+    //   include: [
+    //     {
+    //       model: productTranslate,
+    //       attributes: { exclude: ["createdAt", "updatedAt", "productId"] },
+    //     },
+    //   ],
+    // });
 
-    res.status(200).json({ productCategory, products });
+    const data = await GetOffline();
+
+    res.status(200).json({ data });
   } catch (error) {
     next(error);
   }
