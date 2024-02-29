@@ -11,7 +11,7 @@ const GetOffline = async () => {
     include: [
       {
         model: RestaurantTranslation,
-        attributes: ["title", "description", "lang"],
+        attributes: ["title", "lang"],
       },
       {
         model: ProdCategory,
@@ -84,6 +84,24 @@ const GetOffline = async () => {
                         ...tempProduct,
                         ...translateEdit(product[productKey]),
                       };
+                    } else if (productKey == "price") {
+                      console.log("price");
+                      tempProduct[productKey] = product[productKey];
+                      let currentPrice = product.price
+                        ? parseFloat(product.price).toFixed(2)
+                        : null;
+                      if (
+                        product.discount &&
+                        product.discount > 0 &&
+                        product.price
+                      ) {
+                        currentPrice = (
+                          currentPrice -
+                          parseFloat((product.price * product.discount) / 100)
+                        ).toFixed(2);
+                      }
+                      console.log("-----", currentPrice);
+                      tempProduct["currentPrice"] = (+currentPrice).toString();
                     } else {
                       tempProduct[productKey] = product[productKey];
                     }
@@ -100,7 +118,6 @@ const GetOffline = async () => {
           temp["category"] = tempCatList;
         } else {
           temp[key] = element[key];
-          console.log(key, element[key]);
         }
       }
 
