@@ -172,7 +172,7 @@ const getProducts = async (
         ).toFixed(2);
       }
 
-      data.currentPrice = currentPrice;
+      data.currentPrice = currentPrice.toString();
 
       data.category = data.prodCategory.ProdCategoryTranslations[0].title;
       delete data.prodCategory;
@@ -316,12 +316,11 @@ const findProdCategory = async (
         ).toFixed(2);
       }
 
-      data.currentPrice = currentPrice;
+      data.currentPrice = currentPrice.toString();
 
       data.category = data.prodCategory.ProdCategoryTranslations[0].title;
       delete data.prodCategory;
 
-      console.log("++++++++++", data);
       data.restaurant = data.restaurant.restaurantTranslations[0].title;
       delete data.prodCategory;
 
@@ -458,12 +457,23 @@ const findProduct = async (id, translations = false) => {
       },
     ];
   }
-  const product = await Product.findOne({
+  let product = await Product.findOne({
     where: {
       id: id,
     },
     include,
   });
+  product = product.toJSON();
+  let currentPrice = product.price
+    ? parseFloat(product.price).toFixed(2)
+    : null;
+  if (product.discount && product.discount > 0 && product.price) {
+    currentPrice = (
+      currentPrice - parseFloat((product.price * product.discount) / 100)
+    ).toFixed(2);
+  }
+
+  product.currentPrice = (+currentPrice).toString();
   if (!product) throw new NotFoundException();
   return product;
 };
@@ -802,12 +812,13 @@ const getProductsSearch = async (
         ).toFixed(2);
       }
 
-      data.currentPrice = currentPrice;
+      data.currentPrice = currentPrice.toString();
+
+      console.log(currentPrice);
 
       data.category = data.prodCategory.ProdCategoryTranslations[0].title;
       delete data.prodCategory;
 
-      console.log("++++++++++", data);
       data.restaurant = data.restaurant.restaurantTranslations[0].title;
       delete data.prodCategory;
 
