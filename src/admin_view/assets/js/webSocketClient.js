@@ -32,7 +32,7 @@ function format(date) {
 }
 
 function connect() {
-  var ws = new WebSocket("ws://localhost:3002");
+  var ws = new WebSocket("wss://216.250.12.159:8881");
   ws.onmessage = async function (event) {
     console.log("messagemessage.........");
     const sound = document.getElementById("sound");
