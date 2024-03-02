@@ -717,9 +717,8 @@ const getProductsSearch = async (
   lang = "tm",
   translations = false,
   sort,
-  word
+  word = ""
 ) => {
-  console.log(word);
   let where = {},
     limits = {},
     include = [];
@@ -782,12 +781,18 @@ const getProductsSearch = async (
   });
 
   if (translations) {
+    const patterns = [
+      `${word}%`,
+      `${word.charAt(0).toUpperCase() + word.slice(1)}%`,
+    ];
     include.push({
       model: ProdTranslation,
       attributes: ["title", "description"],
       where: {
         lang: lang,
-        title: { [Op.like]: `${word}%` },
+        [Op.or]: patterns.map((pattern) => ({
+          yourField: { [Op.like]: pattern },
+        })),
       },
     });
   }
