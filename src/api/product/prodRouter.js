@@ -21,7 +21,8 @@ router
     try {
       const prodCategory = await prodService.getAllCategory(
         req.headers["accept-language"],
-        req.query.restaurant
+        req.query.restaurant,
+        req.query.all
       );
       res.send(prodCategory);
     } catch (err) {
@@ -77,8 +78,10 @@ router
         req.query.translations,
         req.headers["accept-language"],
         req.query.page,
-        req.query.size
+        req.query.size,
+        req.query.one
       );
+      console.log("----------------------", shopCategoryById);
       res.send(shopCategoryById);
     } catch (err) {
       next(err);
