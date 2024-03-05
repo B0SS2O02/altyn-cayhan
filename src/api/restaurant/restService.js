@@ -1,10 +1,23 @@
 const { Op } = require("sequelize");
 const Restaurant = require("./restaurants");
 const RestTranlator = require("./restTranslator");
+const ProdCategory = require("../product/prodCategory");
+const ProdCategoryTranslation = require("../product/prodCategoryTranslation");
 
 module.exports.getRestaurants = async (lang) => {
   const restaurants = await Restaurant.findAll({
     include: [
+      // {
+      //   model: ProdCategory,
+      //   include: [
+      //     {
+      //       model: ProdCategoryTranslation,
+      //       where: {
+      //         lang: lang,
+      //       },
+      //     },
+      //   ],
+      // },
       {
         model: RestTranlator,
         attributes: { exclude: ["id", "restaurantId", "lang"] },
@@ -14,6 +27,13 @@ module.exports.getRestaurants = async (lang) => {
       },
     ],
   });
+
+  console.log(
+    "rest-----------------",
+    restaurants.map((rest) => {
+      return rest.toJSON();
+    })
+  );
 
   const structured = (data) => {
     let result = [];

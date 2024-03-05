@@ -1,24 +1,23 @@
 <%- include('../components/body.html')%>
-    <div class="flex">
-        <!-- sidebar -->
+<div class="flex">
+  <!-- sidebar -->
 
-        <%- include('../components/sidebar.html') %>
-            <!-- end of sidebar -->
+  <%- include('../components/sidebar.html') %>
+  <!-- end of sidebar -->
 
 
-            <!-- header -->
-            <!-- top border of header  -->
-            <div class="border-solid border-b-2 z-[-1] absolute w-full top-[80px]"></div>
-            <!-- end of top border -->
-            <div class="lg:ml-[25rem] w-full lg:mx-20 mx-5 flex flex-col gap-10">
-                <%- include('../components/header.html')%>
-                    <!-- end of header -->
-                    <!-- border after header -->
-                    <!--  main -->
-                    <div class="w-full">
-                        <h1 class="text-4xl">Food</h1>
-                        <form action="#"
-                            onsubmit="`<%if(!edit){%>${postFood(event)}<%}else{%>${editFood(event,'<%=data.id%>')}<%}%>`">
+  <!-- header -->
+  <!-- top border of header  -->
+  <div class="border-solid border-b-2 z-[-1] absolute w-full top-[80px]"></div>
+  <!-- end of top border -->
+  <div class="lg:ml-[25rem] w-full lg:mx-20 mx-5 flex flex-col gap-10">
+    <%- include('../components/header.html')%>
+    <!-- end of header -->
+    <!-- border after header -->
+    <!--  main -->
+    <div class="w-full">
+      <h1 class="text-4xl">Food</h1>
+      <form action="#" onsubmit="`<%if(!edit){%>${postFood(event)}<%}else{%>${editFood(event,'<%=data.id%>')}<%}%>`">
                             <div class="border-2 rounded border-[#DBDFEA] mt-3 p-5">
                                 <div class=" my-2">
                                     <label for="name" class="leading-5">Turkmen Title</label>
@@ -66,12 +65,11 @@
                                             <option value="" selected>Choose a category</option>
                                             <% if(category.length>0){ %>
                                                 <% category.forEach(item=>{ %>
-                                                    <option value="<%=item.id%>" <% if(edit &&
+                                                    <option class=" rest-<%= item.restaurantId %>" value="<%=item.id%>" <% if(edit &&
                                                         item.id===data.prodCategoryId ){ %> selected <%}%>
-                                                            ><%=item.title%>
-                                                    </option>
-                                                    <% }) %>
-                                                        <%}%>
+                                                            ><%=item.title%> </option>
+        <% }) %>
+        <%}%>
                                     </select>
                                     <p id="prodCategoryIdValidation" class="text-[red]"></p>
                                 </div>
@@ -82,15 +80,14 @@
                                     <select id="restaurantId"
                                         name="restaurantId" class="bg-gray-50 border  border-[#DBDFEA]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                                         <%if(!edit)%>
-                                            <option value="" selected>Choose a restaurant</option>
-                                            <% if(restaurant.length>0){ %>
-                                                <% restaurant.forEach(item=>{ %>
-                                                    <option value="<%=item.id%>" <% if(edit &&
+        <option value="" selected>Choose a restaurant</option>
+        <% if(restaurant.length>0){ %>
+        <% restaurant.forEach(item=>{ %>
+        <option value="<%=item.id%>" <% if(edit &&
                                                         item.id===data.restaurantId ){ %> selected <%}%>
-                                                            ><%=item.title%>
-                                                    </option>
-                                                    <% }) %>
-                                                        <%}%>
+                                                            ><%=item.title%> </option>
+          <% }) %>
+          <%}%>
                                     </select>
                                     <p id="restaurantIdValidation" class="text-[red]"></p>
                                 </div>
@@ -187,4 +184,5 @@
 
     <script src="/assets/js/modal.js"></script>
     <script src="/assets/js/fetch.js"></script>
+    <script src="/assets/js/catalogChange.js"></script>
     <%-include('../components/end_body.html')%>

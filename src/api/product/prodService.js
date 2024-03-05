@@ -32,9 +32,8 @@ const formatImages = async (oldImagePath, newImagePath) => {
   }
 };
 
-const getAllCategory = async (lang, restaurant) => {
+const getAllCategory = async (lang, restaurant, all) => {
   let where = {};
-
   if (restaurant) {
     where["restaurantId"] = restaurant;
   }
@@ -52,6 +51,7 @@ const getAllCategory = async (lang, restaurant) => {
     ],
     where,
   });
+  console.log("++++++++++++++++", category.to);
   return {
     category: category.map((convSeqeulize) => {
       const data = convSeqeulize.get({ plain: true });
@@ -226,117 +226,145 @@ const findProdCategory = async (
   lang = "tm",
   page = 1,
   size = 10,
+  one,
   sort = null
 ) => {
-  let where = {},
-    limits = {},
-    include = [];
-  if (page && size) {
-    limits = {
-      limit: size,
-      offset: (page - 1) * size,
-    };
-  }
-  if (id) where.prodCategoryId = id;
-  if ((sort && !sort.active) || !sort) {
-    where = {
-      ...where,
-      active: true,
-    };
-  }
-
-  if (sort && sort.popular) {
-    where = {
-      ...where,
-      popular: true,
-    };
-  }
-  if (sort && sort.discount) {
-    where = {
-      ...where,
-      discount: {
-        [Op.not]: null,
-      },
-    };
-  }
-
-  include.push({
-    model: ProdCategory,
-    attributes: ["id"],
-    include: [
-      {
-        model: ProdCategoryTranslation,
-        attributes: ["title"],
-        where: {
-          lang: lang,
-        },
-      },
-    ],
-  });
-
-  include.push({
-    model: Restaurant,
-    attributes: ["id"],
-    include: [
-      {
-        model: RestaurantTranslation,
-        attributes: ["title"],
-        where: {
-          lang: lang,
-        },
-      },
-    ],
-  });
-
-  if (translations) {
-    include.push({
-      model: ProdTranslation,
-      attributes: ["title", "description"],
-      where: {
+  if (one) {
+    let include = [],
+      where = {};
+    if (lang)
+      where = {
         lang: lang,
+      };
+    if (translations || lang) {
+      include = [
+        {
+          model: ProdCategoryTranslation,
+          attributes: ["title", "lang"],
+        },
+      ];
+    }
+    const category = ProdCategory.findOne({
+      where: {
+        id: id,
       },
+      include,
     });
+    if (!category) throw new NotFoundException();
+    return category;
+  } else {
+    let where = {},
+      limits = {},
+      include = [];
+    if (page && size) {
+      limits = {
+        limit: size,
+        offset: (page - 1) * size,
+      };
+    }
+    if (id) where.prodCategoryId = id;
+    if ((sort && !sort.active) || !sort) {
+      where = {
+        ...where,
+        active: true,
+      };
+    }
+
+    if (sort && sort.popular) {
+      where = {
+        ...where,
+        popular: true,
+      };
+    }
+    if (sort && sort.discount) {
+      where = {
+        ...where,
+        discount: {
+          [Op.not]: null,
+        },
+      };
+    }
+
+    include.push({
+      model: ProdCategory,
+      attributes: ["id"],
+      include: [
+        {
+          model: ProdCategoryTranslation,
+          attributes: ["title"],
+          where: {
+            lang: lang,
+          },
+        },
+      ],
+    });
+
+    include.push({
+      model: Restaurant,
+      attributes: ["id"],
+      include: [
+        {
+          model: RestaurantTranslation,
+          attributes: ["title"],
+          where: {
+            lang: lang,
+          },
+        },
+      ],
+    });
+
+    if (translations) {
+      include.push({
+        model: ProdTranslation,
+        attributes: ["title", "description"],
+        where: {
+          lang: lang,
+        },
+      });
+    }
+    const products = await Product.findAndCountAll({
+      where,
+      ...limits,
+      include,
+      order: [["position", "asc"]],
+    });
+
+    console.log(products);
+
+    return {
+      products: products.rows.map((convSeqeulize) => {
+        const data = convSeqeulize.get({ plain: true });
+        let currentPrice = data.price
+          ? parseFloat(data.price).toFixed(2)
+          : null;
+        if (data.discount && data.discount > 0 && data.price) {
+          currentPrice = (
+            currentPrice - parseFloat((data.price * data.discount) / 100)
+          ).toFixed(2);
+        }
+
+        data.currentPrice = currentPrice.toString();
+
+        data.category = data.prodCategory.ProdCategoryTranslations[0].title;
+        delete data.prodCategory;
+
+        data.restaurant = data.restaurant.restaurantTranslations[0].title;
+        delete data.prodCategory;
+
+        if (data.prodTranslations) {
+          Object.entries(...data.prodTranslations).forEach((e, i) => {
+            data[e[0]] = e[1];
+          });
+          delete data.prodTranslations;
+        }
+
+        return data;
+      }),
+      size,
+      page,
+      totalPages: Math.ceil(products.count / size),
+    };
   }
-  const products = await Product.findAndCountAll({
-    where,
-    ...limits,
-    include,
-    order: [["position", "asc"]],
-  });
-
-  console.log(products);
-
-  return {
-    products: products.rows.map((convSeqeulize) => {
-      const data = convSeqeulize.get({ plain: true });
-      let currentPrice = data.price ? parseFloat(data.price).toFixed(2) : null;
-      if (data.discount && data.discount > 0 && data.price) {
-        currentPrice = (
-          currentPrice - parseFloat((data.price * data.discount) / 100)
-        ).toFixed(2);
-      }
-
-      data.currentPrice = currentPrice.toString();
-
-      data.category = data.prodCategory.ProdCategoryTranslations[0].title;
-      delete data.prodCategory;
-
-      data.restaurant = data.restaurant.restaurantTranslations[0].title;
-      delete data.prodCategory;
-
-      if (data.prodTranslations) {
-        Object.entries(...data.prodTranslations).forEach((e, i) => {
-          data[e[0]] = e[1];
-        });
-        delete data.prodTranslations;
-      }
-
-      return data;
-    }),
-    size,
-    page,
-    totalPages: Math.ceil(products.count / size),
-  };
 };
 
 const updateCategoryById = async (body, file, id) => {
@@ -717,9 +745,8 @@ const getProductsSearch = async (
   lang = "tm",
   translations = false,
   sort,
-  word
+  word = ""
 ) => {
-  console.log(word);
   let where = {},
     limits = {},
     include = [];
@@ -782,12 +809,18 @@ const getProductsSearch = async (
   });
 
   if (translations) {
+    const patterns = [
+      `${word}%`,
+      `${word.charAt(0).toUpperCase() + word.slice(1)}%`,
+    ];
     include.push({
       model: ProdTranslation,
       attributes: ["title", "description"],
       where: {
         lang: lang,
-        title: { [Op.like]: `${word}%` },
+        [Op.or]: patterns.map((pattern) => ({
+          yourField: { [Op.like]: pattern },
+        })),
       },
     });
   }
