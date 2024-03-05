@@ -2,9 +2,9 @@ module.exports = {
     database: {
       dialect: "postgres",
       username: "root",
-      password: "root5312023",
+      password: "root14122023",
       database: "altyncayhana",
-      host: "95.85.127.110",
+      host: "127.0.0.1",
       port: 5432,
       logging: false,
       dialectOptions: {

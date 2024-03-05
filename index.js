@@ -25,6 +25,7 @@ const server = async () => {
           process.env.npm_package_version
       );
       connectWSS(config.socketPort);
+	console.log("Server is started")
     });
   } catch (err) {
     console.log(err);
