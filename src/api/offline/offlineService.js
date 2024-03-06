@@ -33,6 +33,21 @@ const GetOffline = async () => {
             ],
             include: [
               {
+                model: Restaurant,
+                attributes: ["id"],
+                include: [
+                  {
+                    model: RestaurantTranslation,
+                    attributes: ["title", "lang"],
+                  },
+                ],
+              },
+              {
+                model: ProdCategory,
+                attributes: ["id"],
+                include: [{ model: ProdCategoryTranslation }],
+              },
+              {
                 model: ProdTranslation,
                 attributes: ["title", "description", "lang"],
               },
@@ -58,7 +73,6 @@ const GetOffline = async () => {
     return tmp;
   };
 
-  console.log(data)
   const structured = (data) => {
     let result = [];
     data = JSON.parse(JSON.stringify(data));
@@ -86,7 +100,6 @@ const GetOffline = async () => {
                         ...translateEdit(product[productKey]),
                       };
                     } else if (productKey == "price") {
-                      console.log("price");
                       tempProduct[productKey] = product[productKey];
                       let currentPrice = product.price
                         ? parseFloat(product.price).toFixed(2)
@@ -101,7 +114,6 @@ const GetOffline = async () => {
                           parseFloat((product.price * product.discount) / 100)
                         ).toFixed(2);
                       }
-                      console.log("-----", currentPrice);
                       tempProduct["currentPrice"] = (+currentPrice).toString();
                     } else {
                       tempProduct[productKey] = product[productKey];
@@ -110,6 +122,7 @@ const GetOffline = async () => {
                   tempProductList.push(tempProduct);
                 }
                 tempCat["products"] = tempProductList;
+              } else if (catKey == "restaurant") {
               } else {
                 tempCat[catKey] = cat[catKey];
               }
@@ -127,7 +140,6 @@ const GetOffline = async () => {
 
     return result;
   };
-
   return structured(data);
 };
 

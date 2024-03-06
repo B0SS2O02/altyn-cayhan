@@ -10,25 +10,6 @@ const { GetOffline } = require("./offlineService");
 
 router.get("/offline", async (req, res, next) => {
   try {
-    // const productCategory = await prodCat.findAll({
-    //   attributes: { exclude: ["createdAt", "updatedAt"] },
-    //   include: [
-    //     {
-    //       model: prodCatTranslate,
-    //       attributes: { exclude: ["createdAt", "updatedAt", "prodCategoryId"] },
-    //     },
-    //   ],
-    // });
-    // const products = await product.findAll({
-    //   attributes: { exclude: ["createdAt", "updatedAt"] },
-    //   include: [
-    //     {
-    //       model: productTranslate,
-    //       attributes: { exclude: ["createdAt", "updatedAt", "productId"] },
-    //     },
-    //   ],
-    // });
-
     const data = await GetOffline();
 
     res.status(200).json({ data });

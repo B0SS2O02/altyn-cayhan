@@ -365,3 +365,75 @@
 [06-Mar-2024 18:00:09]  [INFO ]:	server is listening another 8880 port1.0.0
 [06-Mar-2024 18:00:35]  [INFO ]:	server is listening another 8880 port1.0.0
 [06-Mar-2024 18:00:38]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:31:55]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:42:56]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:43:12]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:43:13]  [ERROR]:	столбец prodCategories->products->restaurant.name не существует
+[06-Mar-2024 19:43:26]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:43:26]  [ERROR]:	столбец prodCategories->products->restaurant.title не существует
+[06-Mar-2024 19:43:36]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:45:54]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:47:15]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:47:19]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:48:18]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:49:04]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:49:05]  [ERROR]:	Cannot read properties of undefined (reading 'ProdCategoryTranslations')
+[06-Mar-2024 19:49:23]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:50:52]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:51:16]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:53:22]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:53:23]  [ERROR]:	Unexpected token u in JSON at position 0
+[06-Mar-2024 19:53:41]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:55:36]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:56:03]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:56:47]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:57:34]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:58:07]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 19:58:31]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:20:32]  [ERROR]:	product.update is not a function
+[06-Mar-2024 20:20:47]  [ERROR]:	product.update is not a function
+[06-Mar-2024 20:21:35]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:21:49]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:21:55]  [ERROR]:	product.update is not a function
+[06-Mar-2024 20:24:12]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:24:12]  [ERROR]:	product.update is not a function
+[06-Mar-2024 20:24:27]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:24:28]  [ERROR]:	product.update is not a function
+[06-Mar-2024 20:24:50]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:24:50]  [ERROR]:	product.toJSON is not a function
+[06-Mar-2024 20:25:05]  [ERROR]:	product.toJSON is not a function
+[06-Mar-2024 20:25:19]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:25:19]  [ERROR]:	product.update is not a function
+[06-Mar-2024 20:27:12]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:27:15]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:27:15]  [ERROR]:	Unexpected token < in JSON at position 0
+[06-Mar-2024 20:29:44]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:29:46]  [ERROR]:	Unexpected token < in JSON at position 0
+[06-Mar-2024 20:30:27]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:30:27]  [ERROR]:	Unexpected token < in JSON at position 0
+[06-Mar-2024 20:30:53]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:30:53]  [ERROR]:	Unexpected token < in JSON at position 0
+[06-Mar-2024 20:31:10]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:31:52]  [ERROR]:	Unexpected token < in JSON at position 0
+[06-Mar-2024 20:32:17]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:32:24]  [ERROR]:	Unexpected token < in JSON at position 0
+[06-Mar-2024 20:32:39]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:32:45]  [ERROR]:	Unexpected token < in JSON at position 0
+[06-Mar-2024 20:32:55]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:33:08]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:33:12]  [ERROR]:	Unexpected token < in JSON at position 0
+[06-Mar-2024 20:33:36]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:33:36]  [ERROR]:	Unexpected token < in JSON at position 0
+[06-Mar-2024 20:34:19]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:34:25]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:34:37]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:34:43]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:34:48]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:34:53]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:35:15]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:35:26]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:39:29]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:39:52]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:40:03]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:41:28]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 20:42:04]  [INFO ]:	server is listening another 8880 port1.0.0

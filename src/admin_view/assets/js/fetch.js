@@ -311,13 +311,16 @@ function editFood(e, id) {
       return response.json();
     })
     .then((response) => {
+      console.log(response);
       loading.classList.add("hidden");
       if (response.message && response.message.includes("File too large")) {
         return alert("Image size should be less than 20Kb");
       }
       if (response.message && response.message.includes("Validation Failure")) {
         putValidationInputs(response.validationErrors);
-      } else window.location.href = "/admin/foods/";
+      } else {
+        window.location.href = "/admin/foods/";
+      }
     });
 }
 

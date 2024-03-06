@@ -56,24 +56,6 @@
                                     <p id="translations.ru.descriptionValidation" class="text-[red]"></p>
                                 </div>
                                 <div>
-                                    <label for="prodCategoryId"
-                                        class="block mb-2 text-sm font-medium text-gray-900 ">Select
-                                        Category</label>
-                                    <select id="prodCategoryId"
-                                        class="bg-gray-50 border  border-[#DBDFEA]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                        <%if(!edit)%>
-                                            <option value="" selected>Choose a category</option>
-                                            <% if(category.length>0){ %>
-                                                <% category.forEach(item=>{ %>
-                                                    <option class=" rest-<%= item.restaurantId %>" value="<%=item.id%>" <% if(edit &&
-                                                        item.id===data.prodCategoryId ){ %> selected <%}%>
-                                                            ><%=item.title%> </option>
-        <% }) %>
-        <%}%>
-                                    </select>
-                                    <p id="prodCategoryIdValidation" class="text-[red]"></p>
-                                </div>
-                                <div>
                                     <label for="restaurantId"
                                         class="block mb-2 text-sm font-medium text-gray-900 ">Select
                                         Restaurant</label>
@@ -83,14 +65,33 @@
         <option value="" selected>Choose a restaurant</option>
         <% if(restaurant.length>0){ %>
         <% restaurant.forEach(item=>{ %>
-        <option value="<%=item.id%>" <% if(edit &&
+        <option value=" <%=item.id%>" <% if(edit &&
                                                         item.id===data.restaurantId ){ %> selected <%}%>
+                                                            ><%=item.title%> </option>
+        <% }) %>
+        <%}%>
+                                    </select>
+                                    <p id="restaurantIdValidation" class="text-[red]"></p>
+                                </div>
+                                <div>
+                                    <label for="prodCategoryId"
+                                        class="block mb-2 text-sm font-medium text-gray-900 ">Select
+                                        Category</label>
+                                    <select id="prodCategoryId"
+                                        class="bg-gray-50 border  border-[#DBDFEA]  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                        <%if(!edit)%>
+        <option value="" selected>Choose a category</option>
+        <% if(category.length>0){ %>
+        <% category.forEach(item=>{ %>
+        <option class=" rest-<%= item.restaurantId %>" value="<%=item.id%>" <% if(edit &&
+                                                        item.id===data.prodCategoryId ){ %> selected <%}%>
                                                             ><%=item.title%> </option>
           <% }) %>
           <%}%>
                                     </select>
-                                    <p id="restaurantIdValidation" class="text-[red]"></p>
+                                    <p id="prodCategoryIdValidation" class="text-[red]"></p>
                                 </div>
+                               
                                 <div class=" my-2">
                                     <label for="price" class="leading-5">Price</label>
                                     <input type="text"
@@ -181,8 +182,8 @@
 
     <!-- <script src="/assets/ckeditor4/ckeditor.js"></script> -->
 
-
-    <script src="/assets/js/modal.js"></script>
-    <script src="/assets/js/fetch.js"></script>
-    <script src="/assets/js/catalogChange.js"></script>
-    <%-include('../components/end_body.html')%>
+    <script><%= edit ? 'const edit=true':'const edit=false' %> </script>
+          <script src="/assets/js/modal.js"></script>
+          <script src="/assets/js/fetch.js"></script>
+          <script src="/assets/js/catalogChange.js"></script>
+          <%-include('../components/end_body.html')%>

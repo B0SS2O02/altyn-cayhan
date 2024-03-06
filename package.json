@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development npm run migrate && cross-env NODE_ENV=development nodemon index ",
     "start": "cross-env NODE_ENV=development nodemon index.js",
-    "prod": "cross-env NODE_ENV=production node index.js",
+    "prod": "set NODE_ENV=production&& node index.js",
     "test": "cross-env NODE_ENV=test jest --watchAll ",
     "lint": "eslint .",
     "build:css": "tailwindcss -i ./src/admin_view/assets/tailwindcss/input.css -o ./src/admin_view/assets/tailwindcss/output.css ",

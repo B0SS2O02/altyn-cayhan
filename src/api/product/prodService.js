@@ -563,8 +563,11 @@ const updateProductById = async (body, file, id) => {
           }
         );
     }
+  console.log("345", product);
+
   if (Object.keys(currentProductBody).length > 0) {
-    await product.update(currentProductBody);
+    await Product.update(currentProductBody, { where: { id } });
+    // await product.update(currentProductBody);
   }
   return product;
 };
