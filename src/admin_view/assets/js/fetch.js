@@ -138,7 +138,7 @@ function categoryValues() {
   };
 }
 
-function categoryValues() {
+function restValues() {
   return {
     image: document.getElementById("image").files[0],
     "translations.tm.title": document.getElementById("titleTm").value,
@@ -239,7 +239,7 @@ function editRestaurant(e, id) {
 
   cleanValidationInputs(ValidationParamsRest);
   const formData = getAllInputsInTagsAndAppendFormData(
-    categoryValues,
+    restValues,
     ValidationParamsRest
   );
   fetch(`${url.restaurant}/${id}`, {
