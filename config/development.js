@@ -1,8 +1,8 @@
 module.exports={
   database: {
     dialect: "postgres",
-    username: "postgres",
-    password: "pikir",
+    username: "root",
+    password: "root14122023",
     host: "127.0.0.1",
     database: "altyncayhana",
     port: 5432,
