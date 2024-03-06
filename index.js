@@ -8,16 +8,16 @@ const config = require("./serverSettings.json");
 const server = async () => {
   try {
     await sequelize.sync({ alter: true });
-    await Auth.count().then(async (response) => {
-      if (!response) {
-        await Auth.create({
-          fullName: "admin",
-          login: "admin",
-          password: "admin1234",
-          role: "admin",
-        });
-      }
-    });
+    // await Auth.count().then(async (response) => {
+    //   if (!response) {
+    //     await Auth.create({
+    //       fullName: "admin",
+    //       login: "admin",
+    //       password: "admin1234",
+    //       role: "admin",
+    //     });
+    //   }
+    // });
     await sequelize.sync();
     await defaults();
     app.listen(config.port, async () => {
