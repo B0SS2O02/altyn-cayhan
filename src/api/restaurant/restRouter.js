@@ -37,6 +37,7 @@ router
       );
       res.send(restaurants);
     } catch (error) {
+      console.log(error);
       next(error);
     }
   });

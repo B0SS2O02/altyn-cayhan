@@ -34,6 +34,14 @@ var ValidationParamsCategory = [
   "image",
 ];
 
+let ValidationParamsRest = [
+  "translations.tm.description",
+  "translations.ru.description",
+  "translations.tm.title",
+  "translations.ru.title",
+  "image",
+];
+
 let url = {
   restaurant: "/api/v1/restaurant",
   video: "/api/v1/video",
@@ -130,6 +138,18 @@ function categoryValues() {
   };
 }
 
+function categoryValues() {
+  return {
+    image: document.getElementById("image").files[0],
+    "translations.tm.title": document.getElementById("titleTm").value,
+    "translations.ru.title": document.getElementById("titleRu").value,
+    "translations.tm.description":
+      document.getElementById("descriptionRu").value,
+    "translations.ru.description":
+      document.getElementById("descriptionTm").value,
+  };
+}
+
 function redirectToFormKey(value) {
   let newValue = value;
   if (newValue.includes(".")) {
@@ -217,10 +237,10 @@ function editRestaurant(e, id) {
   e.preventDefault();
   loading.classList.remove("hidden");
 
-  cleanValidationInputs(ValidationParamsCategory);
+  cleanValidationInputs(ValidationParamsRest);
   const formData = getAllInputsInTagsAndAppendFormData(
     categoryValues,
-    ValidationParamsCategory
+    ValidationParamsRest
   );
   fetch(`${url.restaurant}/${id}`, {
     method: "PUT",

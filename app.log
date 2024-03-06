@@ -310,3 +310,33 @@
 [05-Mar-2024 11:24:33]  [INFO ]:	server is listening another 8880 port1.0.0
 [05-Mar-2024 11:25:07]  [ERROR]:	Validation Failure
 [05-Mar-2024 11:25:28]  [ERROR]:	Cannot set headers after they are sent to the client
+[06-Mar-2024 16:25:13]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 16:28:49]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 16:29:55]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 16:35:46]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 16:37:58]  [ERROR]:	category.update is not a function
+[06-Mar-2024 16:39:37]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 16:40:54]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 16:42:39]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 16:45:02]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 16:46:06]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 16:48:14]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 16:48:21]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 16:48:50]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 16:54:44]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 16:58:19]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 16:59:01]  [ERROR]:	fs is not defined
+[06-Mar-2024 17:01:13]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 17:01:32]  [ERROR]:	fs is not defined
+[06-Mar-2024 17:01:46]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 17:01:51]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 17:02:40]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 17:03:25]  [ERROR]:	fs is not defined
+[06-Mar-2024 17:04:16]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 17:04:29]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 17:04:53]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 17:05:39]  [ERROR]:	fs is not defined
+[06-Mar-2024 17:06:28]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 17:06:50]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 17:22:31]  [INFO ]:	server is listening another 8880 port1.0.0
+[06-Mar-2024 17:23:15]  [ERROR]:	addNewPath is not defined

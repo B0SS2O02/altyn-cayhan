@@ -3,21 +3,13 @@ const Restaurant = require("./restaurants");
 const RestTranlator = require("./restTranslator");
 const ProdCategory = require("../product/prodCategory");
 const ProdCategoryTranslation = require("../product/prodCategoryTranslation");
+const fs = require("fs");
+const path = require("path");
+const { formatImages } = require("../../../compress");
 
 module.exports.getRestaurants = async (lang) => {
   const restaurants = await Restaurant.findAll({
     include: [
-      // {
-      //   model: ProdCategory,
-      //   include: [
-      //     {
-      //       model: ProdCategoryTranslation,
-      //       where: {
-      //         lang: lang,
-      //       },
-      //     },
-      //   ],
-      // },
       {
         model: RestTranlator,
         attributes: { exclude: ["id", "restaurantId", "lang"] },
@@ -27,13 +19,6 @@ module.exports.getRestaurants = async (lang) => {
       },
     ],
   });
-
-  console.log(
-    "rest-----------------",
-    restaurants.map((rest) => {
-      return rest.toJSON();
-    })
-  );
 
   const structured = (data) => {
     let result = [];
@@ -120,6 +105,7 @@ const findProdCategory = async (id, translations = false, lang) => {
 module.exports.updateRestaurantById = async (body, file, id) => {
   const restaurant = await findProdCategory(id);
   const currentRestaurantBody = {};
+  console.log("----", body, file, id);
   if (file) {
     if (
       fs.existsSync(

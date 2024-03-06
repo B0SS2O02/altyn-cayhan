@@ -1,7 +1,7 @@
 const logger = require("../shared/logger");
 
-module.exports = (err, req, res, next) => 
-{
+module.exports = (err, req, res, next) => {
+  console.log(err);
   const { status, message, errors } = err;
   console.log(errors, status, message);
   let validationErrors;
