@@ -257,6 +257,9 @@ function editRestaurant(e, id) {
       if (response.message && response.message.includes("Validation Failure")) {
         putValidationInputs(response.validationErrors);
       } else window.location.href = "/admin/restaurant";
+    })
+    .catch((err) => {
+      console.log(err);
     });
 }
 

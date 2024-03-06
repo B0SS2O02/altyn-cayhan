@@ -58,6 +58,7 @@ const GetOffline = async () => {
     return tmp;
   };
 
+  console.log(data)
   const structured = (data) => {
     let result = [];
     data = JSON.parse(JSON.stringify(data));

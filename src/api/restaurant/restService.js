@@ -5,7 +5,28 @@ const ProdCategory = require("../product/prodCategory");
 const ProdCategoryTranslation = require("../product/prodCategoryTranslation");
 const fs = require("fs");
 const path = require("path");
-const { formatImages } = require("../../../compress");
+// const { formatImages } = require("../../../compress");
+const { deleteFile } = require("../shared/deleteFile");
+const sharp = require("sharp");
+
+const formatImages = async (oldImagePath, newImagePath) => {
+  await sharp(oldImagePath)
+    .toFormat("webp")
+    .resize(360)
+    .webp({ quality: 90 })
+    .toFile(newImagePath);
+  try {
+    if (fs.existsSync(oldImagePath)) {
+      await deleteFile(oldImagePath);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const addNewPath = (originalname) => {
+  return `/uploads/restaurant/${new Date().getTime()}.webp`;
+};
 
 module.exports.getRestaurants = async (lang) => {
   const restaurants = await Restaurant.findAll({
