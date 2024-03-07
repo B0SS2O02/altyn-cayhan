@@ -200,6 +200,23 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "delivery",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url1}}/delivery",
+					"host": [
+						"{{url1}}"
+					],
+					"path": [
+						"delivery"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
