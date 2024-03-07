@@ -76,8 +76,8 @@ const getAllCategory = async (lang, restaurant, all) => {
 const getProducts = async (
   prodCategoryId = false,
   restaurant,
-  page,
-  size,
+  page = 1,
+  size = 10,
   allCategory = false,
   lang = "tm",
   translations = false,

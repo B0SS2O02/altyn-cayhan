@@ -7,7 +7,7 @@ const config = require("./serverSettings.json");
 
 const server = async () => {
   try {
-    await sequelize.sync({ alter: true });
+    await sequelize.authenticate();
     // await Auth.count().then(async (response) => {
     //   if (!response) {
     //     await Auth.create({

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const restService = require("./restService.js");
 const { uploadRestaurant } = require("../util/multer.js");
+const Restaurant = require("./restaurants.js");
 
 router.route("/restaurant").get(async (req, res, next) => {
   try {
@@ -41,5 +42,35 @@ router
       next(error);
     }
   });
+
+router.put("/restaurant-drag", async (req, res) => {
+  console.log(req.body);
+  const { newElem, currentElem } = req.body;
+  const newElemRecord = await Restaurant.findOne({
+    where: {
+      position: newElem,
+    },
+  });
+  const currentElemRecord = await Restaurant.findOne({
+    where: {
+      position: currentElem,
+    },
+  });
+  console.log(currentElemRecord.toJSON(), newElemRecord.toJSON());
+
+  await Restaurant.update(
+    { position: newElem },
+    { where: { id: currentElemRecord.id } }
+  );
+
+  await Restaurant.update(
+    { position: currentElem },
+    { where: { id: newElemRecord.id } }
+  );
+
+  console.log(currentElemRecord.toJSON(), newElemRecord.toJSON());
+  
+  res.send("ok");
+});
 
 module.exports = router;
