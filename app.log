@@ -526,3 +526,10 @@
 [07-Mar-2024 18:13:29]  [INFO ]:	server is listening another 8880 port1.0.0
 [07-Mar-2024 18:13:42]  [INFO ]:	server is listening another 8880 port1.0.0
 [07-Mar-2024 18:14:05]  [INFO ]:	server is listening another 8880 port1.0.0
+[07-Mar-2024 19:52:50]  [INFO ]:	server is listening another 8880 port1.0.0
+[07-Mar-2024 19:55:51]  [INFO ]:	server is listening another 8880 port1.0.0
+[07-Mar-2024 20:14:18]  [INFO ]:	server is listening another 8880 port1.0.0
+[07-Mar-2024 20:15:53]  [INFO ]:	server is listening another 8880 port1.0.0
+[07-Mar-2024 20:22:38]  [ERROR]:	Unexpected token < in JSON at position 0
+[07-Mar-2024 20:23:10]  [INFO ]:	server is listening another 8880 port1.0.0
+[07-Mar-2024 20:48:06]  [INFO ]:	server is listening another 8880 port1.0.0

@@ -1,5 +1,3 @@
-node_modules
-uploads/product
-app.log
-version.json
-delivery.json
+/config
+/node_modules/
+uploads/product/
