@@ -56,19 +56,20 @@ const decodeToken = async (token) => {
 };
 
 const compare = async (body) => {
+  console.log('body',body);
   const user = await Auth.findOne({
     where: {
       login: body.login,
       password: body.password,
     },
   });
-
+  console.log('data',user);
   if (!user || !user.active)
     return {
       login: false,
     };
 
-  if (user.role !== "admin" && user.role !== "shop")
+  if (user.role !== "admin" &&  user.role !=='zakaz')
     return {
       login: false,
     };

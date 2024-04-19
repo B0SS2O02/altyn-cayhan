@@ -4,10 +4,20 @@ const fs = require("fs");
 const url = "http://localhost:8880/api/v1/";
 
 exports.getDashboard = async (req, res, next) => {
+  function parseCookie(cookieString) {
+    const cookies = {};
+    cookieString.split(";").forEach((cookie) => {
+      const [name, value] = cookie.trim().split("=");
+      cookies[name] = decodeURIComponent(value);
+    });
+    return cookies;
+  }
+  
+  const user=JSON.parse(parseCookie(req.headers.cookie).user.slice(2));
   const data = JSON.parse(
     fs.readFileSync(path.resolve("delivery.json"), "utf8")
   );
-  res.render("admin/pages/dashboard.html", { data });
+  res.render("admin/pages/dashboard.html", { data ,role:user.role});
 };
 
 exports.getFoods = async (req, res, next) => {

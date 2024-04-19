@@ -17,11 +17,15 @@
           <!-- border after header -->
           <!--  main -->
 
+          
+            
+          
           <div>
             <div class="my-10 w-full flex flex-wrap gap-4 lg:gap-10">
               <!-- 1 -->
+              
               <div class="w-[100%] lg:w-[calc(50%-1.25rem)] border-solid border-[#DBDFEA] border-2 rounded-[5px]">
-                <a href="/admin/category">
+                <a <% if (role!='zakaz'){ %> href="/admin/category"   <% } %>>
                   <div class="flex lg:flex-col vsm:flex-row justify-center flex-col 2lg:flex-row items-center">
                     <div class="vsm:w-[30%] w-[60%] lg:w-[60%] 2lg:w-[30%] m-3">
                       <img class="w-full" src="/assets/images/categories.png" alt="" />
@@ -42,7 +46,7 @@
               <!-- 1 -->
 
               <div class="w-[100%] lg:w-[calc(50%-1.25rem)] border-solid border-[#DBDFEA] border-2 rounded-[5px]">
-                <a href="/admin/foods">
+                <a <% if (role!='zakaz'){ %> href="/admin/foods" <% } %>>
                   <div class="flex lg:flex-col vsm:flex-row justify-center flex-col 2lg:flex-row items-center">
                     <div class="vsm:w-[30%] w-[60%] lg:w-[60%] 2lg:w-[30%] m-3">
                       <img class="w-full" src="/assets/images/bibimbap.png" alt="" />
@@ -62,7 +66,7 @@
               <!-- end of 1 -->
               <!-- 1 -->
               <div class="w-[100%] lg:w-[calc(50%-1.25rem)] border-solid border-[#DBDFEA] border-2 rounded-[5px]">
-                <a href="/admin/orders">
+                <a href="/admin/orders" >
                   <div class="flex lg:flex-col vsm:flex-row justify-center flex-col 2lg:flex-row items-center">
                     <div class="vsm:w-[30%] w-[60%] lg:w-[60%] 2lg:w-[30%] m-3">
                       <img class="w-full" src="/assets/images/cargo.png" alt="" />
@@ -80,7 +84,7 @@
               </div>
 
               <div class="w-[100%] lg:w-[calc(50%-1.25rem)] border-solid border-[#DBDFEA] border-2 rounded-[5px]">
-                <a href="/admin/restaurant">
+                <a <% if (role!='zakaz'){ %> href="/admin/restaurant" <% } %>>
                   <div class="flex lg:flex-col vsm:flex-row justify-center flex-col 2lg:flex-row items-center">
                     <div class="vsm:w-[30%] w-[60%] lg:w-[60%] 2lg:w-[30%] m-3">
                       <img class="w-full" src="/assets/images/restoran.png" alt="" />
@@ -97,36 +101,13 @@
                 </a>
               </div>
               <!-- end of 1 -->
-              <!-- 1 -->
+            
+ 
+ 
 
-<!--              <div class="w-[100%] lg:w-[calc(50%-1.25rem)] border-solid border-[#DBDFEA] border-2 rounded-[5px] flex justify-center " style="text-align: -webkit-center;">
-               
-                <div class="flex lg:flex-col vsm:flex-row justify-center flex-col 2lg:flex-row items-center">
-                  <div data-key="Total Orders" class="vsm:w-[30%] w-[60%] lg:w-[60%] 2lg:w-[30%] m-3">
-                    Total Orders
-                  </div>
-                  <div class="vsm:w-[70%] w-[90%] m-5">
-                    <h3   class="text-[#445FD3] text-[22px] 2xl:text-[28px] font-500">
-                      <%=data.totalOrders%>
-                    </h3>
-                  </div>
-                </div> 
-                <div class="flex lg:flex-col vsm:flex-row justify-center flex-col 2lg:flex-row items-center">
-                  <div data-key="Total Foods"  class="vsm:w-[30%] w-[60%] lg:w-[60%] 2lg:w-[30%] m-3">
-                    Total Foods
-                  </div>
-                  <div class="vsm:w-[70%] w-[90%] m-5">
-                    <h3   class="text-[#445FD3] text-[22px] 2xl:text-[28px] font-500">
-                      <%=data.deliveryCharge%>
-                    </h3>
-                  </div>
-                </div> 
-            </div>
-
-
-              <!-- end of 1 -->
             </div>
           </div>
+       
       </div>
   </div>
   </body>

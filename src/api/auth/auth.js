@@ -14,7 +14,7 @@ Auth.init(
     password: Sequelize.STRING,
     role: {
       type: Sequelize.ENUM,
-      values: ["admin"],
+      values: ["admin",'zakaz'],
     },
     active: {
       type: Sequelize.BOOLEAN,
