@@ -1,16 +1,16 @@
 module.exports = {
   database: {
-    dialect: "postgres",
-    username: "postgres",
-    password: "pikir",
-    host: "127.0.0.1",
     database: "altyncayhana",
+    username: "root",
+    password: "root14122023",
+    dialect: "postgres",
+    host: "127.0.0.1",
     port: 5432,
-    logging: false,
+    logging: true,
     dialectOptions: {
-      maxRetryCount: 10, // Maximum number of connection acquisition retries
-      minRetryCount: 1, // Minimum number of connection acquisition retries
-      retryInterval: 1000, // Time interval between retries in milliseconds (1 second in this example)
+      maxRetryCount: 10,
+      minRetryCount: 1,
+      retryInterval: 1000,
     },
     pool: {
       max: 5,

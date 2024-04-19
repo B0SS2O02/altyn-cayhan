@@ -61,6 +61,8 @@ router
         }
 
         const prodCategory = await prodService.saveCategory(req.body, req.file);
+
+      
         upVersion();
         res.send(prodCategory);
       } catch (err) {
@@ -168,7 +170,6 @@ router
         const prodCategory = await prodService.saveProduct(req.body, req.file);
         upVersion();
         res.send(prodCategory);
-        res.send("ok");
       } catch (err) {
         next(err);
       }

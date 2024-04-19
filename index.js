@@ -4,20 +4,21 @@ const logger = require("./src/api/shared/logger");
 const { connectWSS } = require("./src/api/wss/webSocketServer");
 const defaults = require("./src/api/util/defaults");
 const config = require("./serverSettings.json");
+const Auth = require("./src/api/auth/auth");
 
 const server = async () => {
   try {
     await sequelize.authenticate();
-    // await Auth.count().then(async (response) => {
-    //   if (!response) {
-    //     await Auth.create({
-    //       fullName: "admin",
-    //       login: "admin",
-    //       password: "admin1234",
-    //       role: "admin",
-    //     });
-    //   }
-    // });
+    await Auth.count().then(async (response) => {
+      if (!response) {
+        await Auth.create({
+          fullName: "admin",
+          login: "admin",
+          password: "admin1234",
+          role: "admin",
+        });
+      }
+    });
     await sequelize.sync();
     await defaults();
     app.listen(config.port, async () => {
